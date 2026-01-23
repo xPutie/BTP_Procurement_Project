@@ -1,0 +1,106 @@
+<mvc:View
+    controllerName="com.gsp.sap.procurement.ui.poautomationui.controller.Admin"
+    xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:f="sap.f" xmlns:core="sap.ui.core"
+    displayBlock="true">
+    
+    <Page id="adm_page" showHeader="false" class="adminPage sapUiNoContentPadding">
+        <content>
+            <VBox id="adm_mainContainer" height="100%" renderType="Bare">
+                
+                <HBox id="adm_header" class="headerBar" justifyContent="SpaceBetween" alignItems="Center">
+                    <HBox id="adm_hbBrand" alignItems="Center">
+                        <Button id="adm_btnBack" icon="sap-icon://nav-back" type="Transparent" press="onNavBack" class="backButtonIcon"/>
+                        <Title id="adm_tiHeader" text="HỆ THỐNG GIÁM SÁT TRUNG TÂM" class="appTitle sapUiSmallMarginBegin"/>
+                    </HBox>
+                    <HBox id="adm_hbUser" alignItems="Center" class="sapUiMediumMarginEnd">
+                        <core:Icon id="adm_icAdmin" src="sap-icon://key" color="#00e5ff" class="sapUiSmallMarginEnd"/>
+                        <Text id="adm_txRole" text="SUPER ADMIN" class="neonTextCyan"/>
+                    </HBox>
+                </HBox>
+
+                <ScrollContainer id="adm_scroll" height="100%" vertical="true" horizontal="false">
+                    <VBox id="adm_content" class="adminContentPadding">
+                        
+                        <HBox id="adm_hbKPIs" class="kpiGridContainer" justifyContent="SpaceBetween">
+                            <VBox id="adm_kpi1" class="admKpiCard kpiGlowBlue" width="19%">
+                                <core:Icon id="adm_ic1" src="sap-icon://shipping-status" size="2rem" class="sapUiSmallMarginBottom"/>
+                                <Title id="adm_val1" text="{/kpi/totalOrders}" level="H2" class="kpiValueText"/>
+                                <Text id="adm_lb1" text="TỔNG ĐƠN HÀNG" class="kpiLabelCyber"/>
+                            </VBox>
+                            <VBox id="adm_kpi2" class="admKpiCard kpiGlowGreen" width="19%">
+                                <core:Icon id="adm_ic2" src="sap-icon://accept" size="2rem" class="sapUiSmallMarginBottom"/>
+                                <Title id="adm_val2" text="{/kpi/approvedOrders}" level="H2" class="kpiValueText"/>
+                                <Text id="adm_lb2" text="ĐÃ PHÊ DUYỆT" class="kpiLabelCyber"/>
+                            </VBox>
+                            <VBox id="adm_kpi3" class="admKpiCard kpiGlowAmber" width="19%">
+                                <core:Icon id="adm_ic3" src="sap-icon://pending" size="2rem" class="sapUiSmallMarginBottom"/>
+                                <Title id="adm_val3" text="{/kpi/pendingOrders}" level="H2" class="kpiValueText"/>
+                                <Text id="adm_lb3" text="ĐANG CHỜ DUYỆT" class="kpiLabelCyber"/>
+                            </VBox>
+                            <VBox id="adm_kpi4" class="admKpiCard kpiGlowRed" width="19%">
+                                <core:Icon id="adm_ic4" src="sap-icon://decline" size="2rem" class="sapUiSmallMarginBottom"/>
+                                <Title id="adm_val4" text="{/kpi/rejectedOrders}" level="H2" class="kpiValueText"/>
+                                <Text id="adm_lb4" text="BỊ TỪ CHỐI" class="kpiLabelCyber"/>
+                            </VBox>
+                            <VBox id="adm_kpi5" class="admKpiCard kpiGlowCyan" width="19%">
+                                <core:Icon id="adm_ic5" src="sap-icon://database" size="2rem" class="sapUiSmallMarginBottom"/>
+                                <Title id="adm_val5" text="{/kpi/mappingErrors}" level="H2" class="kpiValueText"/>
+                                <Text id="adm_lb5" text="LỖI MAPPING" class="kpiLabelCyber"/>
+                            </VBox>
+                        </HBox>
+
+                        <VBox id="adm_vbLogs" class="bentoGlassCard sapUiLargeMarginTop">
+                            <HBox id="adm_hbLogTi" justifyContent="SpaceBetween" alignItems="Center" class="sapUiSmallMarginBottom">
+                                <Title id="adm_tiLog" text="NHẬT KÝ VẬN HÀNH HỆ THỐNG" level="H3" class="neonTextCyan"/>
+                                <Button id="adm_btnExp" text="XUẤT DỮ LIỆU LOG" icon="sap-icon://excel-attachment" press="onExportLogs" class="btnGhost"/>
+                            </HBox>
+                            <Table id="adm_tbLogs" items="{/systemLogs}" class="glassTableCyber" growing="true" growingThreshold="10">
+                                <columns>
+                                    <Column id="adm_lc1" width="15%"><Text id="adm_lt1" text="THỜI GIAN" class="textMutedCyber"/></Column>
+                                    <Column id="adm_lc2" width="10%"><Text id="adm_lt2" text="LOẠI" class="textMutedCyber"/></Column>
+                                    <Column id="adm_lc3" width="15%"><Text id="adm_lt3" text="NGƯỜI DÙNG" class="textMutedCyber"/></Column>
+                                    <Column id="adm_lc4" width="45%"><Text id="adm_lt4" text="THÔNG BÁO CHI TIẾT" class="textMutedCyber"/></Column>
+                                    <Column id="adm_lc5" hAlign="End"><Text id="adm_lt5" text="TRẠNG THÁI" class="textMutedCyber"/></Column>
+                                </columns>
+                                <items>
+                                    <ColumnListItem id="adm_rowLog" class="tableRowCyber">
+                                        <cells>
+                                            <Text id="adm_cl1" text="{logTime}" class="textPopWhite"/>
+                                            <Text id="adm_cl2" text="{logType}" class="textPopWhite"/>
+                                            <Text id="adm_cl3" text="{userName}" class="textPopWhite"/>
+                                            <Text id="adm_cl4" text="{message}" class="textMutedCyber"/>
+                                            <ObjectStatus id="adm_cl5" text="{severity}" state="{severityState}"/>
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table>
+                        </VBox>
+
+                        <VBox id="adm_vbAll" class="bentoGlassCard sapUiLargeMarginTop sapUiLargeMarginBottom">
+                            <Title id="adm_tiAll" text="GIÁM SÁT TOÀN BỘ ĐƠN HÀNG" level="H3" class="neonTextCyan sapUiSmallMarginBottom"/>
+                            <Table id="adm_tbAll" items="{/allOrders}" class="glassTableCyber">
+                                <columns>
+                                    <Column id="adm_ac1"><Text id="adm_at1" text="MÃ ĐƠN" class="textMutedCyber"/></Column>
+                                    <Column id="adm_ac2"><Text id="adm_at2" text="NHÀ CUNG CẤP" class="textMutedCyber"/></Column>
+                                    <Column id="adm_ac3"><Text id="adm_at3" text="TRẠNG THÁI" class="textMutedCyber"/></Column>
+                                    <Column id="adm_ac4" hAlign="End"><Text id="adm_at4" text="ACTION" class="textMutedCyber"/></Column>
+                                </columns>
+                                <items>
+                                    <ColumnListItem id="adm_rowAll" class="tableRowCyber">
+                                        <cells>
+                                            <Text id="adm_ca1" text="{orderCode}" class="neonTextCyan"/>
+                                            <Text id="adm_ca2" text="{supplier}" class="textPopWhite"/>
+                                            <ObjectStatus id="adm_ca3" text="{statusText}" state="{statusState}"/>
+                                            <Button id="adm_btnView" icon="sap-icon://display" press="onViewOrderDetails" class="btnGhostCircle"/>
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table>
+                        </VBox>
+
+                    </VBox>
+                </ScrollContainer>
+            </VBox>
+        </content>
+    </Page>
+</mvc:View>

@@ -1,0 +1,147 @@
+{
+  "_version": "1.81.0",
+  "sap.app": {
+    "id": "com.gsp.sap.procurement.ui.poautomationui",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:basic",
+      "version": "1.20.1",
+      "toolsId": "f914df52-f628-4b2d-8bb4-9aae1cdd64bb"
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "sap-icon://process",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": true,
+    "dependencies": {
+      "minUI5Version": "1.143.2",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.f": {},
+        "sap.ui.layout": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "com.gsp.sap.procurement.ui.poautomationui.i18n.i18n"
+        }
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "controlAggregation": "pages",
+        "controlId": "app",
+        "transition": "slide",
+        "viewType": "XML",
+        "viewPath": "com.gsp.sap.procurement.ui.poautomationui.view",
+        "async": true
+      },
+      "routes": [
+        {
+          "pattern": "",
+          "name": "landing",
+          "target": "landing"
+        },
+        {
+          "pattern": "login",
+          "name": "login",
+          "target": "login"
+        },
+        {
+          "pattern": "register",
+          "name": "register",
+          "target": "register"
+        },
+        {
+          "pattern": "upload",
+          "name": "upload",
+          "target": "upload"
+        },
+        {
+          "pattern": "approval",
+          "name": "approval",
+          "target": "approval"
+        },
+        {
+          "pattern": "admin",
+          "name": "admin",
+          "target": "admin"
+        }
+      ],
+      "targets": {
+        "landing": {
+          "viewId": "Landing",
+          "viewName": "Landing",
+          "viewType": "XML"
+        },
+        "login": {
+          "viewId": "Login",
+          "viewName": "Login",
+          "viewType": "XML"
+        },
+        "register": {
+          "viewId": "Register",
+          "viewName": "Register",
+          "viewType": "XML"
+        },
+        "upload": {
+          "viewId": "Upload",
+          "viewName": "Upload",
+          "viewType": "XML"
+        },
+        "approval": {
+          "viewId": "Approval",
+          "viewName": "Approval",
+          "viewType": "XML"
+        },
+        "admin": {
+          "viewId": "Admin",
+          "viewName": "Admin",
+          "viewType": "XML"
+        }
+      }
+    },
+    "rootView": {
+      "viewName": "com.gsp.sap.procurement.ui.poautomationui.view.App",
+      "type": "XML",
+      "id": "app",
+      "async": true
+    }
+  }
+}

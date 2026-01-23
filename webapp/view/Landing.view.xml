@@ -1,0 +1,55 @@
+<mvc:View
+    controllerName="com.gsp.sap.procurement.ui.poautomationui.controller.Landing"
+    xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:core="sap.ui.core"
+    displayBlock="true">
+    
+    <Page id="lan_page" showHeader="false" class="landingPage sapUiNoContentPadding">
+        <content>
+            <VBox id="lan_mainContainer" class="mainContainer">
+                
+                <HBox id="lan_header" class="headerBar" justifyContent="SpaceBetween" alignItems="Center">
+                    <HBox id="lan_hbLogo" alignItems="Center">
+                        <VBox id="lan_logoWrap" class="logoBacklightSmall">
+                            <Image id="lan_imgLogo" src="https://www.sap.com/dam/application/shared/logos/sap-logo-svg.svg" width="60px"/>
+                        </VBox>
+                        <Title id="lan_tiApp" text="BTP PROCUREMENT PRO" class="appTitle sapUiMediumMarginBegin"/>
+                    </HBox>
+                    <HBox id="lan_hbNav" alignItems="Center">
+                        <Link id="lan_ln1" text="GIẢI PHÁP" class="navLink sapUiHideOnPhone"/>
+                        <Link id="lan_ln2" text="QUY TRÌNH" class="navLink sapUiHideOnPhone"/>
+                        <Button id="lan_btnNavLogin" text="ĐĂNG NHẬP" press="onLoginPress" class="btnHeaderNeon sapUiMediumMarginBegin"/>
+                    </HBox>
+                </HBox>
+
+                <VBox id="lan_hero" class="heroSection" alignItems="Center" justifyContent="Center">
+                    <VBox id="lan_heroContent" alignItems="Center" class="heroCrystalBox" width="85%">
+                        <Title id="lan_tiHero" text="TỰ ĐỘNG HÓA QUY TRÌNH THU MUA" level="H1" class="neonTitleTextLarge"/>
+                        <Text id="lan_txHero" text="Chuyển đổi dữ liệu Excel thành Purchase Order trực tiếp trên nền tảng SAP BTP &amp; HANA Cloud." class="heroSubtitleCyber"/>
+                        
+                        <HBox id="lan_hbHeroBtns" justifyContent="Center" class="sapUiLargeMarginTop">
+                            <Button id="lan_btnCTA" text="TRẢI NGHIỆM NGAY" press="onLoginPress" class="btnFixedSize lan_btnPrimary sapUiSmallMarginEnd"/>
+                            <Button id="lan_btnDemo" text="XEM DEMO" type="Transparent" class="btnFixedSize lan_btnGhost"/>
+                        </HBox>
+                    </VBox>
+                </VBox>
+
+                <VBox id="lan_vbFeatures" class="processSection" alignItems="Center">
+                    <Title id="lan_tiFeat" text="HỆ SINH THÁI VẬN HÀNH" level="H2" class="formTitleHighContrast"/>
+                    <HBox id="lan_hbFeatCards" justifyContent="Center" wrap="Wrap" class="sapUiLargeMarginTop fullWidth">
+                        <VBox id="lan_card1" class="bentoGlassCard lan_cardSize">
+                            <core:Icon id="lan_ic1" src="sap-icon://employee" size="2rem" color="#10b981" class="sapUiSmallMarginBottom"/>
+                            <Title id="lan_tiC1" text="Nhân viên Thu mua" level="H3" class="textPopWhite"/>
+                            <Text id="lan_txC1" text="Tải tập tin, xử lý mapping dữ liệu tự động với độ chính xác 99%." class="textMutedCyber"/>
+                        </VBox>
+                        <VBox id="lan_card2" class="bentoGlassCard lan_cardSize">
+                            <core:Icon id="lan_ic2" src="sap-icon://manager" size="2rem" color="#f59e0b" class="sapUiSmallMarginBottom"/>
+                            <Title id="lan_tiC2" text="Quản lý Phê duyệt" level="H3" class="textPopWhite"/>
+                            <Text id="lan_txC2" text="Kiểm soát dòng tiền, phê duyệt đơn hàng tức thì trên mọi thiết bị." class="textMutedCyber"/>
+                        </VBox>
+                    </HBox>
+                </VBox>
+
+            </VBox>
+        </content>
+    </Page>
+</mvc:View>

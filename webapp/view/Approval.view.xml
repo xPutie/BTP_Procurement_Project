@@ -1,0 +1,78 @@
+<mvc:View
+    controllerName="com.gsp.sap.procurement.ui.poautomationui.controller.Approval"
+    xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:f="sap.f" xmlns:core="sap.ui.core"
+    displayBlock="true">
+    
+    <Page id="pageApprovalInbox" showHeader="false" class="adminPage" enableScrolling="false">
+        <content>
+            <VBox id="vboxApprovalMain" height="100%" renderType="Bare">
+                
+                <HBox id="hboxApprHeader" class="headerBar" justifyContent="SpaceBetween" alignItems="Center">
+                    <HBox id="hboxBrand" alignItems="Center">
+                        <Button id="btnBack" icon="sap-icon://nav-back" type="Transparent" press="onNavBack" class="backButtonIcon"/>
+                        <Title id="titleH" text="HỆ THỐNG PHÊ DUYỆT" class="appTitle sapUiSmallMarginBegin"/>
+                    </HBox>
+                    <Text id="txtU" text="MANAGER PORTAL" class="neonTextCyan sapUiMediumMarginEnd"/>
+                </HBox>
+
+                <f:FlexibleColumnLayout id="fcLayoutApproval" layout="TwoColumnsMidExpanded" class="cyberLayoutFCL">
+                    
+                    <f:beginColumnPages>
+                        <Page id="pageMaster" title="Đơn hàng chờ xử lý" backgroundDesign="Transparent">
+                            <content>
+                                <List id="listOrders" items="{/pendingOrders}" selectionChange="onOrderSelect" mode="SingleSelectMaster">
+                                    <CustomListItem id="itOrder" type="Active" class="cyberOrderCard">
+                                        <VBox id="vbCard" class="cardPadding">
+                                            <HBox id="hbC1" justifyContent="SpaceBetween">
+                                                <Text id="txC1" text="{orderCode}" class="neonTextCyan"/>
+                                                <ObjectStatus id="osC1" text="{priority}" state="{priorityState}"/>
+                                            </HBox>
+                                            <Text id="txC2" text="{supplier}" class="textPopWhite sapUiTinyMarginTop"/>
+                                            <HBox id="hbC2" justifyContent="SpaceBetween" class="sapUiSmallMarginTop">
+                                                <Text id="txC3" text="{uploadTime}" class="textMutedCyber"/>
+                                                <Text id="txC4" text="{itemCount} Items" class="textPopWhite"/>
+                                            </HBox>
+                                        </VBox>
+                                    </CustomListItem>
+                                </List>
+                            </content>
+                        </Page>
+                    </f:beginColumnPages>
+
+                    <f:midColumnPages>
+                        <Page id="pageDetail" showHeader="false" backgroundDesign="Transparent">
+                            <content>
+                                <VBox id="vbDet" class="adminContentPadding">
+                                    <VBox id="vbDetCard" class="bentoGlassCard">
+                                        <Title id="tiDet" text="CHI TIẾT VẬT TƯ" level="H3" class="neonTextCyan sapUiSmallMarginBottom"/>
+                                        
+                                        <Table id="tbDet" items="{/selectedOrder/items}" class="glassTableCyber" noDataText="Hãy chọn đơn hàng">
+                                            <columns>
+                                                <Column id="c1"><Text id="tc1" text="MÃ VẬT TƯ" class="textMutedCyber"/></Column>
+                                                <Column id="c2"><Text id="tc2" text="TÊN LINH KIỆN" class="textMutedCyber"/></Column>
+                                                <Column id="c3" hAlign="End"><Text id="tc3" text="SL" class="textMutedCyber"/></Column>
+                                            </columns>
+                                            <items>
+                                                <ColumnListItem id="rowDet">
+                                                    <cells>
+                                                        <Text id="cl1" text="{itemCode}" class="neonTextCyan"/>
+                                                        <Text id="cl2" text="{itemName}" class="textPopWhite"/>
+                                                        <Text id="cl3" text="{quantity}" class="textPopWhite"/>
+                                                    </cells>
+                                                </ColumnListItem>
+                                            </items>
+                                        </Table>
+                                        
+                                        <HBox id="hbTotal" justifyContent="End" class="sapUiLargeMarginTop">
+                                            <Title id="txT" text="TỔNG GIÁ TRỊ: {/selectedOrder/totalAmount}" level="H2" class="neonTextCyan"/>
+                                        </HBox>
+                                    </VBox>
+                                </VBox>
+                            </content>
+                        </Page>
+                    </f:midColumnPages>
+                </f:FlexibleColumnLayout>
+            </VBox>
+        </content>
+    </Page>
+</mvc:View>

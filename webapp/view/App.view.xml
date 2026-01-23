@@ -1,0 +1,10 @@
+<mvc:View
+    controllerName="com.gsp.sap.procurement.ui.poautomationui.controller.App"
+    xmlns="sap.m"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true">
+    
+    <App id="app" class="appContainer">
+        <!-- Router target container -->
+    </App>
+</mvc:View>

@@ -1,0 +1,79 @@
+<mvc:View
+    controllerName="com.gsp.sap.procurement.ui.poautomationui.controller.Upload"
+    xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:core="sap.ui.core"
+    xmlns:upload="sap.m.upload" displayBlock="true">
+    
+    <Page id="upL_page" showHeader="false" class="adminPage sapUiNoContentPadding">
+        <content>
+            <VBox id="upL_vboxMain" class="mainContainer" height="100%" renderType="Bare">
+                
+                <HBox id="upL_hboxHeader" class="headerBar" justifyContent="SpaceBetween" alignItems="Center">
+                    <HBox id="upL_hbBrand" alignItems="Center">
+                        <Button id="upL_btnBack" icon="sap-icon://nav-back" type="Transparent" press="onNavBack" class="backButtonIcon"/>
+                        <Title id="upL_tiHeader" text="CỔNG NẠP DỮ LIỆU ĐƠN HÀNG" class="appTitle sapUiSmallMarginBegin"/>
+                    </HBox>
+                    <HBox id="upL_hbStatus" alignItems="Center" class="sapUiMediumMarginEnd">
+                        <core:Icon id="upL_icStatus" src="sap-icon://excel-attachment" size="1.2rem" color="#00f2ff" class="sapUiSmallMarginEnd"/>
+                        <Text id="upL_txRole" text="AGENT PORTAL" class="neonTextCyan"/>
+                    </HBox>
+                </HBox>
+
+                <ScrollContainer id="upL_scroll" height="100%" vertical="true">
+                    <VBox id="upL_vbContent" class="adminContentPadding">
+                        
+                        <VBox id="upL_cardPortal" class="bentoGlassCard" alignItems="Center">
+                            <VBox id="upL_vbIconGlow" class="logoBacklight sapUiSmallMarginBottom">
+                                <core:Icon id="upL_icCloud" src="sap-icon://upload-to-cloud" size="3.5rem" color="#00f2ff"/>
+                            </VBox>
+                            <Title id="upL_tiPortal" text="Tải lên danh sách linh kiện" level="H2" class="neonTextCyan"/>
+                            <Text id="upL_txPortalDesc" text="Hỗ trợ file .xlsx, .xls. Hệ thống tự động ánh xạ dữ liệu." class="textMutedCyber sapUiSmallMarginBottom"/>
+                            
+                            <upload:UploadSet
+                                id="upL_set"
+                                uploadUrl="/upload"
+                                instantUpload="false"
+                                class="cyberUploadSet sapUiMediumMarginBottom"
+                                beforeItemAdded="onBeforeItemAdded"
+                                uploadCompleted="onUploadComplete">
+                            </upload:UploadSet>
+                            
+                            <Button id="upL_btnProc" text="XỬ LÝ DỮ LIỆU NGAY" press="onProcessFile" class="btnCyberActionRefined largeBtn"/>
+                        </VBox>
+
+                        <VBox id="upL_cardHist" class="bentoGlassCard sapUiLargeMarginTop">
+                            <Title id="upL_tiHist" text="NHẬT KÝ GIAO DỊCH" level="H3" class="neonTextCyan sapUiSmallMarginBottom"/>
+                            
+                            <Table id="upL_table" items="{/uploadHistory}" class="glassTableCyber" noDataText="Chưa có dữ liệu">
+                                <columns>
+                                    <Column id="upL_c1"><Text id="upL_tc1" text="TÊN FILE" class="textMutedCyber"/></Column>
+                                    <Column id="upL_c2" hAlign="Center"><Text id="upL_tc2" text="THỜI GIAN" class="textMutedCyber"/></Column>
+                                    <Column id="upL_c3" hAlign="Center"><Text id="upL_tc3" text="SỐ DÒNG" class="textMutedCyber"/></Column>
+                                    <Column id="upL_c4" hAlign="End"><Text id="upL_tc4" text="TRẠNG THÁI" class="textMutedCyber"/></Column>
+                                </columns>
+                                <items>
+                                    <ColumnListItem id="upL_row" type="Active" press="onItemPress" class="tableRowCyber">
+                                        <cells>
+                                            <Text id="upL_cl1" text="{fileName}" class="textPopWhite"/>
+                                            <Text id="upL_cl2" text="{uploadTime}" class="textPopWhite"/>
+                                            <Text id="upL_cl3" text="{recordCount}" class="neonTextCyan"/>
+                                            <ObjectStatus id="upL_cl4" text="{statusText}" state="{statusState}"/>
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table>
+                        </VBox>
+
+                    </VBox>
+                </ScrollContainer>
+            </VBox>
+        </content>
+        
+        <footer>
+            <OverflowToolbar id="upL_otb" class="footerBarCyber">
+                <ToolbarSpacer id="upL_ts"/>
+                <Button id="upL_btnRefresh" text="LÀM MỚI" icon="sap-icon://refresh" press="onRefresh" class="btnGhost"/>
+                <Button id="upL_btnLogout" text="ĐĂNG XUẤT" icon="sap-icon://log" press="onLogout" class="btnRejectCyber"/>
+            </OverflowToolbar>
+        </footer>
+    </Page>
+</mvc:View>
