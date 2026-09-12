@@ -1,0 +1,51 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:grid="sap.ui.layout.cssgrid">
+    <VBox class="adminContentPadding" alignItems="Center">
+        <Title text="Nền tảng Tin cậy chuẩn Enterprise" level="H1" class="lan_titleMain sapUiSmallMarginBottom"/>
+        <Text text="Vượt qua mọi rào cản hệ thống bằng công nghệ xử lý dữ liệu chuyên sâu và bền bỉ." 
+              class="lan_textBody sapUiLargeMarginBottom" textAlign="Center"/>
+
+        <grid:CSSGrid gridTemplateColumns="repeat(2, 1fr)" gridGap="1.5rem" width="100%">
+            
+            <HBox class="lan_cleanCard" alignItems="Start">
+                <VBox class="lan_iconBox sapUiMediumMarginEnd">
+                    <core:Icon src="sap-icon://history" size="1.5rem" color="#0070f2"/>
+                </VBox>
+                <VBox>
+                    <Title text="Truy vết Thời gian Toàn diện" level="H4" class="lan_titleSub sapUiTinyMarginBottom"/>
+                    <Text text="Ghi nhận lịch sử chính xác tuyệt đối theo thời gian thực (Date &amp; Time) cho từng bản ghi." class="lan_textBody"/>
+                </VBox>
+            </HBox>
+
+            <HBox class="lan_cleanCard" alignItems="Start">
+                <VBox class="lan_iconBox sapUiMediumMarginEnd">
+                    <core:Icon src="sap-icon://dimension" size="1.5rem" color="#0070f2"/>
+                </VBox>
+                <VBox>
+                    <Title text="Cấu trúc Dữ liệu Thông minh" level="H4" class="lan_titleSub sapUiTinyMarginBottom"/>
+                    <Text text="Tự động phân loại và ánh xạ các dòng Excel vào cấu trúc Header/Items chuẩn hóa trên SAP." class="lan_textBody"/>
+                </VBox>
+            </HBox>
+
+            <HBox class="lan_cleanCard" alignItems="Start">
+                <VBox class="lan_iconBox sapUiMediumMarginEnd">
+                    <core:Icon src="sap-icon://refresh" size="1.5rem" color="#0070f2"/>
+                </VBox>
+                <VBox>
+                    <Title text="Xử lý Hàng đợi Bền bỉ" level="H4" class="lan_titleSub sapUiTinyMarginBottom"/>
+                    <Text text="Kiến trúc Event-driven hiện đại đảm bảo hệ thống vận hành liên tục và cập nhật trạng thái tức thì." class="lan_textBody"/>
+                </VBox>
+            </HBox>
+
+            <HBox class="lan_cleanCard" alignItems="Start">
+                <VBox class="lan_iconBox sapUiMediumMarginEnd">
+                    <core:Icon src="sap-icon://excel-attachment" size="1.5rem" color="#0070f2"/>
+                </VBox>
+                <VBox>
+                    <Title text="Ánh xạ Cột Linh hoạt" level="H4" class="lan_titleSub sapUiTinyMarginBottom"/>
+                    <Text text="Khả năng nhận diện dữ liệu thông minh theo tên cột, không phụ thuộc vào vị trí sắp xếp trong file." class="lan_textBody"/>
+                </VBox>
+            </HBox>
+
+        </grid:CSSGrid>
+    </VBox>
+</core:FragmentDefinition>

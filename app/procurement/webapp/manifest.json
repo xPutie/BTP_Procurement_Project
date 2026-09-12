@@ -1,0 +1,215 @@
+{
+  "_version": "1.81.0",
+  "sap.app": {
+    "id": "com.gsp.sap.procurement.ui.poautomationui",
+    "type": "application",
+    "i18n": {
+      "bundleName": "com.gsp.sap.procurement.ui.poautomationui.i18n.i18n",
+      "supportedLocales": [
+        "vi",
+        "en"
+      ],
+      "fallbackLocale": "vi"
+    },
+    "applicationVersion": {
+      "version": "0.0.14"
+    },
+    "crossNavigation": {
+      "inbounds": {
+        "poautomation-upload": {
+          "signature": {
+            "parameters": {},
+            "additionalParameters": "allowed"
+          },
+          "semanticObject": "POAutomationUpload",
+          "action": "Display",
+          "title": "BTP Procurement Upload",
+          "subTitle": "Nhap du lieu mua sam",
+          "icon": "sap-icon://upload-to-cloud"
+        }
+      }
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "dataSources": {
+      "mainService": {
+        "uri": "/srv-api/odata/v4/procurement/",
+        "type": "OData",
+        "settings": {
+          "odataVersion": "4.0"
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "faviconn.jpg",
+      "favIcon": "faviconn.jpg",
+      "phone": "faviconn.jpg",
+      "phone@2": "faviconn.jpg",
+      "tablet": "faviconn.jpg",
+      "tablet@2": "faviconn.jpg"
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": true,
+    "dependencies": {
+      "minUI5Version": "1.143.2",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.f": {},
+        "sap.ui.layout": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "com.gsp.sap.procurement.ui.poautomationui.i18n.i18n"
+        }
+      },
+      "": {
+        "type": "sap.ui.model.odata.v4.ODataModel",
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "synchronizationMode": "None",
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        },
+        {
+          "uri": "css/premium_upload.css"
+        }
+      ]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "controlAggregation": "pages",
+        "controlId": "app",
+        "transition": "show",
+        "viewType": "XML",
+        "async": true
+      },
+      "routes": [
+        {
+          "pattern": "",
+          "name": "loginRoot",
+          "target": "login"
+        },
+        {
+          "pattern": "landing",
+          "name": "landingHash",
+          "target": "landing"
+        },
+        {
+          "pattern": "login",
+          "name": "login",
+          "target": "login"
+        },
+        {
+          "pattern": "register",
+          "name": "register",
+          "target": "register"
+        },
+        {
+          "pattern": "upload",
+          "name": "upload",
+          "target": "upload"
+        },
+        {
+          "pattern": "upload-history",
+          "name": "uploadHistory",
+          "target": "uploadHistory"
+        },
+        {
+          "pattern": "processing-monitor",
+          "name": "processingMonitor",
+          "target": "processingMonitor"
+        },
+        {
+          "pattern": "approval",
+          "name": "approval",
+          "target": "approval"
+        },
+        {
+          "pattern": "admin",
+          "name": "admin",
+          "target": "admin"
+        }
+      ],
+      "targets": {
+        "landing": {
+          "viewId": "Landing",
+          "viewName": "com.gsp.sap.procurement.ui.poautomationui.view.Landing",
+          "viewType": "XML"
+        },
+        "login": {
+          "viewId": "Login",
+          "viewName": "com.gsp.sap.procurement.ui.poautomationui.view.Login",
+          "viewType": "XML"
+        },
+        "register": {
+          "viewId": "Register",
+          "viewName": "com.gsp.sap.procurement.ui.poautomationui.view.Register",
+          "viewType": "XML"
+        },
+        "upload": {
+          "viewId": "Upload",
+          "viewName": "com.gsp.sap.procurement.ui.poautomationui.view.Upload",
+          "viewType": "XML"
+        },
+        "uploadHistory": {
+          "viewId": "UploadHistory",
+          "viewName": "com.gsp.sap.procurement.ui.poautomationui.view.UploadHistory",
+          "viewType": "XML"
+        },
+        "processingMonitor": {
+          "viewId": "ProcessingMonitor",
+          "viewName": "com.gsp.sap.procurement.ui.poautomationui.view.ProcessingMonitor",
+          "viewType": "XML"
+        },
+        "approval": {
+          "viewId": "Approval",
+          "viewName": "com.gsp.sap.procurement.ui.poautomationui.view.Approval",
+          "viewType": "XML"
+        },
+        "admin": {
+          "viewId": "Admin",
+          "viewName": "com.gsp.sap.procurement.ui.poautomationui.view.Admin",
+          "viewType": "XML"
+        }
+      }
+    },
+    "rootView": {
+      "viewName": "com.gsp.sap.procurement.ui.poautomationui.view.App",
+      "type": "XML",
+      "id": "app",
+      "async": true
+    }
+  },
+  "sap.cloud": {
+    "public": true,
+    "service": "btp.procurement.service"
+  }
+}

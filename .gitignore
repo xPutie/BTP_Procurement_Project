@@ -1,3 +1,4 @@
+# --- Các file SAP đã có của ông ---
 node_modules/
 dist/
 .scp/
@@ -8,3 +9,35 @@ mta-*
 resources
 archive.zip
 .*_mta_build_tmp
+
+# --- BỔ SUNG THÊM ĐỂ CHUYÊN NGHIỆP ---
+
+# 1. IDE & Editor (Tránh đẩy cấu hình cá nhân lên)
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# 2. Hệ điều hành (Rác của Windows/Mac)
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# 3. Logs (Nhật ký lỗi khi chạy npm)
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# 4. Fiori Tools (File sinh ra khi ông chạy Preview)
+webapp/test/changes_preview.js
+
+# 5. Temporary & Generated build files
+.tmp_*
+tmp/
+mta_archives_tmp/
+gen/
+

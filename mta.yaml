@@ -1,0 +1,141 @@
+_schema-version: 3.3.0
+ID: po_automation_ui
+version: 0.0.26
+description: "SAP Fiori application for procurement process automation on SAP BTP."
+parameters:
+  enable-parallel-deployments: true
+  deploy_mode: html5-repo
+build-parameters:
+  before-all:
+    - builder: custom
+      commands:
+        - npm ci
+        - npx cds build --production
+modules:
+  - name: po_automation_ui-srv
+    type: nodejs
+    path: gen/srv
+    parameters:
+      instances: 1
+      buildpack: nodejs_buildpack
+      memory: 512M
+      disk-quota: 512M
+    build-parameters:
+      builder: npm-ci
+      ignore: ["node_modules/"]
+    provides:
+      - name: srv-api # required by consumers of CAP services (e.g. approuter)
+        properties:
+          srv-url: ${default-url}
+    requires:
+      - name: po_automation_ui-db
+      - name: po_automation_ui-auth
+
+  - name: po_automation_ui-db-deployer
+    type: hdb
+    path: gen/db
+    parameters:
+      buildpack: nodejs_buildpack
+      memory: 512M
+      disk-quota: 512M
+      no-route: true
+      no-start: true
+    requires:
+      - name: po_automation_ui-db
+  - name: po_automation_ui
+    type: approuter.nodejs
+    path: app/router
+    parameters:
+      keep-existing-routes: true
+      disk-quota: 256M
+      memory: 256M
+    requires:
+      - name: srv-api
+        group: destinations
+        properties:
+          name: srv-api # must be used in xs-app.json as well
+          url: ~{srv-url}
+          forwardAuthToken: true
+      - name: po_automation_ui-auth
+      - name: po_automation_ui-html5-runtime
+    provides:
+      - name: app-api
+        properties:
+          app-protocol: ${protocol}
+          app-uri: ${default-uri}
+
+  - name: po_automation_ui-app-deployer
+    type: com.sap.application.content
+    path: gen
+    requires:
+      - name: po_automation_ui-auth
+      - name: srv-api
+      - name: po_automation_ui-html5-repo-host
+        parameters:
+          content-target: true
+          config:
+            HTML5Runtime_enabled: true
+    build-parameters:
+      build-result: app/
+      requires:
+        - name: po_automation_uiprocurement
+          artifacts:
+            - procurement.zip
+          target-path: app/
+
+  # NOTE: Destinations must be created manually in BTP Cockpit:
+  # 1. srv-api: Type=HTTP, URL=<srv-url from deployed app>, Authentication=OAuth2UserTokenExchange
+  # 2. po_automation_ui-html5-repo-host: ServiceInstanceName=po_automation_ui-html5-repo-host
+  # 3. po_automation_ui-auth: ServiceInstanceName=po_automation_ui-auth
+
+  - name: po_automation_uiprocurement
+    type: html5
+    path: app/procurement
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm ci
+        - npm run build
+      supported-platforms:
+        []
+
+resources:
+  - name: po_automation_ui-db
+    type: com.sap.xs.hdi-container
+    parameters:
+      service: hana
+      service-plan: hdi-shared
+  - name: po_automation_ui-auth
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: xsuaa
+      service-plan: application
+      path: ./xs-security.json
+      config:
+        xsappname: po_automation_ui-${org}-${space}
+        tenant-mode: dedicated
+        oauth2-configuration:
+          credential-types:
+            - "binding-secret"
+            - "x509"
+          redirect-uris:
+            - https://*~{app-api/app-uri}/**
+    requires:
+      - name: app-api
+
+  - name: po_automation_ui-html5-repo-host
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-plan: app-host
+  - name: po_automation_ui-html5-runtime
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-plan: app-runtime
+  - name: po_automation_ui-destination-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: destination
+      service-plan: lite

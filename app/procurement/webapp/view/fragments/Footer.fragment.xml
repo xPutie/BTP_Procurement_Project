@@ -1,0 +1,57 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+>
+	<VBox class="footerContainer">
+		<Toolbar class="footerToolbar">
+			<!-- Left: System Status -->
+			<HBox
+				alignItems="Center"
+				class="sapUiSmallMarginBegin"
+			>
+				<core:Icon
+					src="sap-icon://status-positive"
+					class="statusDot sapUiTinyMarginEnd"
+				/>
+				<Text
+					text="Hệ thống: Sẵn sàng"
+					class="statusText"
+				/>
+			</HBox>
+			<ToolbarSpacer />
+			<!-- Center: Links with Icons -->
+			<HBox alignItems="Center">
+				<Button
+					icon="sap-icon://hint"
+					text="Về chúng tôi"
+					type="Transparent"
+					class="footerLinkBtn sapUiTinyMarginEnd"
+				/>
+				<Button
+					icon="sap-icon://headset"
+					text="Trung tâm Hỗ trợ"
+					type="Transparent"
+					class="footerLinkBtn sapUiTinyMarginEnd"
+				/>
+				<Button
+					icon="sap-icon://shield"
+					text="Điều khoản &amp; Bảo mật"
+					type="Transparent"
+					class="footerLinkBtn sapUiTinyMarginEnd"
+				/>
+				<Button
+					icon="sap-icon://shelf"
+					text="Thư viện Tài liệu"
+					type="Transparent"
+					class="footerLinkBtn"
+				/>
+			</HBox>
+			<ToolbarSpacer />
+			<!-- Right: Copyright -->
+			<Text
+				text="© 2026 SAP Procurement BTP"
+				class="footerCopyright sapUiSmallMarginEnd"
+			/>
+		</Toolbar>
+	</VBox>
+</core:FragmentDefinition>

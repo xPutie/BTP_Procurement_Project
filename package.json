@@ -8,21 +8,60 @@
     "sapui5"
   ],
   "main": "webapp/index.html",
-  "dependencies": {},
+  "dependencies": {
+    "@cap-js/hana": "^1.0.0",
+    "@sap/cds": "^8",
+    "@sap/xssec": "^4.13.0",
+    "axios": "^1.6.0",
+    "express": "^4",
+    "xlsx": "^0.18.5"
+  },
   "devDependencies": {
+    "@sap/cds-dk": "^9.6.1",
+    "@sap/ux-ui5-tooling": "1",
     "@ui5/cli": "^4.0.33",
-    "@sap/ux-ui5-tooling": "1"
+    "concurrently": "^8.2.2",
+    "sqlite3": "^5.1.7"
   },
   "scripts": {
+    "watch": "cds watch",
+    "start-cap-local-db": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/start-local-db.ps1",
     "start": "fiori run --open \"test/flp.html#app-preview\"",
     "start-local": "fiori run --config ./ui5-local.yaml --open \"test/flp.html#app-preview\"",
+    "build:cap:prod": "npx cds build --production",
+    "build:ui:procurement": "npm run --prefix app/procurement build",
+    "clean-build-deploy": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/clean-build-deploy.ps1",
     "build": "ui5 build --config=ui5.yaml --clean-dest --dest dist",
     "deploy": "fiori verify",
     "deploy-config": "fiori add deploy-config",
     "start-noflp": "fiori run --open \"/index.html?sap-ui-xx-viewCache=false\"",
     "int-test": "fiori run --open \"test/integration/opaTests.qunit.html\"",
     "start-variants-management": "fiori run --open \"/preview.html#app-preview\"",
-    "unit-test": "fiori run --open \"test/unit/unitTests.qunit.html\""
+    "unit-test": "fiori run --open \"test/unit/unitTests.qunit.html\"",
+    "start-embedded": "fiori run --config ./flp.yaml --open \"sap/bc/ui5_ui5/ui2/ushell/shells/abap/Fiorilaunchpad.html?sap-ushell-nocb=true\"",
+    "dev": "concurrently \"npm run watch\" \"npx -y wait-on tcp:4004 && npm run start-noflp\""
+  },
+  "cds": {
+    "requires": {
+      "db": {
+        "kind": "sqlite",
+        "credentials": {
+          "database": "db/procurement.db"
+        }
+      },
+      "[production]": {
+        "db": {
+          "kind": "hana",
+          "pool": {
+            "min": 2,
+            "max": 30,
+            "acquireTimeoutMillis": 20000,
+            "idleTimeoutMillis": 120000
+          }
+        }
+      },
+      "html5-repo": true
+    }
   },
   "sapuxLayer": "CUSTOMER_BASE"
 }

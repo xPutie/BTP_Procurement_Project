@@ -1,0 +1,116 @@
+<core:FragmentDefinition
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+>
+    <VBox
+        class="adminContentPadding sapUiLargeMarginTop"
+        alignItems="Center"
+    >
+        <Title
+            text="Quy trình Vận hành Tinh gọn"
+            level="H1"
+            class="lan_titleMain sapUiSmallMarginBottom"
+        />
+        <Text
+            text="Hành trình tự động hóa toàn diện từ file Excel đến hệ thống SAP S/4HANA."
+            class="lan_textBody sapUiLargeMarginBottom"
+        />
+        <HBox
+            width="100%"
+            justifyContent="SpaceBetween"
+            alignItems="Start"
+        >
+            <VBox
+                alignItems="Center"
+                width="22%"
+            >
+                <VBox class="lan_iconBox sapUiSmallMarginBottom">
+                    <core:Icon
+                        src="sap-icon://upload"
+                        size="2rem"
+                        color="#0070f2"
+                    />
+                </VBox>
+                <Title
+                    text="1. Tiếp nhận"
+                    level="H4"
+                    class="lan_titleSub sapUiTinyMarginBottom"
+                />
+                <Text
+                    text="Tải lên file Excel dữ liệu một cách an toàn và bảo mật."
+                    class="lan_textBody"
+                    textAlign="Center"
+                />
+            </VBox>
+            <HBox class="lan_processLine" />
+            <VBox
+                alignItems="Center"
+                width="22%"
+            >
+                <VBox class="lan_iconBox sapUiSmallMarginBottom">
+                    <core:Icon
+                        src="sap-icon://validate"
+                        size="2rem"
+                        color="#0070f2"
+                    />
+                </VBox>
+                <Title
+                    text="2. Kiểm soát"
+                    level="H4"
+                    class="lan_titleSub"
+                />
+                <Text
+                    text="Hệ thống tự động rà soát và xác thực tính toàn vẹn của dữ liệu."
+                    class="lan_textBody"
+                    textAlign="Center"
+                />
+            </VBox>
+            <HBox class="lan_processLine" />
+            <VBox
+                alignItems="Center"
+                width="22%"
+            >
+                <VBox class="lan_iconBox sapUiSmallMarginBottom">
+                    <core:Icon
+                        src="sap-icon://process"
+                        size="2rem"
+                        color="#0070f2"
+                    />
+                </VBox>
+                <Title
+                    text="3. Xử lý"
+                    level="H4"
+                    class="lan_titleSub"
+                />
+                <Text
+                    text="Dữ liệu được đưa vào hàng đợi xử lý tự động hiệu năng cao."
+                    class="lan_textBody"
+                    textAlign="Center"
+                />
+            </VBox>
+            <HBox class="lan_processLine" />
+            <VBox
+                alignItems="Center"
+                width="22%"
+            >
+                <VBox class="lan_iconBox sapUiSmallMarginBottom">
+                    <core:Icon
+                        src="sap-icon://accept"
+                        size="2rem"
+                        color="#0070f2"
+                    />
+                </VBox>
+                <Title
+                    text="4. Hoàn tất"
+                    level="H4"
+                    class="lan_titleSub"
+                />
+                <Text
+                    text="Đơn mua hàng (PO) đã được khởi tạo thành công trên SAP."
+                    class="lan_textBody"
+                    textAlign="Center"
+                />
+            </VBox>
+        </HBox>
+    </VBox>
+</core:FragmentDefinition>

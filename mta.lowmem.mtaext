@@ -1,0 +1,19 @@
+_schema-version: 3.3.0
+ID: po_automation_ui-lowmem
+extends: po_automation_ui
+
+modules:
+  - name: po_automation_ui-srv
+    parameters:
+      memory: 256M
+      disk-quota: 512M
+
+  - name: po_automation_ui-db-deployer
+    parameters:
+      memory: 512M
+      disk-quota: 512M
+
+  - name: po_automation_ui
+    parameters:
+      memory: 128M
+      disk-quota: 256M

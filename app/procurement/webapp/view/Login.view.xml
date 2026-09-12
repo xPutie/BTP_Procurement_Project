@@ -1,0 +1,67 @@
+<mvc:View
+    controllerName="com.gsp.sap.procurement.ui.poautomationui.controller.Login"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    displayBlock="true"
+>
+    <Page
+        id="idLoginPage"
+        showHeader="false"
+        enableScrolling="false"
+        class="sapSimpleLoginPage"
+    >
+        <content>
+            <VBox
+                class="sapSimpleLoginViewport"
+                alignItems="Center"
+                justifyContent="Center"
+            >
+                <HBox
+                    class="sapSimpleLoginTopBar"
+                    justifyContent="Start"
+                    width="100%"
+                >
+                    <Text
+                        text="SAP"
+                        class="sapSimpleLogo"
+                    />
+                </HBox>
+                <VBox class="sapSimpleLoginPanel">
+                    <Label
+                        text="Username/Email"
+                        class="sapSimpleLoginLabel"
+                    />
+                    <Input
+                        id="idUsernameInput"
+                        placeholder="user@mail.com / user123"
+                        class="sapSimpleLoginInput"
+                    />
+                    <Label
+                        text="Password"
+                        class="sapSimpleLoginLabel sapUiTinyMarginTop"
+                    />
+                    <Input
+                        id="idPasswordInput"
+                        type="Password"
+                        placeholder="********"
+                        class="sapSimpleLoginInput"
+                    />
+                    <Button
+                        id="idXCNHNNGNHPButton"
+                        text="Log On"
+                        type="Emphasized"
+                        press="onXCNHNNGNHPButtonPress"
+                        class="sapSimpleLoginButton sapUiSmallMarginTop"
+                    />
+                    <Link
+                        id="idNgKNgayLink"
+                        text="Change Password"
+                        press="onNgKNgayLinkPress"
+                        class="sapSimpleChangePasswordLink sapUiSmallMarginTop"
+                    />
+                </VBox>
+            </VBox>
+        </content>
+    </Page>
+</mvc:View>

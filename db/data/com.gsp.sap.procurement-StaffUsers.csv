@@ -1,0 +1,2 @@
+email,fullName,role,passwordHash,isActive,createdAt,updatedAt
+chitoann01@gmail.com,Nguyen Chi Toan,STAFF,pbkdf2_sha512$120000$3f2e5f3cce369f4daedb65389f1b50be$2022f2966d77d4a62b34468e8cccb2e4f3ad71181e285a0baa13ccc6ee4d1071b1bbe0a965462c896e5460ea1a62f6e06773b2016f9d166bfa18c8163a66c7be,true,2026-04-06T00:00:00Z,2026-04-06T00:00:00Z

@@ -1,0 +1,566 @@
+<mvc:View
+    controllerName="com.gsp.sap.procurement.ui.poautomationui.controller.ProcessingMonitor"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:m="sap.m"
+    xmlns:core="sap.ui.core"
+    displayBlock="true"
+>
+    <m:Page
+        title="Quotation Processing Monitor"
+        showNavButton="true"
+        navButtonPress=".onNavBack"
+        class="uploadPageBg"
+    >
+        <m:content>
+            <m:VBox class="sapUiResponsiveMargin uploadContent">
+                <m:VBox class="fioriCard flowTrackerCard o2cMonitorShell monitorHeroCard sapUiSmallMarginBottom">
+                    <m:HBox
+                        class="monitorTopBar"
+                        justifyContent="SpaceBetween"
+                        alignItems="Center"
+                        wrap="Wrap"
+                    >
+                        <m:HBox
+                            alignItems="Center"
+                            class="sapUiTinyMarginEnd"
+                        >
+                            <core:Icon
+                                src="sap-icon://process"
+                                class="monitorTopIcon sapUiSmallMarginEnd"
+                            />
+                            <m:VBox>
+                                <m:Title
+                                    text="Processing Monitor"
+                                    level="H4"
+                                    class="monitorTitle"
+                                />
+                                <m:Text
+                                    text="Theo dõi tiến trình Quotation theo thời gian thực cho Sales và Procurement"
+                                    class="monitorSubTitle"
+                                />
+                            </m:VBox>
+                        </m:HBox>
+                        <m:HBox
+                            alignItems="Center"
+                            wrap="Wrap"
+                        >
+                            <m:ObjectStatus
+                                text="{= ${monitor>/runningQuotations} > 0 ? 'Đang đồng bộ dữ liệu' : 'Đã đồng bộ dữ liệu mới nhất' }"
+                                state="{= ${monitor>/runningQuotations} > 0 ? 'Information' : 'Success' }"
+                                inverted="true"
+                                class="monitorRunStatus sapUiTinyMarginEnd"
+                            />
+                            <m:Text
+                                text="{monitor>/lastUpdatedText}"
+                                class="resultTimestamp monitorLastUpdated sapUiSmallMarginEnd"
+                            />
+                            <m:Button
+                                text="Refresh"
+                                icon="sap-icon://refresh"
+                                type="Transparent"
+                                press=".onRefresh"
+                            />
+                        </m:HBox>
+                    </m:HBox>
+                    <m:HBox
+                        class="monitorMetaChips"
+                        wrap="Wrap"
+                    >
+                        <m:ObjectStatus
+                            text="{= 'Records: ' + ${monitor>/totalQuotations} }"
+                            state="Information"
+                            inverted="true"
+                            class="sapUiTinyMarginEnd sapUiTinyMarginBottom"
+                        />
+                        <m:ObjectStatus
+                            text="{= 'Batches: ' + ${monitor>/batchCount} }"
+                            state="None"
+                            inverted="true"
+                            class="sapUiTinyMarginEnd sapUiTinyMarginBottom"
+                        />
+                        <m:ObjectStatus
+                            text="{= ${monitor>/activeTab} === 'ALL' ? 'Flow: All' : (${monitor>/activeTab} === 'SD_OTC' ? 'Flow: Sales Progress' : 'Flow: Procurement Progress') }"
+                            state="Success"
+                            inverted="true"
+                            class="sapUiTinyMarginBottom"
+                        />
+                    </m:HBox>
+                </m:VBox>
+                <m:MessageStrip
+                    text="Màn hình này lưu và theo dõi tiến trình Sales Order, Delivery, Billing và Procurement cho từng quotation."
+                    type="Information"
+                    showIcon="true"
+                    class="sapUiSmallMarginBottom"
+                />
+                <m:HBox
+                    class="summaryRow monitorSummaryRow sapUiSmallMarginBottom"
+                    wrap="Wrap"
+                >
+                    <m:VBox class="summaryCard monitorSummaryCard">
+                        <m:HBox alignItems="Center">
+                            <core:Icon
+                                src="sap-icon://document-text"
+                                class="summaryIcon blue sapUiSmallMarginEnd"
+                            />
+                            <m:VBox>
+                                <m:Text
+                                    text="TOTAL QUOTATIONS"
+                                    class="summaryLabel"
+                                />
+                                <m:Title
+                                    text="{monitor>/totalQuotations}"
+                                    level="H2"
+                                    class="summaryValue"
+                                />
+                            </m:VBox>
+                        </m:HBox>
+                    </m:VBox>
+                    <m:VBox class="summaryCard monitorSummaryCard">
+                        <m:HBox alignItems="Center">
+                            <core:Icon
+                                src="sap-icon://synchronize"
+                                class="summaryIcon orange sapUiSmallMarginEnd"
+                            />
+                            <m:VBox>
+                                <m:Text
+                                    text="IN PROGRESS"
+                                    class="summaryLabel"
+                                />
+                                <m:Title
+                                    text="{monitor>/runningQuotations}"
+                                    level="H2"
+                                    class="summaryValue"
+                                />
+                            </m:VBox>
+                        </m:HBox>
+                    </m:VBox>
+                    <m:VBox class="summaryCard monitorSummaryCard">
+                        <m:HBox alignItems="Center">
+                            <core:Icon
+                                src="sap-icon://complete"
+                                class="summaryIcon green sapUiSmallMarginEnd"
+                            />
+                            <m:VBox>
+                                <m:Text
+                                    text="COMPLETED"
+                                    class="summaryLabel"
+                                />
+                                <m:Title
+                                    text="{monitor>/completedQuotations}"
+                                    level="H2"
+                                    class="summaryValue"
+                                />
+                            </m:VBox>
+                        </m:HBox>
+                    </m:VBox>
+                    <m:VBox class="summaryCard monitorSummaryCard">
+                        <m:HBox alignItems="Center">
+                            <core:Icon
+                                src="sap-icon://status-negative"
+                                class="summaryIcon red sapUiSmallMarginEnd"
+                            />
+                            <m:VBox>
+                                <m:Text
+                                    text="FAILED"
+                                    class="summaryLabel"
+                                />
+                                <m:Title
+                                    text="{monitor>/failedQuotations}"
+                                    level="H2"
+                                    class="summaryValue"
+                                />
+                            </m:VBox>
+                        </m:HBox>
+                    </m:VBox>
+                    <m:VBox class="summaryCard monitorSummaryCard">
+                        <m:HBox alignItems="Center">
+                            <core:Icon
+                                src="sap-icon://number-sign"
+                                class="summaryIcon teal sapUiSmallMarginEnd"
+                            />
+                            <m:VBox>
+                                <m:Text
+                                    text="BATCH_ID"
+                                    class="summaryLabel"
+                                />
+                                <m:Title
+                                    text="{monitor>/batchCount}"
+                                    level="H2"
+                                    class="summaryValue"
+                                />
+                            </m:VBox>
+                        </m:HBox>
+                    </m:VBox>
+                    <m:VBox class="summaryCard monitorSummaryCard">
+                        <m:HBox alignItems="Center">
+                            <core:Icon
+                                src="sap-icon://performance"
+                                class="summaryIcon blue sapUiSmallMarginEnd"
+                            />
+                            <m:VBox>
+                                <m:Text
+                                    text="COMPLETION RATE"
+                                    class="summaryLabel"
+                                />
+                                <m:Title
+                                    text="{monitor>/completionRateText}"
+                                    level="H2"
+                                    class="summaryValue"
+                                />
+                            </m:VBox>
+                        </m:HBox>
+                    </m:VBox>
+                </m:HBox>
+                <m:IconTabBar
+                    id="processTabBar"
+                    expandable="false"
+                    headerBackgroundDesign="Solid"
+                    select=".onProcessTabSelect"
+                    selectedKey="{monitor>/activeTab}"
+                    class="sapUiNoMarginBottom processTabBarShadow"
+                >
+                    <m:items>
+                        <m:IconTabFilter
+                            key="ALL"
+                            text="All Data"
+                            icon="sap-icon://chain-link"
+                        />
+                        <m:IconTabFilter
+                            key="SD_OTC"
+                            text="Sales Progress"
+                            icon="sap-icon://sales-order"
+                        />
+                        <m:IconTabFilter
+                            key="SO_PROCUREMENT"
+                            text="Procurement Progress"
+                            icon="sap-icon://cart"
+                        />
+                    </m:items>
+                    <m:content>
+                        <m:VBox
+                            class="fioriCard resultTableCard monitorTableCard"
+                            style="border-top: none;"
+                        >
+                            <m:OverflowToolbar class="monitorTableToolbar">
+                                <core:Icon
+                                    src="sap-icon://detail-view"
+                                    class="sapUiSmallMarginEnd"
+                                    color="#0070f2"
+                                />
+                                <m:Title
+                                    text="Quotation and Item List"
+                                    level="H4"
+                                />
+                                <m:ToolbarSpacer />
+                                <m:SegmentedButton
+                                    selectedKey="{monitor>/filterStatus}"
+                                    selectionChange=".onFilterStatusChange"
+                                    class="resultStatusSwitch sapUiTinyMarginEnd"
+                                >
+                                    <m:items>
+                                        <m:SegmentedButtonItem
+                                            key="ALL"
+                                            text="All"
+                                        />
+                                        <m:SegmentedButtonItem
+                                            key="SUCCESS"
+                                            text="Success"
+                                        />
+                                        <m:SegmentedButtonItem
+                                            key="RUNNING"
+                                            text="Running"
+                                        />
+                                        <m:SegmentedButtonItem
+                                            key="ERROR"
+                                            text="Error"
+                                        />
+                                    </m:items>
+                                </m:SegmentedButton>
+                                <m:Button
+                                    text="Clear Filters"
+                                    type="Transparent"
+                                    press=".onClearFilters"
+                                />
+                            </m:OverflowToolbar>
+                            <m:Toolbar
+                                class="monitorTableToolbar sapUiTinyMarginBottom"
+                                design="Transparent"
+                            >
+                                <m:Select
+                                    width="14rem"
+                                    selectedKey="{monitor>/filterBatchId}"
+                                    change=".onBatchFilterChange"
+                                    items="{monitor>/batchOptions}"
+                                    class="sapUiTinyMarginEnd"
+                                >
+                                    <core:Item
+                                        key="{monitor>key}"
+                                        text="{monitor>text}"
+                                    />
+                                </m:Select>
+                                <m:SearchField
+                                    width="14rem"
+                                    placeholder="Search Sales Order"
+                                    value="{monitor>/filterSalesOrder}"
+                                    liveChange=".onSalesOrderFilterChange"
+                                    class="resultSearchField sapUiTinyMarginEnd"
+                                />
+                                <m:Select
+                                    width="16rem"
+                                    selectedKey="{monitor>/filterCustomer}"
+                                    change=".onCustomerFilterChange"
+                                    items="{monitor>/customerOptions}"
+                                    class="sapUiTinyMarginEnd"
+                                >
+                                    <core:Item
+                                        key="{monitor>key}"
+                                        text="{monitor>text}"
+                                    />
+                                </m:Select>
+                                <m:DatePicker
+                                    width="11rem"
+                                    placeholder="Upload From"
+                                    value="{monitor>/filterUploadedFrom}"
+                                    valueFormat="yyyy-MM-dd"
+                                    displayFormat="dd/MM/yyyy"
+                                    change=".onUploadedDateFilterChange"
+                                    class="sapUiTinyMarginEnd"
+                                />
+                                <m:DatePicker
+                                    width="11rem"
+                                    placeholder="Upload To"
+                                    value="{monitor>/filterUploadedTo}"
+                                    valueFormat="yyyy-MM-dd"
+                                    displayFormat="dd/MM/yyyy"
+                                    change=".onUploadedDateFilterChange"
+                                />
+                                <m:Select
+                                    width="12rem"
+                                    selectedKey="{monitor>/filterDateSort}"
+                                    change=".onDateSortChange"
+                                    class="sapUiTinyMarginBegin"
+                                >
+                                    <core:Item
+                                        key="DESC"
+                                        text="Date: Newest"
+                                    />
+                                    <core:Item
+                                        key="ASC"
+                                        text="Date: Oldest"
+                                    />
+                                </m:Select>
+                            </m:Toolbar>
+                            <m:VBox class="resultTableViewport">
+                                <m:Table
+                                    items="{monitor>/rows}"
+                                    class="fioriResultTable monitorResultTable resultTableGrid"
+                                    alternateRowColors="true"
+                                >
+                                    <m:columns>
+                                        <m:Column width="12rem">
+                                            <m:Text text="Batch_ID" />
+                                        </m:Column>
+                                        <m:Column width="18rem">
+                                            <m:Text text="Quotation" />
+                                        </m:Column>
+                                        <m:Column width="14rem">
+                                            <m:Text text="Customer" />
+                                        </m:Column>
+                                        <m:Column width="17rem">
+                                            <m:Text text="Current iFlow" />
+                                        </m:Column>
+                                        <m:Column width="12rem">
+                                            <m:Text text="Sales Order" />
+                                        </m:Column>
+                                        <m:Column
+                                            width="12rem"
+                                            visible="{= ${monitor>/activeTab} !== 'SO_PROCUREMENT' }"
+                                        >
+                                            <m:Text text="Delivery Docs" />
+                                        </m:Column>
+                                        <m:Column
+                                            width="12rem"
+                                            visible="{= ${monitor>/activeTab} !== 'SO_PROCUREMENT' }"
+                                        >
+                                            <m:Text text="Billing Docs" />
+                                        </m:Column>
+                                        <m:Column
+                                            width="18rem"
+                                            visible="{= ${monitor>/activeTab} !== 'SD_OTC' }"
+                                        >
+                                            <m:Text text="PR List" />
+                                        </m:Column>
+                                        <m:Column
+                                            width="16rem"
+                                            visible="{= ${monitor>/activeTab} !== 'SD_OTC' }"
+                                        >
+                                            <m:Text text="PO List" />
+                                        </m:Column>
+                                        <m:Column width="10rem">
+                                            <m:Text text="Upload Type" />
+                                        </m:Column>
+                                        <m:Column
+                                            width="10rem"
+                                            hAlign="Center"
+                                        >
+                                            <m:Text text="Status" />
+                                        </m:Column>
+                                        <m:Column width="18rem">
+                                            <m:Text text="Reason/Message" />
+                                        </m:Column>
+                                        <m:Column width="13rem">
+                                            <m:Text text="Uploaded At" />
+                                        </m:Column>
+                                        <m:Column width="13rem">
+                                            <m:Text text="Completed At" />
+                                        </m:Column>
+                                    </m:columns>
+                                    <m:items>
+                                        <m:ColumnListItem highlight="{= ${monitor>statusCode} === 'SUCCESS' ? 'Success' : (
+                                                (${monitor>statusCode} === 'ERROR' || ${monitor>statusCode} === 'FAILED' || ${monitor>statusCode} === 'FAIL' || ${monitor>statusCode} === 'REJECTED') ? 'Error' : 'Information') }">
+                                            <m:cells>
+                                                <m:Text
+                                                    text="{monitor>batchId}"
+                                                    class="docNumber batchIdText"
+                                                    wrapping="false"
+                                                />
+                                                <m:HBox
+                                                    alignItems="Center"
+                                                    class="quotationCellWrap"
+                                                >
+                                                    <m:VBox class="quotationTextBlock">
+                                                        <m:Link
+                                                            text="{monitor>quotationNo}"
+                                                            visible="{monitor>isParent}"
+                                                            press=".onToggleQuotation"
+                                                            class="docNumber viewDocsLink"
+                                                        />
+                                                        <m:Text
+                                                            text="{= ${monitor>isChild} ? (${monitor>message} + (${monitor>material} ? ' - ' + ${monitor>material} : '')
+                                                                       ) : '' }"
+                                                            visible="{monitor>isChild}"
+                                                            class="materialSubText"
+                                                        />
+                                                    </m:VBox>
+                                                </m:HBox>
+                                                <m:Text
+                                                    text="{monitor>customerDisplay}"
+                                                    class="docNumber"
+                                                    wrapping="false"
+                                                />
+                                                <m:Text
+                                                    text="{monitor>flowStage}"
+                                                    class="flowStageText"
+                                                    wrapping="false"
+                                                />
+                                                <m:VBox>
+                                                    <m:Link
+                                                        text="{monitor>salesOrder}"
+                                                        press=".onShowSalesOrderDetails"
+                                                        visible="{= !!${monitor>isParent} &amp;&amp; !!${monitor>salesOrder} &amp;&amp; ${monitor>salesOrder} !== 'N/A' }"
+                                                        class="docNumber viewDocsLink"
+                                                    />
+                                                    <m:Text
+                                                        text="{monitor>salesOrder}"
+                                                        visible="{= !(!!${monitor>isParent} &amp;&amp; !!${monitor>salesOrder} &amp;&amp; ${monitor>salesOrder} !== 'N/A') }"
+                                                        class="docNumber"
+                                                    />
+                                                </m:VBox>
+                                                <m:VBox>
+                                                    <m:Link
+                                                        text="{monitor>delivery}"
+                                                        press=".onShowDeliveryDetails"
+                                                        visible="{= !!${monitor>isParent} &amp;&amp; !!${monitor>delivery} &amp;&amp; ${monitor>delivery} !== 'N/A' }"
+                                                        class="docNumber viewDocsLink"
+                                                    />
+                                                    <m:Text
+                                                        text="{monitor>delivery}"
+                                                        visible="{= !(!!${monitor>isParent} &amp;&amp; !!${monitor>delivery} &amp;&amp; ${monitor>delivery} !== 'N/A') }"
+                                                        class="docNumber"
+                                                    />
+                                                </m:VBox>
+                                                <m:VBox>
+                                                    <m:Link
+                                                        text="{monitor>billing}"
+                                                        press=".onShowBillingDetails"
+                                                        visible="{= !!${monitor>isParent} &amp;&amp; !!${monitor>billing} &amp;&amp; ${monitor>billing} !== 'N/A' }"
+                                                        class="docNumber viewDocsLink"
+                                                    />
+                                                    <m:Text
+                                                        text="{monitor>billing}"
+                                                        visible="{= !(!!${monitor>isParent} &amp;&amp; !!${monitor>billing} &amp;&amp; ${monitor>billing} !== 'N/A') }"
+                                                        class="docNumber"
+                                                    />
+                                                </m:VBox>
+                                                <m:VBox>
+                                                    <m:HBox alignItems="Center">
+                                                        <m:Text
+                                                            text="{monitor>prCount} PRs"
+                                                            class="docCountText sapUiTinyMarginEnd"
+                                                        />
+                                                    </m:HBox>
+                                                    <m:Link
+                                                        text="View PR List"
+                                                        press=".onShowPRList"
+                                                        visible="{= ${monitor>prCount} > 0 }"
+                                                        class="viewDocsLink"
+                                                    />
+                                                </m:VBox>
+                                                <m:VBox>
+                                                    <m:HBox alignItems="Center">
+                                                        <m:Text
+                                                            text="{monitor>poCount} POs"
+                                                            class="docCountText sapUiTinyMarginEnd"
+                                                        />
+                                                    </m:HBox>
+                                                    <m:Link
+                                                        text="View PO List"
+                                                        press=".onShowPOList"
+                                                        visible="{= ${monitor>poCount} > 0 }"
+                                                        class="viewDocsLink"
+                                                    />
+                                                </m:VBox>
+                                                <m:Text
+                                                    text="{monitor>uploadMethod}"
+                                                    class="docNumber"
+                                                />
+                                                <m:ObjectStatus
+                                                    text="{monitor>statusText}"
+                                                    state="{= ${monitor>statusCode} === 'SUCCESS' ? 'Success' : (
+                                                            (${monitor>statusCode} === 'ERROR' || ${monitor>statusCode} === 'FAILED' || ${monitor>statusCode} === 'FAIL' || ${monitor>statusCode} === 'REJECTED') ? 'Error' : 'Information') }"
+                                                    inverted="true"
+                                                    class="resultDocStatus"
+                                                />
+                                                <m:Text
+                                                    text="{= (
+                                                            (${monitor>statusCode} === 'ERROR' || ${monitor>statusCode} === 'FAILED' || ${monitor>statusCode} === 'FAIL' || ${monitor>statusCode} === 'REJECTED') ? (${monitor>reasonMessage} || ${monitor>message} || 'No error message') : '') }"
+                                                    class="materialSubText"
+                                                    wrapping="true"
+                                                />
+                                                <m:Text
+                                                    text="{monitor>uploadAtText}"
+                                                    class="docNumber"
+                                                />
+                                                <m:Text
+                                                    text="{monitor>completedAtText}"
+                                                    class="docNumber"
+                                                />
+                                            </m:cells>
+                                        </m:ColumnListItem>
+                                    </m:items>
+                                    <m:noData>
+                                        <m:IllustratedMessage
+                                            illustrationType="sapIllus-NoData"
+                                            title="No quotations are being tracked"
+                                            description="Data will be saved here after you submit from the Upload page"
+                                        />
+                                    </m:noData>
+                                </m:Table>
+                            </m:VBox>
+                        </m:VBox>
+                    </m:content>
+                </m:IconTabBar>
+            </m:VBox>
+        </m:content>
+    </m:Page>
+</mvc:View>

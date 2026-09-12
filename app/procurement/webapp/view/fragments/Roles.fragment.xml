@@ -1,0 +1,32 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:grid="sap.ui.layout.cssgrid">
+    <VBox class="adminContentPadding sapUiLargeMarginTop" alignItems="Center">
+        <Title text="Quản trị Quyền truy cập Thông minh" level="H1" class="lan_titleMain sapUiSmallMarginBottom"/>
+        <Text text="Phân tách nhiệm vụ minh bạch, tối ưu hóa tính bảo mật và tuân thủ quy trình doanh nghiệp." 
+              class="lan_textBody sapUiLargeMarginBottom" textAlign="Center"/>
+
+        <grid:CSSGrid gridTemplateColumns="repeat(3, 1fr)" gridGap="1.5rem" width="100%">
+            
+            <VBox class="lan_cleanCard" alignItems="Center">
+                <Avatar src="sap-icon://employee" displaySize="L" class="sapUiSmallMarginBottom" backgroundColor="Accent6"/>
+                <Title text="Nhân viên Thu mua" level="H3" class="lan_titleSub sapUiSmallMarginBottom"/>
+                <Text text="Chủ động khởi tạo yêu cầu và theo dõi trạng thái xử lý đơn hàng theo thời gian thực." 
+                      class="lan_textBody" textAlign="Center"/>
+            </VBox>
+            
+            <VBox class="lan_cleanCard" alignItems="Center">
+                <Avatar src="sap-icon://manager" displaySize="L" class="sapUiSmallMarginBottom" backgroundColor="Accent4"/>
+                <Title text="Quản lý Phê duyệt" level="H3" class="lan_titleSub sapUiSmallMarginBottom"/>
+                <Text text="Kiểm duyệt nhanh chóng các yêu cầu từ đội ngũ và trực tiếp phê duyệt đơn hàng (PO)." 
+                      class="lan_textBody" textAlign="Center"/>
+            </VBox>
+
+            <VBox class="lan_cleanCard" alignItems="Center">
+                <Avatar src="sap-icon://it-host" displaySize="L" class="sapUiSmallMarginBottom" backgroundColor="Accent3"/>
+                <Title text="Quản trị viên" level="H3" class="lan_titleSub sapUiSmallMarginBottom"/>
+                <Text text="Giám sát hiệu năng vận hành, quản lý hàng đợi và kiểm soát nhật ký tích hợp hệ thống." 
+                      class="lan_textBody" textAlign="Center"/>
+            </VBox>
+
+        </grid:CSSGrid>
+    </VBox>
+</core:FragmentDefinition>

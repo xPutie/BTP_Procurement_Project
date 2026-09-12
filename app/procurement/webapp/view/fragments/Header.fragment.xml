@@ -1,0 +1,81 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+>
+    <HBox
+        class="lan_header headerBar"
+        justifyContent="SpaceBetween"
+        alignItems="Center"
+        height="4.5rem"
+    >
+        <HBox
+            alignItems="Center"
+            class="sapUiMediumMarginBegin"
+        >
+            <Image
+                src="faviconn.jpg"
+                width="2.5rem"
+                height="2.5rem"
+                class="sapUiSmallMarginEnd logoGlow"
+            />
+            <Title
+                text="BTP PROCUREMENT"
+                class="textMain"
+            />
+        </HBox>
+        <HBox
+            alignItems="Center"
+            class="sapUiMediumMarginEnd"
+        >
+            <HBox
+                alignItems="Center"
+                visible="false"
+            >
+                <Button
+                    text="Đăng ký"
+                    press="onNgKButtonPress"
+                    class="sapUiSmallMarginEnd"
+                />
+                <Button
+                    text="Đăng nhập"
+                    type="Emphasized"
+                    press="onNgNhpButtonPress"
+                    class="lan_btnMain"
+                />
+            </HBox>
+            <HBox
+                alignItems="Center"
+                visible="{app>/isAuthenticated}"
+            >
+                <!-- User Profile Trigger Area -->
+                <HBox
+                    alignItems="Center"
+                    class="userProfileTrigger"
+                    tooltip="Xem hồ sơ"
+                >
+                    <HBox
+                        alignItems="Center"
+                        class="sapUiTinyMarginEnd"
+                    >
+                        <Text
+                            text="Xin chào,"
+                            class="mutedTextSmall sapUiTinyMarginEnd"
+                        />
+                        <Link
+                            text="{app>/userName}"
+                            class="textMainBold"
+                            press="onUserNameLinkPress"
+                        />
+                    </HBox>
+                    <Avatar
+                        displaySize="XS"
+                        initials="{= ${app>/userName} ? ${app>/userName}.substring(0,1) : 'U' }"
+                        press="onAvatarPress"
+                        active="true"
+                        class="cyberAvatar"
+                    />
+                </HBox>
+            </HBox>
+        </HBox>
+    </HBox>
+</core:FragmentDefinition>

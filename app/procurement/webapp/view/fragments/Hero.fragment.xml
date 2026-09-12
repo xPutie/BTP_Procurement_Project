@@ -1,0 +1,48 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+>
+    <VBox
+        alignItems="Center"
+        class="lan_hero"
+        width="100%"
+    >
+        <VBox class="role_badge_light sapUiSmallMarginBottom">
+            <Text text="HỆ SINH THÁI DOANH NGHIỆP SAP BTP" />
+        </VBox>
+        <Title
+            text="Số hóa &amp; Tự động hóa Quy trình Thu mua"
+            class="lan_heroTitle sapUiSmallMarginBottom"
+            textAlign="Center"
+        />
+        <Text
+            text="Bứt phá hiệu suất vận hành: Chuyển đổi dữ liệu Excel thành Đơn mua hàng (PO) tức thì với độ chính xác tuyệt đối trên nền tảng SAP."
+            class="mutedTextSmall sapUiLargeMarginBottom lan_heroSubtext"
+            textAlign="Center"
+        />
+        <HBox class="sapUiMediumMarginTop">
+            <Button
+                text="Trải nghiệm ngay"
+                press="onTriNghimNgayButtonPress"
+                class="lan_btnMain sapUiSmallMarginEnd"
+                width="180px"
+            />
+            <Button
+                text="Khám phá Demo"
+                type="Ghost"
+                width="160px"
+            />
+        </HBox>
+        <VBox class="sapUiLargeMarginTop" width="100%" alignItems="Center">
+            <Text text="LỐI VÀO NHANH" class="role_badge_light sapUiSmallMarginBottom" />
+            <HBox wrap="Wrap" justifyContent="Center" class="sapUiSmallMarginTop" width="100%">
+                <!-- Hidden buttons - only Monitor is active -->
+                <!-- <Button text="Đăng nhập" icon="sap-icon://login" press="onLoginButtonPress" class="sapUiTinyMarginEnd sapUiTinyMarginBottom" /> -->
+                <!-- <Button text="Đăng ký" icon="sap-icon://add-contact" press="onRegisterButtonPress" class="sapUiTinyMarginEnd sapUiTinyMarginBottom" /> -->
+                <!-- <Button text="Staff / Upload" icon="sap-icon://upload" press="onUploadButtonPress" class="sapUiTinyMarginEnd sapUiTinyMarginBottom" /> -->
+                <!-- <Button text="Lịch sử tải lên" icon="sap-icon://history" press="onUploadHistoryButtonPress" class="sapUiTinyMarginEnd sapUiTinyMarginBottom" /> -->
+                <Button text="Theo dõi xử lý" icon="sap-icon://monitor-payments" press="onProcessingMonitorButtonPress" class="sapUiTinyMarginBottom modernMonitorBtn" />
+            </HBox>
+        </VBox>
+    </VBox>
+</core:FragmentDefinition>

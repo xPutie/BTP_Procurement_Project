@@ -1,0 +1,56 @@
+{
+  "xsappname": "po_automation_ui",
+  "tenant-mode": "dedicated",
+  "scopes": [
+    {
+      "name": "$XSAPPNAME.read",
+      "description": "Read access"
+    },
+    {
+      "name": "$XSAPPNAME.write",
+      "description": "Write access"
+    },
+    {
+      "name": "$XSAPPNAME.admin",
+      "description": "Admin access"
+    }
+  ],
+  "attributes": [],
+  "role-templates": [
+    {
+      "name": "Viewer",
+      "description": "View orders and data",
+      "scope-references": [
+        "$XSAPPNAME.read"
+      ]
+    },
+    {
+      "name": "Manager",
+      "description": "Manage orders and upload data",
+      "scope-references": [
+        "$XSAPPNAME.read",
+        "$XSAPPNAME.write"
+      ]
+    },
+    {
+      "name": "Administrator",
+      "description": "Full access including admin functions",
+      "scope-references": [
+        "$XSAPPNAME.read",
+        "$XSAPPNAME.write",
+        "$XSAPPNAME.admin"
+      ]
+    }
+  ],
+  "oauth2-configuration": {
+    "credential-types": [
+      "binding-secret",
+      "x509"
+    ],
+    "redirect-uris": [
+      "https://*.cfapps.us10-001.hana.ondemand.com/**",
+      "https://*.cfapps.us10.hana.ondemand.com/**",
+      "https://*.sap.hana.ondemand.com/**"
+    ]
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "welcomeFile": "/comgspsapprocurementuipoautomationui/index.html",
+  "authenticationMethod": "none",
+  "routes": [
+    {
+      "source": "^/odata/v4/procurement/(.*)$",
+      "target": "/odata/v4/procurement/$1",
+      "destination": "srv-api",
+      "authenticationType": "none",
+      "csrfProtection": false
+    },
+    {
+      "source": "^/srv-api/odata/v4/procurement/(.*)$",
+      "target": "/odata/v4/procurement/$1",
+      "destination": "srv-api",
+      "authenticationType": "none",
+      "csrfProtection": false
+    },
+    {
+      "source": "^/srv-api/(.*)$",
+      "target": "/$1",
+      "destination": "srv-api",
+      "authenticationType": "none",
+      "csrfProtection": false
+    },
+    {
+      "source": "^/procurement/odata/v4/procurement/(.*)$",
+      "target": "/odata/v4/procurement/$1",
+      "destination": "srv-api",
+      "authenticationType": "none",
+      "csrfProtection": false
+    },
+    {
+      "source": "^/procurement/srv-api/(.*)$",
+      "target": "/$1",
+      "destination": "srv-api",
+      "authenticationType": "none",
+      "csrfProtection": false
+    },
+    {
+      "source": "^/monitor/?$",
+      "target": "/comgspsapprocurementuipoautomationui/index.html#/processing-monitor",
+      "service": "html5-apps-repo-rt",
+      "authenticationType": "none"
+    },
+    {
+      "source": "^/monitor/(.*)$",
+      "target": "/comgspsapprocurementuipoautomationui/index.html#/processing-monitor",
+      "service": "html5-apps-repo-rt",
+      "authenticationType": "none"
+    },
+    {
+      "source": "^/history/?$",
+      "target": "/comgspsapprocurementuipoautomationui/index.html#/upload-history",
+      "service": "html5-apps-repo-rt",
+      "authenticationType": "none"
+    },
+    {
+      "source": "^/history/(.*)$",
+      "target": "/comgspsapprocurementuipoautomationui/index.html#/upload-history",
+      "service": "html5-apps-repo-rt",
+      "authenticationType": "none"
+    },
+    {
+      "source": "^/procurement/webapp/(.*)$",
+      "target": "/comgspsapprocurementuipoautomationui/$1",
+      "service": "html5-apps-repo-rt",
+      "authenticationType": "none"
+    },
+    {
+      "source": "^/procurement/(.*)$",
+      "target": "/comgspsapprocurementuipoautomationui/$1",
+      "service": "html5-apps-repo-rt",
+      "authenticationType": "none"
+    },
+    {
+      "source": "^/resources/(.*)$",
+      "target": "/comgspsapprocurementuipoautomationui/resources/$1",
+      "service": "html5-apps-repo-rt",
+      "authenticationType": "none"
+    },
+    {
+      "source": "^/test-resources/(.*)$",
+      "target": "/comgspsapprocurementuipoautomationui/test-resources/$1",
+      "service": "html5-apps-repo-rt",
+      "authenticationType": "none"
+    },
+    {
+      "source": "^(.*)$",
+      "target": "/comgspsapprocurementuipoautomationui/$1",
+      "service": "html5-apps-repo-rt",
+      "authenticationType": "none"
+    }
+  ]
+}
+

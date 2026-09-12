@@ -1,0 +1,1148 @@
+<mvc:View
+    controllerName="com.gsp.sap.procurement.ui.poautomationui.controller.Upload"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:m="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:upload="sap.m.upload"
+    xmlns:l="sap.ui.layout"
+    displayBlock="true"
+    height="100%"
+>
+    <m:Page 
+        id="idUploadPage" 
+        showHeader="true" 
+        showNavButton="false"
+        title="Upload CSV/Excel Data"
+        titleAlignment="Center"
+        class="uploadPageBg"
+    >
+        <m:customHeader>
+            <m:Bar class="uploadNavBar">
+                <m:contentLeft>
+                    <m:HBox alignItems="Center" class="sapUiTinyMarginBegin">
+                        <!-- Upload History button hidden - only Monitor is shown -->
+                        <!-- <m:Button text="Upload History" type="Transparent" icon="sap-icon://history" press=".onGoUploadHistory" class="uploadNavActionBtn uploadHistoryBtn" /> -->
+                        <m:Button text="Monitor" type="Transparent" icon="sap-icon://process" press=".onGoProcessingMonitor" class="sapUiTinyMarginBegin uploadNavActionBtn uploadMonitorBtn" />
+                    </m:HBox>
+                </m:contentLeft>
+                <m:contentMiddle>
+                    <m:HBox alignItems="Center" justifyContent="Center" class="uploadNavTitleInline">
+                        <core:Icon src="sap-icon://upload-to-cloud" class="sapUiTinyMarginEnd" />
+                        <m:Title
+                            text="{= ${status>/uploadMode} === 'json' ? 'Upload JSON Data' : 'Upload CSV/Excel Data' }"
+                            level="H4"
+                        />
+                    </m:HBox>
+                </m:contentMiddle>
+                <m:contentRight>
+                    <m:HBox alignItems="Center" class="uploadNavUserBox">
+                        <m:Text text="Welcome," class="sapUiTinyMarginEnd uploadNavGreetingText" visible="{app>/isAuthenticated}" />
+                        <m:Link text="{app>/userName}" press=".onUserNameLinkPress" class="sapUiSmallMarginEnd uploadNavUserLink" visible="{app>/isAuthenticated}" />
+                        <m:Avatar
+                            displaySize="XS"
+                            initials="{= ${app>/userName} ? ${app>/userName}.substring(0,1) : 'U' }"
+                            press=".onAvatarPress"
+                            visible="{app>/isAuthenticated}"
+                        />
+                    </m:HBox>
+                </m:contentRight>
+            </m:Bar>
+        </m:customHeader>
+        
+        <m:VBox id="idMainVBox" height="100%">
+            <m:VBox class="sapUiResponsiveMargin uploadContent">
+                <!-- Page Header -->
+                <m:VBox class="uploadPageHeader sapUiMediumMarginBottom">
+                    <m:HBox alignItems="Center" class="sapUiTinyMarginBottom">
+                        <core:Icon src="sap-icon://upload-to-cloud" class="uploadHeaderIcon sapUiSmallMarginEnd" />
+                        <m:Title text="{= ${status>/uploadMode} === 'json' ? 'Upload JSON Data' : 'Upload CSV/Excel Data' }" level="H1" class="uploadHeaderTitle" />
+                    </m:HBox>
+                    <m:Text
+                        text="End-to-end automated document processing via SAP CPI: seamlessly create Sales Orders, Deliveries, and Billing documents with real-time status tracking."
+                        class="uploadHeaderSub"
+                    />
+                </m:VBox>
+
+                <!-- ════════════════════════════════════════
+                     TAB NAVIGATION (Excel / JSON)
+                     ════════════════════════════════════════ -->
+                <m:HBox class="uploadTabBar sapUiMediumMarginBottom" justifyContent="Center">
+                    <m:SegmentedButton
+                        class="uploadModeSwitch"
+                        selectedKey="{status>/uploadMode}"
+                        selectionChange=".onUploadModeChange"
+                    >
+                        <m:items>
+                                <m:SegmentedButtonItem key="excel" icon="sap-icon://excel-attachment" text="CSV/Excel" />
+                            <m:SegmentedButtonItem key="json" icon="sap-icon://document-text" text="JSON" />
+                        </m:items>
+                    </m:SegmentedButton>
+                </m:HBox>
+
+                <!-- ════════════════════════════════════════
+                     WIZARD PROGRESS BAR
+                     ════════════════════════════════════════ -->
+                <m:HBox class="wizardBar sapUiMediumMarginBottom" justifyContent="Center">
+                    <m:HBox alignItems="Center" class="wizardSteps">
+                        <!-- Step 1 -->
+                        <m:VBox alignItems="Center" class="wizardStepItem">
+                            <m:VBox class="{= ${status>/step1Done} ? 'wCircle done' : (${status>/step1Active} ? 'wCircle active' : 'wCircle')}">
+                                <core:Icon src="{= ${status>/step1Done} ? 'sap-icon://accept' : 'sap-icon://upload-to-cloud'}" class="wCircleIcon" />
+                            </m:VBox>
+                            <m:Text text="Upload" class="{= ${status>/step1Done} ? 'wLabel done' : (${status>/step1Active} ? 'wLabel active' : 'wLabel')}" />
+                        </m:VBox>
+                        <m:VBox class="{= ${status>/step2Active} || ${status>/step2Done} ? 'wLine active' : 'wLine'}" />
+                        <!-- Step 2 -->
+                        <m:VBox alignItems="Center" class="wizardStepItem">
+                            <m:VBox class="{= ${status>/step2Done} ? 'wCircle done' : (${status>/step2Active} ? 'wCircle active' : 'wCircle')}">
+                                <core:Icon src="{= ${status>/step2Done} ? 'sap-icon://accept' : 'sap-icon://inspection'}" class="wCircleIcon" />
+                            </m:VBox>
+                            <m:Text text="Validate" class="{= ${status>/step2Done} ? 'wLabel done' : (${status>/step2Active} ? 'wLabel active' : 'wLabel')}" />
+                        </m:VBox>
+                        <m:VBox class="{= ${status>/step3Active} || ${status>/step3Done} ? 'wLine active' : 'wLine'}" />
+                        <!-- Step 3 -->
+                        <m:VBox alignItems="Center" class="wizardStepItem">
+                            <m:VBox class="{= ${status>/step3Done} ? 'wCircle done' : (${status>/step3Active} ? 'wCircle active' : 'wCircle')}">
+                                <core:Icon src="{= ${status>/step3Done} ? 'sap-icon://accept' : 'sap-icon://process'}" class="wCircleIcon" />
+                            </m:VBox>
+                            <m:Text text="Process" class="{= ${status>/step3Done} ? 'wLabel done' : (${status>/step3Active} ? 'wLabel active' : 'wLabel')}" />
+                        </m:VBox>
+                        <m:VBox class="{= ${status>/step4Active} || ${status>/step4Done} ? 'wLine active' : 'wLine'}" />
+                        <!-- Step 4 -->
+                        <m:VBox alignItems="Center" class="wizardStepItem">
+                            <m:VBox class="{= ${status>/step4Done} ? 'wCircle done' : (${status>/step4Active} ? 'wCircle active' : 'wCircle')}">
+                                <core:Icon src="{= ${status>/step4Done} ? 'sap-icon://accept' : 'sap-icon://complete'}" class="wCircleIcon" />
+                            </m:VBox>
+                            <m:Text text="Complete" class="{= ${status>/step4Done} ? 'wLabel done' : (${status>/step4Active} ? 'wLabel active' : 'wLabel')}" />
+                        </m:VBox>
+                    </m:HBox>
+                </m:HBox>
+
+                <!-- ════════════════════════════════════════
+                     JSON UPLOAD SECTION
+                     ════════════════════════════════════════ -->
+                <m:VBox visible="{= ${status>/uploadMode} === 'json' &amp;&amp; !${status>/resultVisible} }">
+
+                    <!-- Two-column flex layout: Editor (wide) + Sidebar (fixed) -->
+                    <m:HBox class="jsonMainLayout" alignItems="Stretch" wrap="Wrap">
+
+                        <!-- ── LEFT: JSON Editor ── -->
+                        <m:VBox class="fioriCard jsonEditorCard">
+
+                            <!-- Toolbar -->
+                            <m:Toolbar class="jsonEditorToolbar">
+                                <core:Icon src="sap-icon://document-text" class="sapUiSmallMarginEnd" color="#0070f2" />
+                                <m:Title text="JSON Editor" level="H4" />
+                                <m:ToolbarSpacer />
+                                <m:Button
+                                    text="JSON Template"
+                                    icon="sap-icon://download"
+                                    type="Ghost"
+                                    press=".onDownloadJSONSample"
+                                    tooltip="Tải xuống file JSON mẫu"
+                                />
+                                <m:Button
+                                    text="Upload JSON"
+                                    icon="sap-icon://upload"
+                                    type="Ghost"
+                                    press=".onUploadJSONFile"
+                                    tooltip="Chọn file .json từ máy tính"
+                                />
+                            </m:Toolbar>
+
+                            <!-- Material Process Type Guidelines - Configurable -->
+                            <m:Panel headerText="Material-ProcessType Configuration" expandable="true" expanded="false" class="sapUiSmallMarginBottom">
+                                <m:content>
+                                    <m:Text text="Configure which Materials belong to which Process Types for validation:" class="sapUiSmallMarginBottom" />
+                                    <m:Table
+                                        items="{status>/materialProcessTypeConfigDraft}"
+                                        class="materialConfigTable"
+                                    >
+                                        <m:columns>
+                                            <m:Column width="40%"><m:Text text="Material" /></m:Column>
+                                            <m:Column width="40%"><m:Text text="Required Process Type" /></m:Column>
+                                            <m:Column width="20%" hAlign="Center"><m:Text text="Action" /></m:Column>
+                                        </m:columns>
+                                        <m:items>
+                                            <m:ColumnListItem>
+                                                <m:cells>
+                                                    <m:Input value="{status>material}" placeholder="e.g., EV_MOTOR_02" liveChange=".onMaterialConfigChange" />
+                                                    <m:Select selectedKey="{status>processType}" change=".onMaterialConfigChange">
+                                                        <core:Item key="Make-to-Order" text="Make-to-Order" />
+                                                        <core:Item key="Order-to-Cash" text="Order-to-Cash" />
+                                                    </m:Select>
+                                                    <m:Button icon="sap-icon://delete" press=".onRemoveMaterialConfig" tooltip="Remove" />
+                                                </m:cells>
+                                            </m:ColumnListItem>
+                                        </m:items>
+                                    </m:Table>
+                                    <m:VBox class="sapUiSmallMarginTop">
+                                        <m:Title text="Delivery Date Rules (months from today)" level="H6" />
+                                        <m:HBox class="sapUiTinyMarginTop" wrap="Wrap">
+                                            <m:VBox class="jsonDefaultField">
+                                                <m:Label text="Order-to-Cash" />
+                                                <m:Input
+                                                    value="{status>/deliveryLeadMonthsO2CDraft}"
+                                                    type="Number"
+                                                    liveChange=".onMaterialConfigChange"
+                                                    valueState="{= ${status>/deliveryLeadO2CError} ? 'Error' : 'None' }"
+                                                />
+                                            </m:VBox>
+                                            <m:VBox class="jsonDefaultField">
+                                                <m:Label text="Make-to-Order" />
+                                                <m:Input
+                                                    value="{status>/deliveryLeadMonthsMTODraft}"
+                                                    type="Number"
+                                                    liveChange=".onMaterialConfigChange"
+                                                    valueState="{= ${status>/deliveryLeadMTOError} ? 'Error' : 'None' }"
+                                                />
+                                            </m:VBox>
+                                        </m:HBox>
+                                    </m:VBox>
+                                    <m:HBox class="sapUiSmallMarginTop">
+                                        <m:Button text="Add Material" icon="sap-icon://add" press=".onAddMaterialConfig" />
+                                        <m:Button text="Reset Defaults" icon="sap-icon://reset" press=".onResetMaterialConfig" class="sapUiSmallMarginBegin" />
+                                        <m:Button text="Apply Config" icon="sap-icon://accept" type="Emphasized" press=".onApplyMaterialConfig" class="sapUiSmallMarginBegin" />
+                                    </m:HBox>
+                                </m:content>
+                            </m:Panel>
+                            <m:VBox class="jsonDefaultsPanel">
+                                <m:Title text="Default Information (auto-merged into JSON if missing)" level="H6" class="jsonDefaultsTitle" />
+                                <m:HBox class="jsonDefaultsGrid" wrap="Wrap">
+                                    <m:VBox class="jsonDefaultField">
+                                        <m:Label text="Sales Organization" />
+                                        <m:Input value="{status>/jsonDefaultSalesOrg}" placeholder="ND01" valueState="{= ${status>/csvDefaultSalesOrgError} ? 'Error' : 'None' }" valueStateText="{status>/csvDefaultSalesOrgErrorText}" liveChange=".onDefaultFieldChange" />
+                                    </m:VBox>
+                                    <m:VBox class="jsonDefaultField">
+                                        <m:Label text="Distrubution Channel" />
+                                        <m:Input value="{status>/jsonDefaultDistrChan}" placeholder="DI" valueState="{= ${status>/csvDefaultDistrChanError} ? 'Error' : 'None' }" valueStateText="{status>/csvDefaultDistrChanErrorText}" liveChange=".onDefaultFieldChange" />
+                                    </m:VBox>
+                                    <m:VBox class="jsonDefaultField">
+                                        <m:Label text="Division" />
+                                        <m:Input value="{status>/jsonDefaultDivision}" placeholder="AU" valueState="{= ${status>/csvDefaultDivisionError} ? 'Error' : 'None' }" valueStateText="{status>/csvDefaultDivisionErrorText}" liveChange=".onDefaultFieldChange" />
+                                    </m:VBox>
+                                    <m:VBox class="jsonDefaultField">
+                                        <m:Label text="Doc Type" />
+                                        <m:Input value="{status>/jsonDefaultDocType}" placeholder="QT" valueState="{= ${status>/csvDefaultDocTypeError} ? 'Error' : 'None' }" valueStateText="{status>/csvDefaultDocTypeErrorText}" liveChange=".onDefaultFieldChange" />
+                                    </m:VBox>
+                                    <m:VBox class="jsonDefaultField">
+                                        <m:Label text="Plant" />
+                                        <m:Input value="{status>/jsonDefaultPlant}" placeholder="ND01" valueState="{= ${status>/csvDefaultPlantError} ? 'Error' : 'None' }" valueStateText="{status>/csvDefaultPlantErrorText}" liveChange=".onDefaultFieldChange" />
+                                    </m:VBox>
+                                    <m:VBox class="jsonDefaultField">
+                                        <m:Label text="Storage Location" />
+                                        <m:Input value="{status>/jsonDefaultStorLoc}" placeholder="TG01" valueState="{= ${status>/csvDefaultStorLocError} ? 'Error' : 'None' }" valueStateText="{status>/csvDefaultStorLocErrorText}" liveChange=".onDefaultFieldChange" />
+                                    </m:VBox>
+                                    <m:VBox class="jsonDefaultField">
+                                        <m:Label text="Valid From" />
+                                        <m:DatePicker value="{status>/jsonDefaultValidFrom}" valueFormat="yyyy-MM-dd" displayFormat="dd/MM/yyyy" valueState="{= ${status>/csvDefaultValidFromError} || ${status>/csvDefaultDateRangeError} ? 'Error' : 'None' }" valueStateText="{status>/csvDefaultValidFromErrorText}" change=".onDefaultFieldChange" />
+                                    </m:VBox>
+                                    <m:VBox class="jsonDefaultField">
+                                        <m:Label text="Vaid To" />
+                                        <m:DatePicker value="{status>/jsonDefaultValidTo}" valueFormat="yyyy-MM-dd" displayFormat="dd/MM/yyyy" valueState="{= ${status>/csvDefaultValidToError} || ${status>/csvDefaultDateRangeError} ? 'Error' : 'None' }" valueStateText="{status>/csvDefaultValidToErrorText}" change=".onDefaultFieldChange" />
+                                    </m:VBox>
+                                    <m:VBox class="jsonDefaultField">
+                                        <m:Label text="Price Date" />
+                                        <m:DatePicker value="{status>/jsonDefaultPriceDate}" valueFormat="yyyy-MM-dd" displayFormat="dd/MM/yyyy" valueState="{= ${status>/csvDefaultPriceDateError} || ${status>/csvDefaultPriceDatePastError} ? 'Error' : 'None' }" valueStateText="{status>/csvDefaultPriceDateErrorText}" change=".onDefaultFieldChange" />
+                                    </m:VBox>
+                                </m:HBox>
+                                <m:HBox class="sapUiSmallMarginTop">
+                                    <m:Button text="Validate" type="Emphasized" icon="sap-icon://check-availability" press=".onValidateDefaultFields" />
+                                </m:HBox>
+                            </m:VBox>
+
+                            <!-- Textarea -->
+                            <m:TextArea
+                                id="idJSONEditor"
+                                value="{status>/jsonInput}"
+                                rows="22"
+                                width="100%"
+                                growing="false"
+                                class="jsonEditorTextArea"
+                                placeholder="Paste JSON data here or upload .json file..."
+                            />
+
+                            <!-- Action Bar -->
+                            <m:HBox class="jsonEditorActions" justifyContent="SpaceBetween" alignItems="Center" wrap="Wrap">
+                                <m:HBox alignItems="Center">
+                                    <m:Button
+                                        text="Validate JSON"
+                                        icon="sap-icon://accept"
+                                        type="Emphasized"
+                                        press=".onValidateJSON"
+                                    />
+                                    <m:Button
+                                        text="Format"
+                                        icon="sap-icon://indent"
+                                        type="Ghost"
+                                        press=".onFormatJSON"
+                                        class="sapUiSmallMarginBegin"
+                                        tooltip="Standard JSON format (supports comments)"
+                                    />
+                                    <m:Button
+                                        text="Clear"
+                                        icon="sap-icon://delete"
+                                        type="Transparent"
+                                        press=".onClearJSON"
+                                        class="sapUiSmallMarginBegin"
+                                    />
+                                </m:HBox>
+                                <m:HBox alignItems="Center">
+                                    <m:Button
+                                        text="Template"
+                                        visible="false"
+                                        icon="sap-icon://download"
+                                        type="Default"
+                                        press=".onDownloadJSONTemplate"
+                                        class="sapUiSmallMarginEnd"
+                                        tooltip="Tải mẫu JSON về"
+                                    />
+                                    <!-- Validation badge -->
+                                    <m:MessageStrip
+                                        visible="{status>/jsonValidationVisible}"
+                                        text="{status>/jsonValidationText}"
+                                        type="{status>/jsonValidationType}"
+                                        showIcon="true"
+                                        showCloseButton="false"
+                                        class="jsonValidationStrip"
+                                    />
+                                </m:HBox>
+                            </m:HBox>
+
+                        </m:VBox>
+
+                        <!-- ── RIGHT: Sidebar ── -->
+                        <m:VBox class="jsonSidebarWrapper">
+
+                            <!-- Quotation table (always visible with empty state) -->
+                            <m:Panel class="fioriSidePanel quotationPanel sapUiSmallMarginBottom" expandable="false">
+                                <m:headerToolbar>
+                                    <m:Toolbar>
+                                        <core:Icon src="sap-icon://sales-quote" color="#0070f2" class="sapUiTinyMarginEnd" />
+                                        <m:Title text="Quotation Preview" level="H5" />
+                                        <m:ToolbarSpacer />
+                                        <m:ObjectStatus text="{status>/jsonPreviewSummary}" state="Information" />
+                                    </m:Toolbar>
+                                </m:headerToolbar>
+
+                                <m:VBox class="quotationTableViewport">
+                                    <m:ScrollContainer horizontal="true" vertical="true" width="100%" height="20rem" focusable="true" class="quotationTableScroll">
+                                        <m:Table
+                                            id="idQuotationPreviewTable"
+                                            items="{status>/jsonTableData}"
+                                            class="quotationExcelTable"
+                                            sticky="ColumnHeaders"
+                                            alternateRowColors="true"
+                                            fixedLayout="false"
+                                            width="86rem"
+                                        >
+                                            <m:columns>
+                                                <m:Column width="3rem" hAlign="Center"><m:Text text="#" /></m:Column>
+                                                <m:Column width="7rem"><m:Text text="Doc Type" /></m:Column>
+                                                <m:Column width="12rem"><m:Text text="Items" /></m:Column>
+                                                <m:Column width="6rem"><m:Text text="Plant" /></m:Column>
+                                                <m:Column width="8rem"><m:Text text="Sold To" /></m:Column>
+                                                <m:Column width="7rem"><m:Text text="Sales Org" /></m:Column>
+                                                <m:Column width="7rem"><m:Text text="Channel" /></m:Column>
+                                                <m:Column width="7rem"><m:Text text="Division" /></m:Column>
+                                                <m:Column width="8rem"><m:Text text="Flow" /></m:Column>
+                                            </m:columns>
+                                            <m:items>
+                                                <m:ColumnListItem>
+                                                    <m:cells>
+                                                        <m:ObjectNumber number="{status>index}" emphasized="false" />
+                                                        <m:ObjectStatus text="{= ${status>DocTypeDisplay} || ${status>DocType} }" state="Information" inverted="true" />
+                                                        <m:Link
+                                                            text="{= (${status>ItemCount} || 1) + ' Item(s)' }"
+                                                            enabled="{= (${status>ItemCount} || 0) > 0 }"
+                                                            press=".onOpenJSONItemsDialog"
+                                                        />
+                                                        <m:Text text="{status>Plant}" />
+                                                        <m:Text text="{status>SoldToParty}" />
+                                                        <m:Text text="{status>SalesOrg}" />
+                                                        <m:Text text="{status>DistrChan}" />
+                                                        <m:Text text="{status>Division}" />
+                                                        <m:Text text="{status>FlowType}" />
+                                                    </m:cells>
+                                                </m:ColumnListItem>
+                                            </m:items>
+                                            <m:noData>
+                                                <m:IllustratedMessage
+                                                    illustrationType="sapIllus-NoData"
+                                                    title="No quotation data"
+                                                    description="Validate JSON to render quotation rows in table format."
+                                                />
+                                            </m:noData>
+                                        </m:Table>
+                                    </m:ScrollContainer>
+                                </m:VBox>
+
+                                <m:Toolbar class="sapUiTinyMarginTop">
+                                    <m:ToolbarSpacer />
+                                    <m:Button
+                                        text="Send to SAP CPI"
+                                        icon="sap-icon://initiative"
+                                        press=".onSendJSONToCPI"
+                                        enabled="{status>/jsonCanExecute}"
+                                        type="Emphasized"
+                                    />
+                                </m:Toolbar>
+                            </m:Panel>
+
+                            <!-- Features list -->
+                            <m:Panel class="fioriSidePanel sapUiSmallMarginBottom" expandable="true" expanded="false">
+                                <m:headerToolbar>
+                                    <m:Toolbar>
+                                        <core:Icon src="sap-icon://hint" color="#0070f2" class="sapUiTinyMarginEnd" />
+                                        <m:Title text="Instructions" level="H5" />
+                                    </m:Toolbar>
+                                </m:headerToolbar>
+                                <m:VBox class="sapUiSmallMargin">
+                                    <m:HBox alignItems="Center" class="jsonFeatureItem">
+                                        <core:Icon src="sap-icon://accept" color="#107e3e" class="sapUiSmallMarginEnd" />
+                                        <m:Text text="Paste JSON directly or upload .json file" />
+                                    </m:HBox>
+                                    <m:HBox alignItems="Center" class="jsonFeatureItem">
+                                        <core:Icon src="sap-icon://accept" color="#107e3e" class="sapUiSmallMarginEnd" />
+                                        <m:Text text="Auto-validate JSON structure" />
+                                    </m:HBox>
+                                    <m:HBox alignItems="Center" class="jsonFeatureItem">
+                                        <core:Icon src="sap-icon://accept" color="#107e3e" class="sapUiSmallMarginEnd" />
+                                        <m:Text text="Preview data before sending to SAP" />
+                                    </m:HBox>
+                                    <m:HBox alignItems="Center" class="jsonFeatureItem">
+                                        <core:Icon src="sap-icon://accept" color="#107e3e" class="sapUiSmallMarginEnd" />
+                                        <m:Text text="Process multiple orders in parallel (batch)" />
+                                    </m:HBox>
+                                    <m:HBox alignItems="Center" class="jsonFeatureItem">
+                                        <core:Icon src="sap-icon://accept" color="#107e3e" class="sapUiSmallMarginEnd" />
+                                        <m:Text text="Support comments in JSON (// and /* */)" />
+                                    </m:HBox>
+                                </m:VBox>
+                            </m:Panel>
+
+                            <!-- Required fields -->
+                            <m:Panel class="fioriSidePanel" expandable="true" expanded="false">
+                                <m:headerToolbar>
+                                    <m:Toolbar>
+                                        <core:Icon src="sap-icon://tag" color="#e76500" class="sapUiTinyMarginEnd" />
+                                        <m:Title text="Required Fields" level="H5" />
+                                    </m:Toolbar>
+                                </m:headerToolbar>
+                                <m:VBox class="sapUiSmallMargin">
+                                    <m:Text text="Order Level:" class="sapUiTinyMarginBottom requiredFieldCategory" />
+                                    <m:HBox wrap="Wrap" class="sapUiTinyMarginBottom">
+                                        <m:Token text="SoldToParty" editable="false" class="sapUiTinyMarginEnd sapUiTinyMarginBottom" />
+                                        <m:Token text="SalesOrg" editable="false" class="sapUiTinyMarginEnd sapUiTinyMarginBottom" />
+                                        <m:Token text="DistrChannel" editable="false" class="sapUiTinyMarginEnd sapUiTinyMarginBottom" />
+                                        <m:Token text="Division" editable="false" class="sapUiTinyMarginEnd sapUiTinyMarginBottom" />
+                                        <m:Token text="DocType" editable="false" class="sapUiTinyMarginEnd sapUiTinyMarginBottom" />
+                                        <m:Token text="ValidFrom" editable="false" class="sapUiTinyMarginEnd sapUiTinyMarginBottom" />
+                                        <m:Token text="ValidTo" editable="false" class="sapUiTinyMarginEnd sapUiTinyMarginBottom" />
+                                        <m:Token text="PriceDate" editable="false" class="sapUiTinyMarginEnd sapUiTinyMarginBottom" />
+                                        <m:Token text="ProcessType" editable="false" class="sapUiTinyMarginEnd sapUiTinyMarginBottom" />
+                                    </m:HBox>
+                                    <m:Text text="Item Level (ItemLine.item[*]):" class="sapUiTinyMarginBottom requiredFieldCategory" />
+                                    <m:HBox wrap="Wrap" class="sapUiTinyMarginBottom">
+                                        <m:Token text="Material" editable="false" class="sapUiTinyMarginEnd sapUiTinyMarginBottom" />
+                                        <m:Token text="Quantity" editable="false" class="sapUiTinyMarginEnd sapUiTinyMarginBottom" />
+                                        <m:Token text="Unit" editable="false" class="sapUiTinyMarginEnd sapUiTinyMarginBottom" />
+                                        <m:Token text="Plant" editable="false" class="sapUiTinyMarginEnd sapUiTinyMarginBottom" />
+                                        <m:Token text="StorageLoc" editable="false" class="sapUiTinyMarginEnd sapUiTinyMarginBottom" />
+                                        <m:Token text="DeliveryDate" editable="false" class="sapUiTinyMarginEnd sapUiTinyMarginBottom" />
+                                    </m:HBox>
+                                    <m:Text text="Auto-filled from Defaults:" class="sapUiTinyMarginBottom requiredFieldCategory autoFillCategory" />
+                                    <m:HBox wrap="Wrap">
+                                        <m:Token text="SalesOrg" editable="false" class="sapUiTinyMarginEnd sapUiTinyMarginBottom autoFillToken" />
+                                        <m:Token text="DistrChannel" editable="false" class="sapUiTinyMarginEnd sapUiTinyMarginBottom autoFillToken" />
+                                        <m:Token text="Division" editable="false" class="sapUiTinyMarginEnd sapUiTinyMarginBottom autoFillToken" />
+                                        <m:Token text="DocType" editable="false" class="sapUiTinyMarginEnd sapUiTinyMarginBottom autoFillToken" />
+                                        <m:Token text="ValidFrom" editable="false" class="sapUiTinyMarginEnd sapUiTinyMarginBottom autoFillToken" />
+                                        <m:Token text="ValidTo" editable="false" class="sapUiTinyMarginEnd sapUiTinyMarginBottom autoFillToken" />
+                                        <m:Token text="PriceDate" editable="false" class="sapUiTinyMarginEnd sapUiTinyMarginBottom autoFillToken" />
+                                        <m:Token text="PO" editable="false" class="sapUiTinyMarginEnd sapUiTinyMarginBottom autoFillToken" />
+                                        <m:Token text="RequesterEmail" editable="false" class="sapUiTinyMarginEnd sapUiTinyMarginBottom autoFillToken" />
+                                        <m:Token text="StorageLoc" editable="false" class="sapUiTinyMarginEnd sapUiTinyMarginBottom autoFillToken" />
+                                    </m:HBox>
+                                </m:VBox>
+                            </m:Panel>
+
+                        </m:VBox>
+                    </m:HBox>
+
+                    <!-- JSON Preview Table (shown after validation) -->
+                    <m:VBox visible="{= ${status>/jsonTableVisible} &amp;&amp; ${device>/system/phone} }" class="fioriCard sapUiMediumMarginTop jsonPreviewCard">
+                        <m:Toolbar class="previewToolbar">
+                            <core:Icon src="sap-icon://table-view" class="sapUiSmallMarginEnd" color="#0070f2" />
+                            <m:Title text="JSON Data Preview" level="H4" />
+                            <m:ToolbarSpacer />
+                            <m:Label text="{status>/jsonPreviewSummary}" class="previewCount" />
+                        </m:Toolbar>
+                        <m:Table id="idJSONPreviewTable" items="{status>/jsonTableData}" class="fioriPreviewTable" sticky="ColumnHeaders" alternateRowColors="true">
+                            <m:columns>
+                                <m:Column width="3rem" hAlign="Center"><m:Text text="#" /></m:Column>
+                                <m:Column width="7rem"><m:Text text="Doc Type" /></m:Column>
+                                <m:Column><m:Text text="Material" /></m:Column>
+                                <m:Column width="5rem" hAlign="End"><m:Text text="Qty" /></m:Column>
+                                <m:Column width="5rem"><m:Text text="Plant" /></m:Column>
+                                <m:Column width="10rem"><m:Text text="Delivery Date" /></m:Column>
+                                <m:Column width="7rem"><m:Text text="Sold To" /></m:Column>
+                                <m:Column width="6rem"><m:Text text="Sales Org" /></m:Column>
+                            </m:columns>
+                            <m:items>
+                                <m:ColumnListItem>
+                                    <m:cells>
+                                        <m:Text text="{status>index}" />
+                                        <m:ObjectStatus text="{= ${status>DocTypeDisplay} || ${status>DocType} }" state="Information" inverted="true" />
+                                        <m:Text text="{status>Material}" class="materialText" />
+                                        <m:ObjectNumber number="{status>Quantity}" emphasized="false" />
+                                        <m:Text text="{status>Plant}" />
+                                        <m:Text text="{status>DeliveryDate}" />
+                                        <m:Text text="{status>SoldToParty}" />
+                                        <m:Text text="{status>SalesOrg}" />
+                                    </m:cells>
+                                </m:ColumnListItem>
+                            </m:items>
+                        </m:Table>
+                        <m:Toolbar class="sapUiSmallMarginTop">
+                            <m:ToolbarSpacer />
+                            <m:Button
+                                text="Gửi tới SAP CPI"
+                                icon="sap-icon://initiative"
+                                press=".onSendJSONToCPI"
+                                enabled="{status>/jsonCanExecute}"
+                                type="Emphasized"
+                            />
+                        </m:Toolbar>
+                    </m:VBox>
+                </m:VBox>
+
+                <!-- ════════════════════════════════════════
+                     EXCEL UPLOAD SECTION
+                     ════════════════════════════════════════ -->
+                <m:VBox visible="{= ${status>/uploadMode} === 'excel' &amp;&amp; !${status>/resultVisible} }">
+                    <l:Grid defaultSpan="XL6 L6 M12 S12" hSpacing="1">
+                        <!-- LEFT COLUMN -->
+                        <m:VBox class="fioriCard">
+                            <m:layoutData><l:GridData span="XL6 L6 M12 S12" /></m:layoutData>
+
+                            <!-- Material Process Type Guidelines - Configurable (Shared) -->
+                            <m:Panel headerText="Material-ProcessType Configuration" expandable="true" expanded="false" class="sapUiSmallMarginBottom">
+                                <m:content>
+                                    <m:Text text="Configure which Materials belong to which Process Types for validation:" class="sapUiSmallMarginBottom" />
+                                    <m:Table
+                                        items="{status>/materialProcessTypeConfigDraft}"
+                                        class="materialConfigTable"
+                                    >
+                                        <m:columns>
+                                            <m:Column width="40%"><m:Text text="Material" /></m:Column>
+                                            <m:Column width="40%"><m:Text text="Required Process Type" /></m:Column>
+                                            <m:Column width="20%" hAlign="Center"><m:Text text="Action" /></m:Column>
+                                        </m:columns>
+                                        <m:items>
+                                            <m:ColumnListItem>
+                                                <m:cells>
+                                                    <m:Input value="{status>material}" placeholder="e.g., EV_MOTOR_02" liveChange=".onMaterialConfigChange" />
+                                                    <m:Select selectedKey="{status>processType}" change=".onMaterialConfigChange">
+                                                        <core:Item key="Make-to-Order" text="Make-to-Order" />
+                                                        <core:Item key="Order-to-Cash" text="Order-to-Cash" />
+                                                    </m:Select>
+                                                    <m:Button icon="sap-icon://delete" press=".onRemoveMaterialConfig" tooltip="Remove" />
+                                                </m:cells>
+                                            </m:ColumnListItem>
+                                        </m:items>
+                                    </m:Table>
+                                    <m:VBox class="sapUiSmallMarginTop">
+                                        <m:Title text="Delivery Date Rules (months from today)" level="H6" />
+                                        <m:HBox class="sapUiTinyMarginTop" wrap="Wrap">
+                                            <m:VBox class="jsonDefaultField">
+                                                <m:Label text="Order-to-Cash" />
+                                                <m:Input
+                                                    value="{status>/deliveryLeadMonthsO2CDraft}"
+                                                    type="Number"
+                                                    liveChange=".onMaterialConfigChange"
+                                                    valueState="{= ${status>/deliveryLeadO2CError} ? 'Error' : 'None' }"
+                                                />
+                                            </m:VBox>
+                                            <m:VBox class="jsonDefaultField">
+                                                <m:Label text="Make-to-Order" />
+                                                <m:Input
+                                                    value="{status>/deliveryLeadMonthsMTODraft}"
+                                                    type="Number"
+                                                    liveChange=".onMaterialConfigChange"
+                                                    valueState="{= ${status>/deliveryLeadMTOError} ? 'Error' : 'None' }"
+                                                />
+                                            </m:VBox>
+                                        </m:HBox>
+                                    </m:VBox>
+                                    <m:HBox class="sapUiSmallMarginTop">
+                                        <m:Button text="Add Material" icon="sap-icon://add" press=".onAddMaterialConfig" />
+                                        <m:Button text="Reset Defaults" icon="sap-icon://reset" press=".onResetMaterialConfig" class="sapUiSmallMarginBegin" />
+                                        <m:Button text="Apply Config" icon="sap-icon://accept" type="Emphasized" press=".onApplyMaterialConfig" class="sapUiSmallMarginBegin" />
+                                    </m:HBox>
+                                </m:content>
+                            </m:Panel>
+
+                            <m:VBox class="excelDefaultsPanel sapUiSmallMarginBottom">
+                                <m:Title text="Default Information (auto-merged into CSV if missing)" level="H6" class="jsonDefaultsTitle" />
+                                <m:HBox class="jsonDefaultsGrid" wrap="Wrap">
+                                    <m:VBox class="jsonDefaultField">
+                                        <m:Label text="Sales Organization" />
+                                        <m:Input value="{status>/jsonDefaultSalesOrg}" placeholder="ND01" valueState="{= ${status>/csvDefaultSalesOrgError} ? 'Error' : 'None' }" valueStateText="{status>/csvDefaultSalesOrgErrorText}" liveChange=".onDefaultFieldChange" />
+                                    </m:VBox>
+                                    <m:VBox class="jsonDefaultField">
+                                        <m:Label text="Distrubution Channel" />
+                                        <m:Input value="{status>/jsonDefaultDistrChan}" placeholder="DI" valueState="{= ${status>/csvDefaultDistrChanError} ? 'Error' : 'None' }" valueStateText="{status>/csvDefaultDistrChanErrorText}" liveChange=".onDefaultFieldChange" />
+                                    </m:VBox>
+                                    <m:VBox class="jsonDefaultField">
+                                        <m:Label text="Division" />
+                                        <m:Input value="{status>/jsonDefaultDivision}" placeholder="AU" valueState="{= ${status>/csvDefaultDivisionError} ? 'Error' : 'None' }" valueStateText="{status>/csvDefaultDivisionErrorText}" liveChange=".onDefaultFieldChange" />
+                                    </m:VBox>
+                                    <m:VBox class="jsonDefaultField">
+                                        <m:Label text="Doc Type" />
+                                        <m:Input value="{status>/jsonDefaultDocType}" placeholder="QT" valueState="{= ${status>/csvDefaultDocTypeError} ? 'Error' : 'None' }" valueStateText="{status>/csvDefaultDocTypeErrorText}" liveChange=".onDefaultFieldChange" />
+                                    </m:VBox>
+                                    <m:VBox class="jsonDefaultField">
+                                        <m:Label text="Plant" />
+                                        <m:Input value="{status>/jsonDefaultPlant}" placeholder="ND01" valueState="{= ${status>/csvDefaultPlantError} ? 'Error' : 'None' }" valueStateText="{status>/csvDefaultPlantErrorText}" liveChange=".onDefaultFieldChange" />
+                                    </m:VBox>
+                                    <m:VBox class="jsonDefaultField">
+                                        <m:Label text="Storage Location" />
+                                        <m:Input value="{status>/jsonDefaultStorLoc}" placeholder="TG01" valueState="{= ${status>/csvDefaultStorLocError} ? 'Error' : 'None' }" valueStateText="{status>/csvDefaultStorLocErrorText}" liveChange=".onDefaultFieldChange" />
+                                    </m:VBox>
+                                    <m:VBox class="jsonDefaultField">
+                                        <m:Label text="Valid From" />
+                                        <m:DatePicker value="{status>/jsonDefaultValidFrom}" valueFormat="yyyy-MM-dd" displayFormat="dd/MM/yyyy" valueState="{= ${status>/csvDefaultValidFromError} || ${status>/csvDefaultDateRangeError} ? 'Error' : 'None' }" valueStateText="{status>/csvDefaultValidFromErrorText}" change=".onDefaultFieldChange" />
+                                    </m:VBox>
+                                    <m:VBox class="jsonDefaultField">
+                                        <m:Label text="Vaid To" />
+                                        <m:DatePicker value="{status>/jsonDefaultValidTo}" valueFormat="yyyy-MM-dd" displayFormat="dd/MM/yyyy" valueState="{= ${status>/csvDefaultValidToError} || ${status>/csvDefaultDateRangeError} ? 'Error' : 'None' }" valueStateText="{status>/csvDefaultValidToErrorText}" change=".onDefaultFieldChange" />
+                                    </m:VBox>
+                                    <m:VBox class="jsonDefaultField">
+                                        <m:Label text="Price Date" />
+                                        <m:DatePicker value="{status>/jsonDefaultPriceDate}" valueFormat="yyyy-MM-dd" displayFormat="dd/MM/yyyy" valueState="{= ${status>/csvDefaultPriceDateError} || ${status>/csvDefaultPriceDatePastError} ? 'Error' : 'None' }" valueStateText="{status>/csvDefaultPriceDateErrorText}" change=".onDefaultFieldChange" />
+                                    </m:VBox>
+                                </m:HBox>
+                                <m:HBox class="sapUiSmallMarginTop">
+                                    <m:Button text="Validate" type="Emphasized" icon="sap-icon://check-availability" press=".onValidateDefaultFields" />
+                                </m:HBox>
+                            </m:VBox>
+
+                            <!-- Upload Drop Zone -->
+                            <m:VBox visible="{= !${status>/tableVisible} }" class="uploadDropZone" alignItems="Center" justifyContent="Center">
+                                <upload:UploadSet
+                                    id="idUploadSet"
+                                    instantUpload="false"
+                                    fileTypes="xlsx,xls,xlsm,csv"
+                                    maxFileSize="10"
+                                    noDataText="Select or drop CSV/Excel file (.csv, .xlsx, .xls, .xlsm)"
+                                    noDataDescription="After upload, the system will auto-clear the file so you can select another"
+                                    fileTypeMismatch="onUploadSetFileTypeMismatch"
+                                    afterItemAdded="onUploadSetAfterItemAdded"
+                                    afterItemRemoved="onUploadSetAfterItemRemoved"
+                                    class="fioriUploadSet"
+                                />
+                            </m:VBox>
+
+                            <!-- Data Preview -->
+                            <m:VBox visible="{status>/tableVisible}">
+                                <m:Toolbar class="previewToolbar">
+                                    <core:Icon src="sap-icon://table-view" class="sapUiSmallMarginEnd" color="#0070f2" />
+                                    <m:Title text="Preview CSV/Excel Data (CPI Standard)" level="H4" />
+                                    <m:ToolbarSpacer />
+                                    <m:Label text="{= ${status>/tableData}.length + ' rows'}" class="previewCount" />
+                                    <m:Button icon="sap-icon://delete-column" text="Delete Column" type="Transparent" press=".onDeleteColumnPress" tooltip="Delete columns with too many errors" class="sapUiSmallMarginEnd" />
+                                    <m:Button icon="sap-icon://refresh" text="Apply" type="Emphasized" press=".onApplyDefaultsToTable" tooltip="Apply defaults and validate data" class="sapUiSmallMarginEnd" enabled="{= !${status>/csvDefaultSalesOrgError} &amp;&amp; !${status>/csvDefaultDistrChanError} &amp;&amp; !${status>/csvDefaultDivisionError} &amp;&amp; !${status>/csvDefaultDocTypeError} &amp;&amp; !${status>/csvDefaultPlantError} &amp;&amp; !${status>/csvDefaultStorLocError} &amp;&amp; !${status>/csvDefaultValidFromError} &amp;&amp; !${status>/csvDefaultValidToError} &amp;&amp; !${status>/csvDefaultPriceDateError} &amp;&amp; !${status>/csvDefaultPriceDatePastError} &amp;&amp; !${status>/csvDefaultDateRangeError} }" />
+                                    <m:Button icon="sap-icon://delete" type="Transparent" press="onButtonClearPress" tooltip="Clear" />
+                                </m:Toolbar>
+                                <m:MessageStrip
+                                    visible="{= !!${status>/csvValidationText} }"
+                                    text="{status>/csvValidationText}"
+                                    type="{status>/csvValidationType}"
+                                    showIcon="true"
+                                    showCloseButton="false"
+                                    class="sapUiTinyMarginBottom"
+                                />
+                                <m:ScrollContainer horizontal="true" vertical="false" width="100%" class="excelPreviewScroll">
+                                    <m:Table
+                                        id="idTableDataPreviewTable"
+                                        items="{status>/tableData}"
+                                        class="fioriPreviewTable csvPreviewTable"
+                                        sticky="ColumnHeaders"
+                                        alternateRowColors="true"
+                                        fixedLayout="false"
+                                        width="250rem"
+                                    >
+                                        <m:columns>
+                                            <m:Column width="4rem"><m:Text text="#" /></m:Column>
+                                            <m:Column width="10rem"><m:Text text="Sales Organization" /></m:Column>
+                                            <m:Column width="10rem"><m:Text text="Distrubution Channel" /></m:Column>
+                                            <m:Column width="8rem"><m:Text text="Division" /></m:Column>
+                                            <m:Column width="8rem"><m:Text text="Doc Type" /></m:Column>
+                                            <m:Column width="10rem"><m:Text text="Sold-to-Party" /></m:Column>
+                                            <m:Column width="10rem"><m:Text text="Ship-to-Party" /></m:Column>
+                                            <m:Column width="8rem"><m:Text text="Payer" /></m:Column>
+                                            <m:Column width="10rem"><m:Text text="Bill-to-Party" /></m:Column>
+                                            <m:Column width="10rem"><m:Text text="Valid From" /></m:Column>
+                                            <m:Column width="10rem"><m:Text text="Valid To" /></m:Column>
+                                            <m:Column width="10rem"><m:Text text="Price Date" /></m:Column>
+                                            <m:Column width="14rem"><m:Text text="Purchase Reference" /></m:Column>
+                                            <m:Column width="18rem"><m:Text text="Requester Email" /></m:Column>
+                                            <m:Column width="10rem"><m:Text text="Process Type" /></m:Column>
+                                            <m:Column width="14rem"><m:Text text="Material" /></m:Column>
+                                            <m:Column width="8rem" hAlign="End"><m:Text text="Quantity" /></m:Column>
+                                            <m:Column width="7rem"><m:Text text="Unit" /></m:Column>
+                                            <m:Column width="8rem"><m:Text text="Plant" /></m:Column>
+                                            <m:Column width="12rem"><m:Text text="Storage Location" /></m:Column>
+                                            <m:Column width="12rem"><m:Text text="Delivery Date" /></m:Column>
+                                        </m:columns>
+                                        <m:items>
+                                            <m:ColumnListItem>
+                                                <m:cells>
+                                                    <m:ObjectNumber number="{status>RowNo}" emphasized="false" />
+                                                    <m:Input value="{status>SALES_ORG}" valueState="{= ${status>_err_SALES_ORG} ? 'Error' : 'None' }" valueStateText="{status>_errMsg_SALES_ORG}" editable="false"><m:customData><core:CustomData key="field" value="SALES_ORG" /></m:customData></m:Input>
+                                                    <m:Input value="{status>DISTR_CHAN}" valueState="{= ${status>_err_DISTR_CHAN} ? 'Error' : 'None' }" valueStateText="{status>_errMsg_DISTR_CHAN}" editable="false"><m:customData><core:CustomData key="field" value="DISTR_CHAN" /></m:customData></m:Input>
+                                                    <m:Input value="{status>DIVISION}" valueState="{= ${status>_err_DIVISION} ? 'Error' : 'None' }" valueStateText="{status>_errMsg_DIVISION}" editable="false"><m:customData><core:CustomData key="field" value="DIVISION" /></m:customData></m:Input>
+                                                    <m:Input value="{status>DOC_TYPE}" valueState="{= ${status>_err_DOC_TYPE} ? 'Error' : 'None' }" valueStateText="{status>_errMsg_DOC_TYPE}" editable="false"><m:customData><core:CustomData key="field" value="DOC_TYPE" /></m:customData></m:Input>
+                                                    <m:Input value="{status>SOLD_TO}" valueState="{= ${status>_err_SOLD_TO} ? 'Error' : 'None' }" valueStateText="{status>_errMsg_SOLD_TO}" liveChange=".onCSVPreviewFieldLiveChange"><m:customData><core:CustomData key="field" value="SOLD_TO" /></m:customData></m:Input>
+                                                    <m:Input value="{status>SHIP_TO}" valueState="{= ${status>_err_SHIP_TO} ? 'Error' : 'None' }" valueStateText="{status>_errMsg_SHIP_TO}" editable="false" class="lockedPartnerField"><m:customData><core:CustomData key="field" value="SHIP_TO" /></m:customData></m:Input>
+                                                    <m:Input value="{status>PAYER}" valueState="{= ${status>_err_PAYER} ? 'Error' : 'None' }" valueStateText="{status>_errMsg_PAYER}" editable="false" class="lockedPartnerField"><m:customData><core:CustomData key="field" value="PAYER" /></m:customData></m:Input>
+                                                    <m:Input value="{status>BILL_TO}" valueState="{= ${status>_err_BILL_TO} ? 'Error' : 'None' }" valueStateText="{status>_errMsg_BILL_TO}" editable="false" class="lockedPartnerField"><m:customData><core:CustomData key="field" value="BILL_TO" /></m:customData></m:Input>
+                                                    <m:DatePicker value="{status>VALID_FROM}" valueFormat="yyyy-MM-dd" displayFormat="dd/MM/yyyy" valueState="{= ${status>_err_VALID_FROM} ? 'Error' : 'None' }" valueStateText="{status>_errMsg_VALID_FROM}" editable="false"><m:customData><core:CustomData key="field" value="VALID_FROM" /></m:customData></m:DatePicker>
+                                                    <m:DatePicker value="{status>VALID_TO}" valueFormat="yyyy-MM-dd" displayFormat="dd/MM/yyyy" valueState="{= ${status>_err_VALID_TO} ? 'Error' : 'None' }" valueStateText="{status>_errMsg_VALID_TO}" editable="false"><m:customData><core:CustomData key="field" value="VALID_TO" /></m:customData></m:DatePicker>
+                                                    <m:DatePicker value="{status>PRICE_DATE}" valueFormat="yyyy-MM-dd" displayFormat="dd/MM/yyyy" valueState="{= ${status>_err_PRICE_DATE} ? 'Error' : 'None' }" valueStateText="{status>_errMsg_PRICE_DATE}" editable="false"><m:customData><core:CustomData key="field" value="PRICE_DATE" /></m:customData></m:DatePicker>
+                                                    <m:Input value="{status>PURCH_NO_C}" editable="false" class="lockedEmailField"><m:customData><core:CustomData key="field" value="PURCH_NO_C" /></m:customData></m:Input>
+                                                    <m:Input value="{app>/userEmail}" editable="false" enabled="false" class="lockedEmailField"><m:customData><core:CustomData key="field" value="RequesterEmail" /></m:customData></m:Input>
+                                                    <m:Select selectedKey="{status>FlowType}" forceSelection="false" valueState="{= ${status>_err_FlowType} ? 'Error' : 'None' }" valueStateText="{status>_errMsg_FlowType}" change=".onCSVPreviewFieldLiveChange" width="100%">
+                                                        <m:customData><core:CustomData key="field" value="FlowType" /></m:customData>
+                                                        <core:Item key="" text="" />
+                                                        <core:Item key="Order-to-Cash" text="Order-to-Cash" />
+                                                        <core:Item key="Make-to-Order" text="Make-to-Order" />
+                                                    </m:Select>
+                                                    <m:Input value="{status>MATERIAL}" valueState="{= ${status>_err_MATERIAL} ? 'Error' : 'None' }" valueStateText="{status>_errMsg_MATERIAL}" liveChange=".onCSVPreviewFieldLiveChange" class="materialText"><m:customData><core:CustomData key="field" value="MATERIAL" /></m:customData></m:Input>
+                                                    <m:Input value="{status>QUANTITY}" valueState="{= ${status>_err_QUANTITY} ? 'Error' : 'None' }" valueStateText="{status>_errMsg_QUANTITY}" liveChange=".onCSVPreviewFieldLiveChange"><m:customData><core:CustomData key="field" value="QUANTITY" /></m:customData></m:Input>
+                                                    <m:Input value="{status>UNIT}" liveChange=".onCSVPreviewFieldLiveChange"><m:customData><core:CustomData key="field" value="UNIT" /></m:customData></m:Input>
+                                                    <m:Input value="{status>PLANT}" valueState="{= ${status>_err_PLANT} ? 'Error' : 'None' }" valueStateText="{status>_errMsg_PLANT}" editable="false"><m:customData><core:CustomData key="field" value="PLANT" /></m:customData></m:Input>
+                                                    <m:Input value="{status>STOR_LOC}" valueState="{= ${status>_err_STOR_LOC} ? 'Error' : 'None' }" valueStateText="{status>_errMsg_STOR_LOC}" editable="false"><m:customData><core:CustomData key="field" value="STOR_LOC" /></m:customData></m:Input>
+                                                    <m:DatePicker value="{status>DELIVERY_DATE}" valueFormat="yyyy-MM-dd" displayFormat="dd/MM/yyyy" valueState="{= ${status>_err_DELIVERY_DATE} ? 'Error' : 'None' }" valueStateText="{status>_errMsg_DELIVERY_DATE}" change=".onCSVPreviewFieldLiveChange"><m:customData><core:CustomData key="field" value="DELIVERY_DATE" /></m:customData></m:DatePicker>
+                                                </m:cells>
+                                            </m:ColumnListItem>
+                                        </m:items>
+                                    </m:Table>
+                                </m:ScrollContainer>
+                                <m:Toolbar class="sapUiSmallMarginTop">
+                                    <m:ToolbarSpacer />
+                                    <m:Button
+                                        text="Validate Data"
+                                        icon="sap-icon://accept"
+                                        press=".onConfirmPreviewData"
+                                        enabled="{status>/csvPendingChanges}"
+                                        type="Emphasized"
+                                        class="sapUiSmallMarginEnd"
+                                    />
+                                    <m:Button
+                                        id="idThcHinNhXChinLcButton"
+                                        text="Send to SAP CPI"
+                                        icon="sap-icon://initiative"
+                                        press="onThcHinNhXChinLcButtonPress"
+                                        enabled="{= ${status>/canExecute} &amp;&amp; !${status>/csvPendingChanges} &amp;&amp; !${status>/defaultFieldsPending} &amp;&amp; !${status>/materialConfigPending} }"
+                                        type="Emphasized"
+                                    />
+                                </m:Toolbar>
+                            </m:VBox>
+                        </m:VBox>
+
+                        <!-- RIGHT COLUMN: Sidebar -->
+                        <m:VBox>
+                            <m:layoutData><l:GridData span="XL6 L6 M12 S12" /></m:layoutData>
+
+                            <m:Panel headerText="File Requirements" class="fioriSidePanel sapUiSmallMarginBottom" expandable="false">
+                                <m:VBox class="sapUiSmallMargin">
+                                    <m:HBox alignItems="Center" class="reqCheckItem">
+                                        <core:Icon src="{status>/reqFormatIcon}" color="{status>/reqFormatColor}" class="sapUiSmallMarginEnd" />
+                                        <m:Text text="Format: CSV/Excel (.csv, .xlsx, .xls, .xlsm)" />
+                                    </m:HBox>
+                                    <m:HBox alignItems="Center" class="reqCheckItem">
+                                        <core:Icon src="{status>/reqSizeIcon}" color="{status>/reqSizeColor}" class="sapUiSmallMarginEnd" />
+                                        <m:Text text="Maximum size: 10 MB" />
+                                    </m:HBox>
+                                    <m:HBox alignItems="Center" class="reqCheckItem">
+                                        <core:Icon src="{status>/reqStructureIcon}" color="{status>/reqStructureColor}" class="sapUiSmallMarginEnd" />
+                                        <m:Text text="Column structure must match requirements" />
+                                    </m:HBox>
+                                </m:VBox>
+                            </m:Panel>
+
+                            <m:Panel headerText="Download Templates" class="fioriSidePanel templateDownloadPanel sapUiSmallMarginBottom" expandable="false">
+                                <m:VBox class="sapUiSmallMargin">
+                                    <m:Text text="Download template files with standard CPI columns:" class="sapUiTinyMarginBottom templateDesc" />
+                                    <m:HBox class="templateButtons" wrap="Wrap">
+                                        <m:Button 
+                                            icon="sap-icon://excel-attachment" 
+                                            text="CSV Template" 
+                                            type="Emphasized"
+                                            press=".onDownloadCSVTemplate"
+                                            class="templateBtn csvBtn sapUiTinyMarginEnd sapUiTinyMarginBottom"
+                                            tooltip="Download CSV template"
+                                        />
+                                        <m:Button 
+                                            icon="sap-icon://xlsx-file" 
+                                            text="Excel Template" 
+                                            type="Default"
+                                            press=".onDownloadExcelTemplate"
+                                            class="templateBtn excelBtn sapUiTinyMarginEnd sapUiTinyMarginBottom"
+                                            tooltip="Download Excel template (.xlsx)"
+                                        />
+                                    </m:HBox>
+                                    <m:HBox alignItems="Center" class="templateNote sapUiTinyMarginTop">
+                                        <core:Icon src="sap-icon://hint" color="#5B8BC4" class="sapUiTinyMarginEnd" />
+                                        <m:Text text="Template files include column headers, just fill in your data" class="templateNoteText" />
+                                    </m:HBox>
+                                </m:VBox>
+                            </m:Panel>
+
+                            <m:Panel headerText="Required Fields" class="fioriSidePanel sapUiSmallMarginBottom" expandable="false">
+                                <m:VBox class="sapUiSmallMargin">
+                                    <m:Text text="Mandatory fields:" class="sapUiTinyMarginBottom" />
+                                    <m:HBox wrap="Wrap">
+                                        <m:Token text="Sold-to-Party" editable="false" class="sapUiTinyMarginEnd sapUiTinyMarginBottom" />
+                                        <m:Token text="Sales Organization" editable="false" class="sapUiTinyMarginEnd sapUiTinyMarginBottom" />
+                                        <m:Token text="Distribution Channel" editable="false" class="sapUiTinyMarginEnd sapUiTinyMarginBottom" />
+                                        <m:Token text="Division" editable="false" class="sapUiTinyMarginEnd sapUiTinyMarginBottom" />
+                                        <m:Token text="Doc Type" editable="false" class="sapUiTinyMarginEnd sapUiTinyMarginBottom" />
+                                        <m:Token text="Plant" editable="false" class="sapUiTinyMarginEnd sapUiTinyMarginBottom" />
+                                        <m:Token text="Storage Location" editable="false" class="sapUiTinyMarginEnd sapUiTinyMarginBottom" />
+                                        <m:Token text="Valid From" editable="false" class="sapUiTinyMarginEnd sapUiTinyMarginBottom" />
+                                        <m:Token text="Valid To" editable="false" class="sapUiTinyMarginEnd sapUiTinyMarginBottom" />
+                                        <m:Token text="Price Date" editable="false" class="sapUiTinyMarginEnd sapUiTinyMarginBottom" />
+                                        <m:Token text="Material" editable="false" class="sapUiTinyMarginEnd sapUiTinyMarginBottom" />
+                                        <m:Token text="Quantity" editable="false" class="sapUiTinyMarginEnd sapUiTinyMarginBottom" />
+                                        <m:Token text="Process Type" editable="false" class="sapUiTinyMarginEnd sapUiTinyMarginBottom" />
+                                    </m:HBox>
+                                </m:VBox>
+                            </m:Panel>
+
+                        </m:VBox>
+                    </l:Grid>
+                </m:VBox>
+
+                <!-- ════════════════════════════════════════
+                     PHASE 2: RESULT PANEL (after CPI)
+                     ════════════════════════════════════════ -->
+                <!-- <m:VBox visible="{status>/resultVisible}" class="resultSection"> -->
+                    <!-- Success / Error Banner -->
+                    <!-- <m:MessageStrip
+                        text="{status>/resultBannerText}"
+                        type="{status>/resultBannerType}"
+                        showIcon="true"
+                        class="sapUiMediumMarginBottom resultBanner"
+                    /> -->
+
+                    <!-- O2C Flow Monitor - DISABLED -->
+                    <!-- <m:VBox class="fioriCard flowTrackerCard o2cMonitorShell sapUiSmallMarginBottom">
+                        <m:HBox class="monitorTopBar" justifyContent="SpaceBetween" alignItems="Center" wrap="Wrap">
+                            <m:HBox alignItems="Center" class="sapUiTinyMarginEnd">
+                                <core:Icon src="sap-icon://process" class="monitorTopIcon sapUiSmallMarginEnd" />
+                                <m:VBox>
+                                    <m:Title text="O2C Flow Monitor" level="H4" class="monitorTitle" />
+                                    <m:Text text="Theo dõi tiến trình SO → Delivery → Billing theo thời gian thực" class="monitorSubTitle" />
+                                </m:VBox>
+                            </m:HBox>
+
+                            <m:ObjectStatus
+                                text="{= ${status>/resultPendingCount} > 0 ? 'Đang chạy iFlow' : 'Đã đồng bộ kết quả' }"
+                                state="{= ${status>/resultPendingCount} > 0 ? 'Information' : 'Success' }"
+                                inverted="true"
+                                class="monitorRunStatus"
+                            />
+                        </m:HBox>
+
+                        <m:HBox class="o2cRail" justifyContent="Center" alignItems="Center" wrap="Wrap">
+                            <m:VBox class="o2cStep o2cStepSO" alignItems="Start">
+                                <m:HBox alignItems="Center" class="sapUiTinyMarginBottom">
+                                    <m:VBox class="o2cStepIconWrap"><core:Icon src="sap-icon://sales-order" class="o2cStepIcon" /></m:VBox>
+                                    <m:VBox class="sapUiSmallMarginBegin">
+                                        <m:Text text="Order Processing" class="o2cStepPhase" />
+                                        <m:Title text="Sales Order" level="H5" class="o2cStepName" />
+                                    </m:VBox>
+                                </m:HBox>
+                                <m:ObjectStatus
+                                    text="{= ${status>/resultSOCount} > 0 ? 'Completed' : (${status>/resultTotal} > 0 ? 'In Progress' : 'Idle') }"
+                                    state="{= ${status>/resultSOCount} > 0 ? 'Success' : (${status>/resultTotal} > 0 ? 'Information' : 'None') }"
+                                    class="o2cStepState"
+                                />
+                                <m:Text text="{= 'Số chứng từ: ' + ${status>/resultSOCount} }" class="o2cStepMetric" />
+                            </m:VBox>
+
+                            <m:HBox class="o2cStepConnector" alignItems="Center" justifyContent="Center">
+                                <core:Icon src="sap-icon://slim-arrow-right" class="o2cConnectorIcon" />
+                            </m:HBox>
+
+                            <m:VBox class="o2cStep o2cStepDL" alignItems="Start">
+                                <m:HBox alignItems="Center" class="sapUiTinyMarginBottom">
+                                    <m:VBox class="o2cStepIconWrap"><core:Icon src="sap-icon://shipping-status" class="o2cStepIcon" /></m:VBox>
+                                    <m:VBox class="sapUiSmallMarginBegin">
+                                        <m:Text text="Delivery Processing" class="o2cStepPhase" />
+                                        <m:Title text="Outbound Delivery" level="H5" class="o2cStepName" />
+                                    </m:VBox>
+                                </m:HBox>
+                                <m:ObjectStatus
+                                    text="{= ${status>/resultDLCount} > 0 ? 'Completed' : (${status>/resultSOCount} > 0 || ${status>/resultPendingCount} > 0 ? 'In Progress' : 'Idle') }"
+                                    state="{= ${status>/resultDLCount} > 0 ? 'Success' : (${status>/resultSOCount} > 0 || ${status>/resultPendingCount} > 0 ? 'Information' : 'None') }"
+                                    class="o2cStepState"
+                                />
+                                <m:Text text="{= 'Số chứng từ: ' + ${status>/resultDLCount} }" class="o2cStepMetric" />
+                            </m:VBox>
+
+                            <m:HBox class="o2cStepConnector" alignItems="Center" justifyContent="Center">
+                                <core:Icon src="sap-icon://slim-arrow-right" class="o2cConnectorIcon" />
+                            </m:HBox>
+
+                            <m:VBox class="o2cStep o2cStepBL" alignItems="Start">
+                                <m:HBox alignItems="Center" class="sapUiTinyMarginBottom">
+                                    <m:VBox class="o2cStepIconWrap"><core:Icon src="sap-icon://payment-approval" class="o2cStepIcon" /></m:VBox>
+                                    <m:VBox class="sapUiSmallMarginBegin">
+                                        <m:Text text="Billing Processing" class="o2cStepPhase" />
+                                        <m:Title text="Billing" level="H5" class="o2cStepName" />
+                                    </m:VBox>
+                                </m:HBox>
+                                <m:ObjectStatus
+                                    text="{= ${status>/resultBLCount} > 0 ? 'Completed' : (${status>/resultDLCount} > 0 || ${status>/resultPendingCount} > 0 ? 'In Progress' : 'Idle') }"
+                                    state="{= ${status>/resultBLCount} > 0 ? 'Success' : (${status>/resultDLCount} > 0 || ${status>/resultPendingCount} > 0 ? 'Information' : 'None') }"
+                                    class="o2cStepState"
+                                />
+                                <m:Text text="{= 'Số chứng từ: ' + ${status>/resultBLCount} }" class="o2cStepMetric" />
+                            </m:VBox>
+                        </m:HBox>
+                    </m:VBox>
+
+                    <m:HBox justifyContent="SpaceBetween" class="sapUiSmallMarginBottom summaryRow monitorSummaryRow" wrap="Wrap">
+                        <m:VBox class="summaryCard monitorSummaryCard" width="16%">
+                            <m:HBox alignItems="Center">
+                                <core:Icon src="sap-icon://documents" class="summaryIcon blue sapUiSmallMarginEnd" />
+                                <m:VBox>
+                                    <m:Text text="Tổng xử lý" class="summaryLabel" />
+                                    <m:Title text="{status>/resultTotal}" level="H2" class="summaryValue" />
+                                </m:VBox>
+                            </m:HBox>
+                        </m:VBox>
+                        <m:VBox class="summaryCard monitorSummaryCard" width="16%">
+                            <m:HBox alignItems="Center">
+                                <core:Icon src="sap-icon://synchronize" class="summaryIcon blue sapUiSmallMarginEnd" />
+                                <m:VBox>
+                                    <m:Text text="Đang xử lý" class="summaryLabel" />
+                                    <m:Title text="{status>/resultPendingCount}" level="H2" class="summaryValue" />
+                                </m:VBox>
+                            </m:HBox>
+                        </m:VBox>
+                        <m:VBox class="summaryCard monitorSummaryCard" width="16%">
+                            <m:HBox alignItems="Center">
+                                <core:Icon src="sap-icon://number-sign" class="summaryIcon teal sapUiSmallMarginEnd" />
+                                <m:VBox>
+                                    <m:Text text="Batch_ID" class="summaryLabel" />
+                                    <m:Title text="{status>/resultBatchCount}" level="H2" class="summaryValue" />
+                                </m:VBox>
+                            </m:HBox>
+                        </m:VBox>
+                        <m:VBox class="summaryCard monitorSummaryCard" width="16%">
+                            <m:HBox alignItems="Center">
+                                <core:Icon src="sap-icon://sales-order" class="summaryIcon teal sapUiSmallMarginEnd" />
+                                <m:VBox>
+                                    <m:Text text="Sales Orders" class="summaryLabel" />
+                                    <m:Title text="{status>/resultSOCount}" level="H2" class="summaryValue" />
+                                </m:VBox>
+                            </m:HBox>
+                        </m:VBox>
+                        <m:VBox class="summaryCard monitorSummaryCard" width="16%">
+                            <m:HBox alignItems="Center">
+                                <core:Icon src="sap-icon://shipping-status" class="summaryIcon orange sapUiSmallMarginEnd" />
+                                <m:VBox>
+                                    <m:Text text="Deliveries" class="summaryLabel" />
+                                    <m:Title text="{status>/resultDLCount}" level="H2" class="summaryValue" />
+                                </m:VBox>
+                            </m:HBox>
+                        </m:VBox>
+                        <m:VBox class="summaryCard monitorSummaryCard" width="16%">
+                            <m:HBox alignItems="Center">
+                                <core:Icon src="sap-icon://payment-approval" class="summaryIcon green sapUiSmallMarginEnd" />
+                                <m:VBox>
+                                    <m:Text text="Billing Docs" class="summaryLabel" />
+                                    <m:Title text="{status>/resultBLCount}" level="H2" class="summaryValue" />
+                                </m:VBox>
+                            </m:HBox>
+                        </m:VBox>
+                    </m:HBox> -->
+                    <!-- END DISABLED -->
+
+                    <!-- Result Detail Table - HIDDEN -->
+                    <!-- <m:VBox class="fioriCard resultTableCard monitorTableCard" visible="false">
+                        <m:OverflowToolbar class="monitorTableToolbar">
+                            <core:Icon src="sap-icon://detail-view" class="sapUiSmallMarginEnd" color="#0070f2" />
+                            <m:Title text="Chi tiết chứng từ đã tạo" level="H4" />
+                            <m:ToolbarSpacer />
+                            <m:SegmentedButton
+                                class="resultStatusSwitch sapUiTinyMarginEnd"
+                                selectedKey="{status>/resultFlowType}"
+                                selectionChange=".onResultFlowTypeChange"
+                            >
+                                <m:layoutData>
+                                    <m:OverflowToolbarLayoutData priority="NeverOverflow" shrinkable="false" minWidth="16rem" />
+                                </m:layoutData>
+                                <m:items>
+                                    <m:SegmentedButtonItem key="ALL" text="Tất cả luồng" />
+                                    <m:SegmentedButtonItem key="SALES" text="Sales" />
+                                    <m:SegmentedButtonItem key="PROCUREMENT" text="Procurement" />
+                                </m:items>
+                            </m:SegmentedButton>
+                            <m:SegmentedButton
+                                class="resultStatusSwitch sapUiTinyMarginEnd"
+                                selectedKey="{status>/resultFilterStatus}"
+                                selectionChange=".onResultStatusFilterChange"
+                            >
+                                <m:layoutData>
+                                    <m:OverflowToolbarLayoutData priority="NeverOverflow" shrinkable="false" minWidth="18rem" />
+                                </m:layoutData>
+                                <m:items>
+                                    <m:SegmentedButtonItem key="ALL" text="Tất cả" />
+                                    <m:SegmentedButtonItem key="SUCCESS" text="Thành công" />
+                                    <m:SegmentedButtonItem key="PENDING" text="Đang chạy" />
+                                    <m:SegmentedButtonItem key="ERROR" text="Lỗi" />
+                                </m:items>
+                            </m:SegmentedButton>
+                            <m:SearchField
+                                width="16rem"
+                                placeholder="Lọc Batch_ID / iFlow / Quotation / Delivery / Billing / PR / PO"
+                                value="{status>/resultFilterQuery}"
+                                liveChange=".onBatchFilterChange"
+                                class="sapUiTinyMarginEnd resultSearchField"
+                            >
+                                <m:layoutData>
+                                    <m:OverflowToolbarLayoutData priority="Low" shrinkable="true" minWidth="12rem" />
+                                </m:layoutData>
+                            </m:SearchField>
+                            <m:Button text="Tải lên file mới" icon="sap-icon://upload-to-cloud" press="onResetUpload" type="Ghost">
+                                <m:layoutData>
+                                    <m:OverflowToolbarLayoutData priority="Disappear" />
+                                </m:layoutData>
+                            </m:Button>
+                        </m:OverflowToolbar>
+
+                        <m:VBox class="resultTableViewport">
+                            <m:Table
+                                id="idResultTable"
+                                items="{status>/resultData}"
+                                class="fioriResultTable monitorResultTable resultTableGrid"
+                                alternateRowColors="true"
+                            >
+                            <m:columns>
+                                <m:Column width="3rem" hAlign="Center"><m:Text text="#" /></m:Column>
+                                <m:Column><m:Text text="Vật tư" /></m:Column>
+                                <m:Column width="5rem" hAlign="End"><m:Text text="SL" /></m:Column>
+                                <m:Column width="14rem"><m:Text text="Batch_ID" /></m:Column>
+                                <m:Column width="15rem"><m:Text text="iFlow hiện tại" /></m:Column>
+                                <m:Column width="10rem"><m:Text text="Quotation No" /></m:Column>
+                                <m:Column width="10rem" visible="{= ${status>/resultFlowType} !== 'PROCUREMENT' }"><m:Text text="Delivery Docs" /></m:Column>
+                                <m:Column width="10rem" visible="{= ${status>/resultFlowType} !== 'PROCUREMENT' }"><m:Text text="Billing Doc" /></m:Column>
+                                <m:Column width="16rem" visible="{= ${status>/resultFlowType} !== 'SALES' }"><m:Text text="Danh sách PR" /></m:Column>
+                                <m:Column width="14rem" visible="{= ${status>/resultFlowType} !== 'SALES' }"><m:Text text="Danh sách PO" /></m:Column>
+                                <m:Column width="9.5rem" hAlign="Center"><m:Text text="Trạng thái" /></m:Column>
+                            </m:columns>
+                            <m:items>
+                                <m:ColumnListItem
+                                    highlight="{= ${status>docStatus} === 'Success' ? 'Success' : (${status>docStatus} === 'Error' ? 'Error' : (${status>docStatus} === 'Pending' ? 'Information' : 'Warning'))}"
+                                >
+                                    <m:cells>
+                                        <m:ObjectNumber number="{status>displayIndex}" emphasized="false" />
+                                        <m:HBox alignItems="Center" class="quotationCellWrap">
+                                            <m:Button
+                                                type="Transparent"
+                                                icon="{= ${status>isQuotationParent} ? (${status>isExpanded} ? 'sap-icon://navigation-down-arrow' : 'sap-icon://navigation-right-arrow') : '' }"
+                                                visible="{status>isQuotationParent}"
+                                                press=".onToggleQuotationItems"
+                                                tooltip="Mở/thu gọn danh sách item"
+                                                class="quotationExpandBtn"
+                                            />
+                                            <core:Icon
+                                                src="sap-icon://indent"
+                                                visible="{status>isChildItem}"
+                                                class="quotationChildIcon sapUiTinyMarginEnd"
+                                            />
+                                            <m:VBox class="quotationTextBlock">
+                                                <m:Text
+                                                    text="{status>material}"
+                                                    class="{= ${status>isQuotationParent} ? 'materialText quotationParentText' : 'materialText quotationChildText' }"
+                                                />
+                                                <m:Text text="{status>docType}" class="materialSubText" />
+                                            </m:VBox>
+                                        </m:HBox>
+                                        <m:ObjectNumber number="{status>quantity}" emphasized="false" />
+                                        <m:Text text="{= ${status>batchId} ? ${status>batchId} : '-' }" class="docNumber batchIdText" wrapping="false" />
+                                        <m:Text text="{status>flowStage}" class="flowStageText" wrapping="false" />
+                                        <m:HBox alignItems="Center">
+                                            <core:Icon src="sap-icon://sales-order" color="#0070f2" class="docIcon" visible="{= !${status>isChildItem} &amp;&amp; ( !!${status>quotation} || (!!${status>salesOrder} &amp;&amp; ${status>salesOrder} !== 'N/A') ) }" />
+                                            <m:Link
+                                                text="{= ${status>quotation} ? ${status>quotation} : ${status>salesOrder} }"
+                                                visible="{= !${status>isChildItem} &amp;&amp; ( !!${status>quotation} || (!!${status>salesOrder} &amp;&amp; ${status>salesOrder} !== 'N/A') ) }"
+                                                press=".onOpenQuotationDetail"
+                                                class="docNumber"
+                                            />
+                                            <m:Text
+                                                text="{= ${status>quotation} ? ${status>quotation} : (${status>salesOrder} ? ${status>salesOrder} : '-') }"
+                                                visible="{= ${status>isChildItem} || (!${status>quotation} &amp;&amp; (!${status>salesOrder} || ${status>salesOrder} === 'N/A')) }"
+                                                class="docNumber"
+                                            />
+                                        </m:HBox>
+                                        <m:HBox alignItems="Center">
+                                            <core:Icon src="sap-icon://shipping-status" color="#e76500" class="docIcon" visible="{= !!${status>delivery} &amp;&amp; ${status>delivery} !== 'N/A' }" />
+                                            <m:Text text="{status>delivery}" class="docNumber" />
+                                        </m:HBox>
+                                        <m:HBox alignItems="Center">
+                                            <core:Icon src="sap-icon://payment-approval" color="#107e3e" class="docIcon" visible="{= !!${status>billing} &amp;&amp; ${status>billing} !== 'N/A' }" />
+                                            <m:Text text="{status>billing}" class="docNumber" />
+                                        </m:HBox>
+                                        <m:VBox visible="{= ${status>/resultFlowType} !== 'SALES' }">
+                                            <m:ObjectNumber number="{status>prCount}" unit="PRs" emphasized="false" class="sapUiTinyMarginBottom" />
+                                            <m:Link
+                                                text="Xem danh sách PR"
+                                                visible="{= !!${status>prCount} &amp;&amp; ${status>prCount} !== '0' }"
+                                                press=".onOpenPrListDialog"
+                                                class="sapUiTinyMarginTop"
+                                            />
+                                        </m:VBox>
+                                        <m:VBox visible="{= ${status>/resultFlowType} !== 'SALES' }">
+                                            <m:ObjectNumber number="{status>poCount}" unit="POs" emphasized="false" class="sapUiTinyMarginBottom" />
+                                            <m:Link
+                                                text="Xem danh sách PO"
+                                                visible="{= !!${status>poCount} &amp;&amp; ${status>poCount} !== '0' }"
+                                                press=".onOpenPoListDialog"
+                                                class="sapUiTinyMarginTop"
+                                            />
+                                        </m:VBox>
+                                        <m:ObjectStatus
+                                            text="{status>docStatusText}"
+                                            state="{= ${status>docStatus} === 'Success' ? 'Success' : (${status>docStatus} === 'Error' ? 'Error' : (${status>docStatus} === 'Pending' ? 'Information' : 'Warning'))}"
+                                            inverted="true"
+                                            class="resultDocStatus"
+                                        />
+                                    </m:cells>
+                                </m:ColumnListItem>
+                            </m:items>
+                            <m:noData>
+                                <m:IllustratedMessage
+                                    illustrationType="sapIllus-NoSearchResults"
+                                    title="Không có dữ liệu phù hợp"
+                                    description="Hãy đổi bộ lọc trạng thái hoặc từ khóa tìm kiếm"
+                                />
+                            </m:noData>
+                        </m:Table>
+                        </m:VBox>
+                    </m:VBox>
+
+                    <m:HBox justifyContent="End" class="sapUiSmallMarginTop">
+                        <m:Text text="{status>/resultTimestamp}" class="resultTimestamp" />
+                    </m:HBox>
+                </m:VBox> -->
+            </m:VBox>
+        </m:VBox>
+    </m:Page>
+</mvc:View>

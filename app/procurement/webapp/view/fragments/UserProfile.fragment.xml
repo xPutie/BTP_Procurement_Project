@@ -1,0 +1,45 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+>
+    <Popover
+        class="cyberPopover"
+        placement="Bottom"
+        showHeader="false"
+        contentWidth="280px"
+    >
+        <VBox class="sapUiSmallMargin">
+            <!-- Header Section -->
+            <HBox
+                alignItems="Center"
+                class="sapUiSmallMarginBottom"
+            >
+                <Avatar
+                    initials="{= ${app>/userName} ? ${app>/userName}.substring(0,1) : 'U' }"
+                    displaySize="L"
+                    class="cyberAvatar sapUiMediumMarginEnd"
+                />
+                <VBox>
+                    <Title
+                        text="{app>/userName}"
+                        level="H3"
+                        class="textMainBold"
+                    />
+                    <Text
+                        text="{app>/authRole}"
+                        class="mutedTextSmall"
+                    />
+                </VBox>
+            </HBox>
+            <core:HTML content="&lt;hr style='border: 0; border-top: 1px solid rgba(0,0,0,0.1); margin: 0.5rem 0;'&gt;&lt;/hr&gt;" />
+            <!-- Logout Section -->
+            <Button
+                text="Sign Out"
+                icon="sap-icon://log"
+                class="cyberLogoutBtn sapUiTinyMarginTop"
+                width="100%"
+                press="onNgXutAnTonButtonPress"
+            />
+        </VBox>
+    </Popover>
+</core:FragmentDefinition>

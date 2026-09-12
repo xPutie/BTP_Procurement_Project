@@ -1,0 +1,198 @@
+{
+  "info": {
+    "name": "BTP Procurement - CPI Integration",
+    "description": "Test collection for SAP CPI integration with real credentials",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "cpi_base_url",
+      "value": "https://ec191742trial.it-cpitrial03-rt.cfapps.ap21.hana.ondemand.com",
+      "type": "string"
+    },
+    {
+      "key": "cpi_client_id",
+      "value": "sb-e8246846-5419-4da5-ba09-f1e2427e8b4f!b114552|it-rt-ec191742trial!b196",
+      "type": "string"
+    },
+    {
+      "key": "cpi_client_secret",
+      "value": "9e46c545-3c01-4f55-977a-1380a2a5cc0c$7OhHNCrwhcScuon1yM2OVroGti1EwWRdDmFHSsXGAzw=",
+      "type": "string"
+    },
+    {
+      "key": "token_url",
+      "value": "https://ec191742trial.authentication.ap21.hana.ondemand.com/oauth/token",
+      "type": "string"
+    },
+    {
+      "key": "access_token",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "1. Get OAuth Token",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "var jsonData = pm.response.json();",
+              "pm.collectionVariables.set(\"access_token\", jsonData.access_token);",
+              "console.log(\"Token obtained:\", jsonData.access_token);"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "{{cpi_client_id}}",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{cpi_client_secret}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/x-www-form-urlencoded",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "grant_type",
+              "value": "client_credentials",
+              "type": "text"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{token_url}}",
+          "host": ["{{token_url}}"]
+        },
+        "description": "Get OAuth 2.0 access token from CPI"
+      },
+      "response": []
+    },
+    {
+      "name": "2. Create Sales Order (Single Item)",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{access_token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"DocType\": \"OR1\",\n    \"PO\": \"\",\n    \"SalesOrg\": \"FU24\",\n    \"Channel\": \"FU\",\n    \"SalesDistrict\": \"\",\n    \"Division\": \"FH\",\n    \"Incoterms1\": \"FOB\",\n    \"Incoterms2\": \"Miami\",\n    \"PaymentTerms\": \"0001\",\n    \"SoldToParty\": \"1003209\",\n    \"ShipToParty\": \"1003209\",\n    \"BillToParty\": \"1003209\",\n    \"Payer\": \"1003209\",\n    \"Material\": \"HEADPHONE_LG\",\n    \"Quantity\": 10,\n    \"Plant\": \"FU24\",\n    \"StorageLoc\": \"TG01\",\n    \"PriceDate\": \"2026-02-27\",\n    \"TestRun\": \"\",\n    \"ReqDate\": \"2026-02-25\",\n    \"ReqTime\": \"12:30:00\"\n}"
+        },
+        "url": {
+          "raw": "{{cpi_base_url}}/http/sales-order",
+          "host": ["{{cpi_base_url}}"],
+          "path": ["http", "sales-order"]
+        },
+        "description": "Create a sales order with single item (HEADPHONE_LG)"
+      },
+      "response": []
+    },
+    {
+      "name": "3. Create Sales Order (Laptop)",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{access_token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"DocType\": \"OR1\",\n    \"PO\": \"\",\n    \"SalesOrg\": \"FU24\",\n    \"Channel\": \"FU\",\n    \"SalesDistrict\": \"\",\n    \"Division\": \"FH\",\n    \"Incoterms1\": \"FOB\",\n    \"Incoterms2\": \"Miami\",\n    \"PaymentTerms\": \"0001\",\n    \"SoldToParty\": \"1003209\",\n    \"ShipToParty\": \"1003209\",\n    \"BillToParty\": \"1003209\",\n    \"Payer\": \"1003209\",\n    \"Material\": \"LAPTOP_DELL\",\n    \"Quantity\": 5,\n    \"Plant\": \"FU24\",\n    \"StorageLoc\": \"TG01\",\n    \"PriceDate\": \"2026-03-01\",\n    \"TestRun\": \"\",\n    \"ReqDate\": \"2026-02-28\",\n    \"ReqTime\": \"14:00:00\"\n}"
+        },
+        "url": {
+          "raw": "{{cpi_base_url}}/http/sales-order",
+          "host": ["{{cpi_base_url}}"],
+          "path": ["http", "sales-order"]
+        },
+        "description": "Create sales order for Laptop"
+      },
+      "response": []
+    },
+    {
+      "name": "4. Create Sales Order (Basic Auth)",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "{{cpi_client_id}}",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{cpi_client_secret}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"DocType\": \"OR1\",\n    \"SalesOrg\": \"FU24\",\n    \"Channel\": \"FU\",\n    \"Division\": \"FH\",\n    \"Incoterms1\": \"FOB\",\n    \"SoldToParty\": \"1003209\",\n    \"ShipToParty\": \"1003209\",\n    \"BillToParty\": \"1003209\",\n    \"Payer\": \"1003209\",\n    \"Material\": \"MOUSE_WIRELESS\",\n    \"Quantity\": 20,\n    \"Plant\": \"FU24\",\n    \"StorageLoc\": \"TG01\",\n    \"PriceDate\": \"2026-03-05\",\n    \"ReqDate\": \"2026-03-02\"\n}"
+        },
+        "url": {
+          "raw": "{{cpi_base_url}}/http/sales-order",
+          "host": ["{{cpi_base_url}}"],
+          "path": ["http", "sales-order"]
+        },
+        "description": "Alternative: Using Basic Auth instead of OAuth Bearer token"
+      },
+      "response": []
+    }
+  ]
+}

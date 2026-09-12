@@ -1,0 +1,148 @@
+<mvc:View
+    controllerName="com.gsp.sap.procurement.ui.poautomationui.controller.UploadHistory"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:m="sap.m"
+    xmlns:core="sap.ui.core"
+    displayBlock="true"
+>
+    <m:Page
+        title="Lịch sử Upload"
+        showNavButton="true"
+        navButtonPress=".onNavBack"
+        class="uploadPageBg"
+    >
+        <m:content>
+            <m:VBox class="sapUiResponsiveMargin uploadContent">
+                <m:HBox alignItems="Center" class="sapUiSmallMarginBottom" justifyContent="SpaceBetween">
+                    <m:HBox alignItems="Center">
+                        <core:Icon src="sap-icon://history" color="#0070f2" class="sapUiSmallMarginEnd" />
+                        <m:Title text="Upload History (DB Storage)" level="H3" />
+                    </m:HBox>
+                    <m:Button text="Refresh" icon="sap-icon://refresh" type="Transparent" press=".onRefreshHistory" />
+                </m:HBox>
+
+                <m:MessageStrip
+                    text="View history icon: sap-icon://history - Upload History"
+                    type="Information"
+                    showIcon="true"
+                    class="sapUiSmallMarginBottom"
+                />
+
+                <m:IconTabBar expanded="true" class="historySectionCard">
+                    <m:items>
+                        <m:IconTabFilter key="sd" icon="sap-icon://sales-order" text="Sales &amp; Distribution (Order-to-Cash)">
+                            <m:VBox class="historyTableViewport">
+                                <m:ScrollContainer horizontal="true" vertical="true" width="100%" height="24rem" focusable="true" class="historyTableScroller">
+                                    <m:Table
+                                        id="idUploadHistorySDTable"
+                                        items="{history>/sdRecords}"
+                                        sticky="ColumnHeaders"
+                                        alternateRowColors="true"
+                                        class="fioriResultTable historyWideTable"
+                                        fixedLayout="false"
+                                        width="118rem"
+                                    >
+                                        <m:columns>
+                                            <m:Column width="11rem"><m:Text text="Time" /></m:Column>
+                                            <m:Column width="11rem"><m:Text text="Method" /></m:Column>
+                                            <m:Column width="7rem"><m:Text text="Icon" /></m:Column>
+                                            <m:Column width="6rem" hAlign="End"><m:Text text="Total" /></m:Column>
+                                            <m:Column width="8rem" hAlign="End"><m:Text text="Success" /></m:Column>
+                                            <m:Column width="8rem" hAlign="End"><m:Text text="Failed" /></m:Column>
+                                            <m:Column width="12rem"><m:Text text="Batch_ID" /></m:Column>
+                                            <m:Column width="12rem"><m:Text text="Sales Order Codes" /></m:Column>
+                                            <m:Column width="12rem"><m:Text text="Delivery Codes" /></m:Column>
+                                            <m:Column width="12rem"><m:Text text="Billing Codes" /></m:Column>
+                                            <m:Column width="8rem" hAlign="Center"><m:Text text="Status" /></m:Column>
+                                            <m:Column width="9rem"><m:Text text="Created By" /></m:Column>
+                                        </m:columns>
+                                        <m:items>
+                                            <m:ColumnListItem>
+                                                <m:cells>
+                                                    <m:Text text="{history>createdAtText}" />
+                                                    <m:ObjectStatus text="{history>uploadMethod}" state="Information" inverted="true" />
+                                                    <m:HBox alignItems="Center">
+                                                        <core:Icon src="{history>methodIcon}" class="sapUiTinyMarginEnd" />
+                                                        <m:Text text="{history>methodIconName}" />
+                                                    </m:HBox>
+                                                    <m:ObjectNumber number="{history>totalRows}" emphasized="false" />
+                                                    <m:ObjectNumber number="{history>successRows}" emphasized="false" />
+                                                    <m:ObjectNumber number="{history>failRows}" emphasized="false" />
+                                                    <m:Text text="{history>batchIds}" />
+                                                    <m:Text text="{history>salesOrderCodes}" />
+                                                    <m:Text text="{history>deliveryCodes}" />
+                                                    <m:Text text="{history>billingCodes}" />
+                                                    <m:ObjectStatus text="{history>statusText}" state="{history>statusState}" inverted="true" />
+                                                    <m:Text text="{history>createdBy}" />
+                                                </m:cells>
+                                            </m:ColumnListItem>
+                                        </m:items>
+                                    </m:Table>
+                                </m:ScrollContainer>
+                            </m:VBox>
+                        </m:IconTabFilter>
+
+                        <m:IconTabFilter key="mm" icon="sap-icon://shipping-status" text="Material Management (Procure-to-Pay)">
+                            <m:VBox class="historyTableViewport">
+                                <m:ScrollContainer horizontal="true" vertical="true" width="100%" height="24rem" focusable="true" class="historyTableScroller">
+                                    <m:Table
+                                        id="idUploadHistoryMMTable"
+                                        items="{history>/mmRecords}"
+                                        sticky="ColumnHeaders"
+                                        alternateRowColors="true"
+                                        class="fioriResultTable historyWideTable"
+                                        fixedLayout="false"
+                                        width="118rem"
+                                    >
+                                        <m:columns>
+                                            <m:Column width="11rem"><m:Text text="Time" /></m:Column>
+                                            <m:Column width="11rem"><m:Text text="Method" /></m:Column>
+                                            <m:Column width="7rem"><m:Text text="Icon" /></m:Column>
+                                            <m:Column width="6rem" hAlign="End"><m:Text text="Total" /></m:Column>
+                                            <m:Column width="8rem" hAlign="End"><m:Text text="Success" /></m:Column>
+                                            <m:Column width="8rem" hAlign="End"><m:Text text="Failed" /></m:Column>
+                                            <m:Column width="12rem"><m:Text text="Batch_ID" /></m:Column>
+                                            <m:Column width="12rem"><m:Text text="Sales Order Codes" /></m:Column>
+                                            <m:Column width="12rem"><m:Text text="Delivery Codes" /></m:Column>
+                                            <m:Column width="12rem"><m:Text text="Billing Codes" /></m:Column>
+                                            <m:Column width="8rem" hAlign="Center"><m:Text text="Status" /></m:Column>
+                                            <m:Column width="9rem"><m:Text text="Created By" /></m:Column>
+                                        </m:columns>
+                                        <m:items>
+                                            <m:ColumnListItem>
+                                                <m:cells>
+                                                    <m:Text text="{history>createdAtText}" />
+                                                    <m:ObjectStatus text="{history>uploadMethod}" state="Information" inverted="true" />
+                                                    <m:HBox alignItems="Center">
+                                                        <core:Icon src="{history>methodIcon}" class="sapUiTinyMarginEnd" />
+                                                        <m:Text text="{history>methodIconName}" />
+                                                    </m:HBox>
+                                                    <m:ObjectNumber number="{history>totalRows}" emphasized="false" />
+                                                    <m:ObjectNumber number="{history>successRows}" emphasized="false" />
+                                                    <m:ObjectNumber number="{history>failRows}" emphasized="false" />
+                                                    <m:Text text="{history>batchIds}" />
+                                                    <m:Text text="{history>salesOrderCodes}" />
+                                                    <m:Text text="{history>deliveryCodes}" />
+                                                    <m:Text text="{history>billingCodes}" />
+                                                    <m:ObjectStatus text="{history>statusText}" state="{history>statusState}" inverted="true" />
+                                                    <m:Text text="{history>createdBy}" />
+                                                </m:cells>
+                                            </m:ColumnListItem>
+                                        </m:items>
+                                        <m:noData>
+                                            <m:IllustratedMessage
+                                                illustrationType="sapIllus-NoData"
+                                                title="Chưa có lịch sử MM"
+                                                description="Dữ liệu Procure-to-Pay sẽ hiển thị tại đây"
+                                            />
+                                        </m:noData>
+                                    </m:Table>
+                                </m:ScrollContainer>
+                            </m:VBox>
+                        </m:IconTabFilter>
+                    </m:items>
+                </m:IconTabBar>
+            </m:VBox>
+        </m:content>
+    </m:Page>
+</mvc:View>

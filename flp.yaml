@@ -1,37 +1,39 @@
-# yaml-language-server: $schema=https://sap.github.io/ui5-tooling/schema/ui5.yaml.json
-
 specVersion: "4.0"
 metadata:
   name: com.gsp.sap.procurement.ui.poautomationui
-resources:
-  configuration:
-    paths:
-      webapp: app/procurement/webapp
 type: application
 server:
   customMiddleware:
     - name: fiori-tools-proxy
       afterMiddleware: compression
       configuration:
-        ignoreCertErrors: false # If set to true, certificate errors will be ignored. E.g. self-signed certificates will be accepted
+        ignoreCertErrors: false
         ui5:
           path:
             - /resources
             - /test-resources
           url: https://ui5.sap.com
-        backend:
-          - path: /srv-api
-            url: http://localhost:4004
-          - path: /odata
-            url: http://localhost:4004
+        bsp: "Fiori:"
     - name: fiori-tools-appreload
       afterMiddleware: compression
       configuration:
         port: 35729
-        path: app/procurement/webapp
+        path: dist
         delay: 300
     - name: fiori-tools-preview
       afterMiddleware: fiori-tools-appreload
       configuration:
         flp:
           theme: sap_horizon
+    - name: fiori-tools-servestatic
+      beforeMiddleware: fiori-tools-proxy
+      configuration:
+        paths:
+          - path: "/**/Fiori:"
+            src: dist
+          - path: /**/com/gsp/sap/procurement/ui/poautomationui
+            src: dist
+resources:
+  configuration:
+    paths:
+      webapp: dist

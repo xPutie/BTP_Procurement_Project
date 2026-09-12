@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON Upload - UI Mockup Design</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "72", "72full", Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #0070f2 0%, #0a6ed1 100%);
+            color: white;
+            padding: 24px 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        .header-icon {
+            font-size: 32px;
+        }
+        
+        .header h1 {
+            font-size: 24px;
+            font-weight: 400;
+        }
+        
+        .header-subtitle {
+            font-size: 14px;
+            opacity: 0.9;
+            margin-top: 4px;
+        }
+        
+        .tab-bar {
+            display: flex;
+            border-bottom: 2px solid #e5e5e5;
+            background: #f7f7f7;
+        }
+        
+        .tab {
+            flex: 1;
+            padding: 20px 32px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            border: none;
+            background: transparent;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+        
+        .tab:hover {
+            background: #ebebeb;
+        }
+        
+        .tab.active {
+            background: white;
+            border-bottom: 3px solid #0070f2;
+            color: #0070f2;
+        }
+        
+        .tab-icon {
+            font-size: 20px;
+        }
+        
+        .content {
+            padding: 32px;
+        }
+        
+        .json-upload-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+        
+        .card {
+            background: #f9fafb;
+            border: 2px solid #e5e5e5;
+            border-radius: 8px;
+            padding: 24px;
+        }
+        
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid #e5e5e5;
+        }
+        
+        .card-header-icon {
+            font-size: 24px;
+            color: #0070f2;
+        }
+        
+        .card-header h2 {
+            font-size: 18px;
+            font-weight: 500;
+        }
+        
+        .json-editor {
+            width: 100%;
+            min-height: 400px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            padding: 16px;
+            border: 2px solid #d1d5db;
+            border-radius: 6px;
+            background: #1e1e1e;
+            color: #d4d4d4;
+            resize: vertical;
+        }
+        
+        .json-editor:focus {
+            outline: none;
+            border-color: #0070f2;
+            box-shadow: 0 0 0 3px rgba(0, 112, 242, 0.1);
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 16px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .btn-primary {
+            background: #0070f2;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #0a6ed1;
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: #0070f2;
+            border: 2px solid #0070f2;
+        }
+        
+        .btn-secondary:hover {
+            background: #f0f7ff;
+        }
+        
+        .btn-success {
+            background: #107e3e;
+            color: white;
+        }
+        
+        .btn-success:hover {
+            background: #0e6d35;
+        }
+        
+        .btn-icon {
+            font-size: 16px;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-top: 20px;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background: white;
+            border-radius: 6px;
+            border: 1px solid #e5e5e5;
+        }
+        
+        .feature-icon {
+            font-size: 20px;
+            color: #107e3e;
+        }
+        
+        .feature-text {
+            font-size: 14px;
+        }
+        
+        .preview-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: white;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+        
+        .preview-table th {
+            background: #0070f2;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: 500;
+            font-size: 13px;
+        }
+        
+        .preview-table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #e5e5e5;
+            font-size: 13px;
+        }
+        
+        .preview-table tr:hover {
+            background: #f7f7f7;
+        }
+        
+        .info-box {
+            background: #e6f3ff;
+            border-left: 4px solid #0070f2;
+            padding: 16px;
+            border-radius: 4px;
+            margin-top: 20px;
+        }
+        
+        .info-box-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #0070f2;
+        }
+        
+        .info-box-content {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        .validation-status {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            background: #f0fdf4;
+            border: 2px solid #86efac;
+            border-radius: 6px;
+            margin-top: 16px;
+        }
+        
+        .validation-icon {
+            font-size: 24px;
+            color: #107e3e;
+        }
+        
+        .validation-text {
+            font-size: 14px;
+            color: #107e3e;
+            font-weight: 500;
+        }
+        
+        .file-upload-zone {
+            border: 2px dashed #0070f2;
+            border-radius: 8px;
+            padding: 32px;
+            text-align: center;
+            background: #f0f7ff;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .file-upload-zone:hover {
+            background: #e6f3ff;
+            border-color: #0a6ed1;
+        }
+        
+        .upload-icon-large {
+            font-size: 48px;
+            color: #0070f2;
+            margin-bottom: 16px;
+        }
+        
+        .sample-json {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 16px;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            overflow-x: auto;
+            margin-top: 12px;
+        }
+        
+        .json-key { color: #9cdcfe; }
+        .json-string { color: #ce9178; }
+        .json-number { color: #b5cea8; }
+        .json-bracket { color: #ffd700; }
+        
+        .wizard-progress {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            margin: 32px 0;
+        }
+        
+        .wizard-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .wizard-circle {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: #e5e5e5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: #999;
+            transition: all 0.3s;
+        }
+        
+        .wizard-circle.active {
+            background: #0070f2;
+            color: white;
+            box-shadow: 0 4px 12px rgba(0, 112, 242, 0.4);
+        }
+        
+        .wizard-circle.done {
+            background: #107e3e;
+            color: white;
+        }
+        
+        .wizard-line {
+            width: 80px;
+            height: 3px;
+            background: #e5e5e5;
+            margin: 0 16px;
+        }
+        
+        .wizard-line.active {
+            background: #0070f2;
+        }
+        
+        .wizard-label {
+            font-size: 13px;
+            color: #666;
+        }
+        
+        .wizard-label.active {
+            color: #0070f2;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-left">
+                <div class="header-icon">📤</div>
+                <div>
+                    <h1>Upload Dữ liệu - BTP Procurement</h1>
+                    <div class="header-subtitle">Tải lên thông qua Excel hoặc JSON để tạo Sales Order tự động</div>
+                </div>
+            </div>
+            <div style="color: white; font-size: 14px;">👤 Xin chào, Admin</div>
+        </div>
+        
+        <!-- Tab Bar -->
+        <div class="tab-bar">
+            <button class="tab">
+                <span class="tab-icon">📊</span>
+                <span>Excel Upload</span>
+            </button>
+            <button class="tab active">
+                <span class="tab-icon">{ }</span>
+                <span>JSON Upload</span>
+            </button>
+        </div>
+        
+        <!-- Content -->
+        <div class="content">
+            <!-- Wizard Progress -->
+            <div class="wizard-progress">
+                <div class="wizard-step">
+                    <div class="wizard-circle active">📝</div>
+                    <div class="wizard-label active">Nhập JSON</div>
+                </div>
+                <div class="wizard-line"></div>
+                <div class="wizard-step">
+                    <div class="wizard-circle">✓</div>
+                    <div class="wizard-label">Validate</div>
+                </div>
+                <div class="wizard-line"></div>
+                <div class="wizard-step">
+                    <div class="wizard-circle">👁️</div>
+                    <div class="wizard-label">Preview</div>
+                </div>
+                <div class="wizard-line"></div>
+                <div class="wizard-step">
+                    <div class="wizard-circle">🚀</div>
+                    <div class="wizard-label">Gửi CPI</div>
+                </div>
+            </div>
+            
+            <!-- JSON Upload Section -->
+            <div class="json-upload-section">
+                <!-- Left Column: JSON Editor -->
+                <div class="card" style="grid-column: span 1;">
+                    <div class="card-header">
+                        <span class="card-header-icon">📝</span>
+                        <h2>JSON Editor</h2>
+                    </div>
+                    
+                    <textarea class="json-editor" placeholder="Paste JSON data here...
+Example:
+{
+  &quot;orders&quot;: [
+    {
+      &quot;DocType&quot;: &quot;OR1&quot;,
+      &quot;Material&quot;: &quot;HEADPHONE_10&quot;,
+      &quot;Quantity&quot;: 10,
+      &quot;Plant&quot;: &quot;UP24&quot;,
+      ...
+    }
+  ]
+}"></textarea>
+                    
+                    <div class="action-buttons">
+                        <button class="btn btn-primary">
+                            <span class="btn-icon">✓</span>
+                            <span>Validate JSON</span>
+                        </button>
+                        <button class="btn btn-secondary">
+                            <span class="btn-icon">📁</span>
+                            <span>Upload .json File</span>
+                        </button>
+                        <button class="btn btn-secondary">
+                            <span class="btn-icon">📥</span>
+                            <span>Download Sample</span>
+                        </button>
+                        <button class="btn btn-secondary">
+                            <span class="btn-icon">🗑️</span>
+                            <span>Clear</span>
+                        </button>
+                    </div>
+                    
+                    <div class="validation-status">
+                        <span class="validation-icon">✓</span>
+                        <span class="validation-text">JSON hợp lệ - Tìm thấy 3 orders</span>
+                    </div>
+                </div>
+                
+                <!-- Right Column: Features & Instructions -->
+                <div style="display: flex; flex-direction: column; gap: 24px;">
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="card-header-icon">📋</span>
+                            <h2>Hướng dẫn sử dụng</h2>
+                        </div>
+                        
+                        <div class="features-grid">
+                            <div class="feature-item">
+                                <span class="feature-icon">✓</span>
+                                <span class="feature-text">Paste JSON trực tiếp</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">✓</span>
+                                <span class="feature-text">Upload file .json</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">✓</span>
+                                <span class="feature-text">Validate tự động</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">✓</span>
+                                <span class="feature-text">Preview trước khi gửi</span>
+                            </div>
+                        </div>
+                        
+                        <div class="info-box">
+                            <div class="info-box-title">💡 JSON Format</div>
+                            <div class="info-box-content">
+                                JSON data phải có cấu trúc:<br>
+                                • Root object với key <code>"orders"</code> chứa array<br>
+                                • Mỗi order phải có: DocType, Material, Quantity, Plant<br>
+                                • Các trường tùy chọn: PO, SalesOrg, Channel, Division, v.v.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="card-header-icon">📄</span>
+                            <h2>Sample JSON Template</h2>
+                        </div>
+                        
+                        <div class="sample-json">
+<span class="json-bracket">{</span>
+  <span class="json-key">"orders"</span>: <span class="json-bracket">[</span>
+    <span class="json-bracket">{</span>
+      <span class="json-key">"DocType"</span>: <span class="json-string">"OR1"</span>,
+      <span class="json-key">"Material"</span>: <span class="json-string">"HEADPHONE_10"</span>,
+      <span class="json-key">"Quantity"</span>: <span class="json-number">10</span>,
+      <span class="json-key">"Plant"</span>: <span class="json-string">"UP24"</span>,
+      <span class="json-key">"SalesOrg"</span>: <span class="json-string">"FU24"</span>,
+      <span class="json-key">"Channel"</span>: <span class="json-string">"FU"</span>,
+      <span class="json-key">"SoldToParty"</span>: <span class="json-string">"1003209"</span>
+    <span class="json-bracket">}</span>
+  <span class="json-bracket">]</span>
+<span class="json-bracket">}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Preview Table -->
+            <div class="card" style="margin-top: 24px;">
+                <div class="card-header">
+                    <span class="card-header-icon">👁️</span>
+                    <h2>Preview dữ liệu (3 orders)</h2>
+                </div>
+                
+                <table class="preview-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Doc Type</th>
+                            <th>Material</th>
+                            <th>Quantity</th>
+                            <th>Plant</th>
+                            <th>Sales Org</th>
+                            <th>Sold To</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>OR1</td>
+                            <td>HEADPHONE_10</td>
+                            <td>10</td>
+                            <td>UP24</td>
+                            <td>FU24</td>
+                            <td>1003209</td>
+                            <td>✅ Valid</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>OR1</td>
+                            <td>LAPTOP_15</td>
+                            <td>5</td>
+                            <td>UP24</td>
+                            <td>FU24</td>
+                            <td>1003209</td>
+                            <td>✅ Valid</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>OR1</td>
+                            <td>MOUSE_WIRELESS</td>
+                            <td>20</td>
+                            <td>UP24</td>
+                            <td>FU24</td>
+                            <td>1003209</td>
+                            <td>✅ Valid</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="action-buttons" style="margin-top: 24px; justify-content: center;">
+                    <button class="btn btn-success" style="padding: 14px 48px; font-size: 16px;">
+                        <span class="btn-icon">🚀</span>
+                        <span>Gửi đến SAP CPI (3 orders)</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+>
+	<Dialog
+		id="idRejectDialog"
+		title="Lý do từ chối đơn hàng"
+		icon="sap-icon://decline"
+		type="Message"
+		class="cyberDialog"
+	>
+		<content>
+			<VBox class="sapUiSmallMargin">
+				<Label
+					text="Vui lòng nhập lý do từ chối:"
+					required="true"
+				/>
+				<TextArea
+					id="idRejectCommentTextArea"
+					width="100%"
+					rows="4"
+					placeholder="Nhập lý do tại đây..."
+					liveChange=".onTextAreaRejectCommentLiveChange"
+				/>
+			</VBox>
+		</content>
+		<beginButton>
+			<Button
+				id="idXcNhnTChiButton"
+				text="Xác nhận từ chối"
+				type="Reject"
+				press=".onXcNhnTChiButtonPress"
+				icon="sap-icon://decline"
+			/>
+		</beginButton>
+		<endButton>
+			<Button
+				id="idHyBButton"
+				text="Hủy bỏ"
+				press=".onHyBButtonPress"
+			/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

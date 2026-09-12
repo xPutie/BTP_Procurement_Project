@@ -1,0 +1,1892 @@
+/* ============================================================
+   UPLOAD PAGE — SAP FIORI PROFESSIONAL DESIGN
+   ============================================================ */
+
+/* ── Page Background ── */
+.uploadPageBg {
+    background: linear-gradient(180deg, #f4f9ff 0%, #eef5fc 100%) !important;
+}
+
+/* ── Navigation Bar ── */
+.uploadNavBar {
+    background: linear-gradient(96deg, #2f8fd9 0%, #49a4e5 45%, #68bcef 100%) !important;
+    border-bottom: 1px solid #2a84c8 !important;
+    box-shadow: 0 4px 12px rgba(31, 110, 176, 0.2) !important;
+    height: 3.25rem !important;
+    position: relative !important;
+}
+.uploadNavBar .sapMBarChild {
+    height: 3.25rem !important;
+    display: flex !important;
+    align-items: center !important;
+}
+.uploadNavBar .sapMBtnInner {
+    border-radius: 10px !important;
+}
+.uploadNavTitleInline {
+    padding: 0;
+    border-radius: 0;
+    background: transparent !important;
+    min-width: 0;
+}
+.uploadNavUserBox {
+    gap: 0.22rem;
+}
+.uploadNavBar .sapMBarMiddle {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    position: absolute !important;
+    left: 50% !important;
+    top: 0 !important;
+    height: 100% !important;
+    transform: translateX(-50%) !important;
+    max-width: 64vw;
+}
+.uploadNavBar .sapMBarMiddle .sapMBarChild {
+    max-width: 100%;
+}
+.uploadNavBar .sapMBarMiddle .sapMTitle {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: clamp(15rem, 34vw, 30rem);
+    line-height: 1.2 !important;
+}
+.uploadNavBar .sapMBtn {
+    color: #ffffff !important;
+}
+.uploadNavBar .sapMBtnContent,
+.uploadNavBar .sapMBtnIcon {
+    color: #ffffff !important;
+}
+.uploadNavBar .uploadNavActionBtn .sapMBtnInner {
+    border: 1px solid rgba(255, 255, 255, 0.26) !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+}
+.uploadNavBar .uploadNavActionBtn:hover .sapMBtnInner {
+    background: rgba(255, 255, 255, 0.16) !important;
+    border-color: rgba(255, 255, 255, 0.45) !important;
+}
+.uploadNavBar .sapMTitle {
+    color: #ffffff !important;
+    font-weight: 600 !important;
+    font-size: 1.125rem !important;
+}
+.uploadNavBar .sapUiIcon {
+    color: #ffffff !important;
+}
+.uploadNavBar .sapMText {
+    color: #ffffff !important;
+    font-size: 0.875rem !important;
+}
+.uploadNavGreetingText {
+    color: #ffffff !important;
+    font-weight: 600 !important;
+}
+.uploadNavUserLink.sapMLnk {
+    color: #ffffff !important;
+    font-weight: 700 !important;
+}
+.uploadNavUserLink.sapMLnk:hover {
+    color: #edf6ff !important;
+}
+.uploadNavBar .sapMLink {
+    color: #ffffff !important;
+    font-weight: 600 !important;
+}
+.uploadNavBar .sapMLink:hover {
+    text-decoration: underline !important;
+}
+.uploadNavBar .uploadHistoryBtn,
+.uploadNavBar .uploadHistoryBtn .sapMBtnInner,
+.uploadNavBar .uploadHistoryBtn .sapMBtnContent,
+.uploadNavBar .uploadHistoryBtn .sapMBtnIcon {
+    color: #ffffff !important;
+    opacity: 1 !important;
+}
+.uploadNavBar .uploadHistoryBtn .sapMBtnInner {
+    border: 1px solid rgba(255, 255, 255, 0.35) !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+}
+.uploadNavBar .sapFAvatar {
+    border: 2px solid rgba(255, 255, 255, 0.5) !important;
+}
+
+.uploadContent {
+    max-width: 1260px;
+    margin: 0 auto;
+    padding: 0 0.875rem 2rem 0.875rem;
+}
+
+/* ── Page Header ── */
+.uploadPageHeader {
+    background: linear-gradient(180deg, #ffffff 0%, #f3f9ff 100%);
+    border: 1px solid #d3e4f5;
+    border-radius: 16px;
+    padding: 1rem 1.2rem;
+    box-shadow: 0 6px 14px rgba(21, 86, 145, 0.09);
+}
+.uploadHeaderIcon {
+    font-size: 1.75rem !important;
+    color: #0070f2 !important;
+}
+.uploadHeaderTitle {
+    font-size: 1.75rem !important;
+    font-weight: 700 !important;
+    color: #1d2d3e !important;
+    letter-spacing: -0.3px;
+}
+.uploadHeaderSub {
+    font-size: 0.93rem !important;
+    color: #3f5f80 !important;
+    line-height: 1.45 !important;
+    margin-top: 0.3rem !important;
+    max-width: 110ch;
+}
+
+/* ════════════════════════════════════════
+   WIZARD PROGRESS BAR
+   ════════════════════════════════════════ */
+.wizardBar {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 1.25rem 2rem !important;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    border: 1px solid #e5e5e6;
+    width: 100%;
+}
+.wizardSteps {
+    gap: 0;
+    width: 100%;
+    max-width: 760px;
+    justify-content: center;
+}
+.wizardStepItem {
+    min-width: 70px;
+}
+
+/* Circle */
+.wCircle {
+    width: 44px;
+    height: 44px;
+    min-height: 44px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 2px solid #d9d9d9;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transition: all 0.3s ease;
+}
+.wCircle.active {
+    border-color: #0070f2;
+    background: #e8f0fe;
+}
+.wCircle.done {
+    border-color: #107e3e;
+    background: #107e3e;
+}
+.wCircleIcon {
+    font-size: 1.1rem !important;
+}
+.wCircle.active .wCircleIcon {
+    color: #0070f2 !important;
+}
+.wCircle.done .wCircleIcon {
+    color: #ffffff !important;
+}
+
+/* Line connector */
+.wLine {
+    height: 2px !important;
+    min-height: 2px !important;
+    max-height: 2px !important;
+    flex: 1;
+    background: #d9d9d9;
+    margin: 0 0.5rem;
+    align-self: center;
+    margin-bottom: 1.5rem;
+    transition: background 0.3s ease;
+}
+.wLine.active {
+    background: #107e3e;
+}
+
+/* Label */
+.wLabel {
+    font-size: 0.7rem !important;
+    font-weight: 600 !important;
+    margin-top: 0.4rem !important;
+    color: #6a6d70 !important;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-align: center;
+}
+.wLabel.active {
+    color: #0070f2 !important;
+}
+.wLabel.done {
+    color: #107e3e !important;
+}
+
+/* ════════════════════════════════════════
+   FIORI CARD
+   ════════════════════════════════════════ */
+.fioriCard {
+    background: #ffffff !important;
+    border: 1px solid #e5e5e6 !important;
+    border-radius: 8px !important;
+    padding: 1.25rem !important;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06) !important;
+}
+
+/* ════════════════════════════════════════
+   UPLOAD DROP ZONE
+   ════════════════════════════════════════ */
+.uploadDropZone {
+    border: 2px dashed #bcc3ca !important;
+    border-radius: 8px !important;
+    padding: 1.25rem 1.5rem !important;
+    background: #fafbfc !important;
+    transition: all 0.2s ease;
+    min-height: 220px !important;
+}
+.uploadDropZone:hover {
+    border-color: #0070f2 !important;
+    background: #e8f0fe !important;
+}
+.uploadDropIcon {
+    font-size: 3rem !important;
+    color: #0070f2 !important;
+    margin-bottom: 1rem !important;
+}
+.uploadDropTitle {
+    font-size: 1.125rem !important;
+    font-weight: 600 !important;
+    color: #32363a !important;
+    margin-bottom: 0.25rem !important;
+}
+.uploadDropSub {
+    font-size: 0.85rem !important;
+    color: #6a6d70 !important;
+    margin-bottom: 1rem !important;
+}
+.fioriUploadSet {
+    width: 100%;
+    max-width: 500px;
+}
+.fioriUploadSet .sapMUCListHeader,
+.fioriUploadSet .sapMListHdr,
+.fioriUploadSet .sapMUCListHeaderCont,
+.fioriUploadSet .sapMUCListHeaderToolbar,
+.fioriUploadSet .sapMUCListSingleUploadButton {
+    display: none !important;
+}
+.fioriUploadSet .sapMUC {
+    border: none !important;
+    background: transparent !important;
+}
+.fioriUploadSet .sapMUCNoDataPage,
+.fioriUploadSet .sapMUCNoDataDescription,
+.fioriUploadSet .sapMUCNoDataText {
+    color: #475569 !important;
+}
+
+.excelPreviewScroll {
+    border: 1px solid #e5e5e6;
+    border-radius: 8px;
+    background: #ffffff;
+}
+
+.csvPreviewTable .sapMListTblHeaderCell,
+.csvPreviewTable .sapMListTblCell {
+    white-space: nowrap !important;
+}
+
+.csvPreviewTable .sapMText,
+.csvPreviewTable .sapMObjStatusText,
+.csvPreviewTable .sapMObjectNumberText,
+.csvPreviewTable .sapMObjectNumberUnit {
+    font-size: 0.78rem !important;
+}
+
+/* ════════════════════════════════════════
+   PREVIEW TABLE
+   ════════════════════════════════════════ */
+.previewToolbar {
+    border-bottom: 1px solid #e5e5e6;
+    padding-bottom: 0.5rem !important;
+    margin-bottom: 0.5rem !important;
+}
+.previewCount {
+    color: #6a6d70 !important;
+    font-size: 0.85rem !important;
+}
+.fioriPreviewTable .sapMListTblHeader {
+    background: #f5f6f7 !important;
+}
+.materialText {
+    font-weight: 600 !important;
+    color: #32363a !important;
+}
+.materialSubText {
+    font-size: 0.75rem !important;
+    color: #6a6d70 !important;
+}
+
+/* ════════════════════════════════════════
+   SIDEBAR PANELS
+   ════════════════════════════════════════ */
+.fioriSidePanel {
+    border-radius: 8px !important;
+    border: 1px solid #e5e5e6 !important;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06) !important;
+}
+.fioriSidePanel .sapMTB,
+.fioriSidePanel .sapMPanelWrappingDivTb {
+    background: linear-gradient(180deg, #fbfdff 0%, #f4f9ff 100%) !important;
+    border-bottom: 1px solid #d7e4f2 !important;
+}
+.fioriSidePanel .sapMPanelContent {
+    padding: 0.7rem 0.85rem !important;
+}
+.fioriSidePanel .sapMToken {
+    background: #f2f7fd !important;
+    border: 1px solid #c8d9eb !important;
+    color: #2f506f !important;
+}
+.fioriSidePanel .sapMPanelHdr {
+    font-weight: 600 !important;
+    color: #32363a !important;
+}
+.reqCheckItem {
+    margin-bottom: 0.6rem !important;
+}
+
+/* Process Flow Steps */
+.processFlow {
+    padding: 0.5rem 0;
+}
+.processStep {
+    padding: 0.25rem 0;
+}
+.processStepCircle {
+    width: 28px;
+    height: 28px;
+    min-width: 28px;
+    border-radius: 50%;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+.processStepCircle.blue  { background: #e8f0fe; }
+.processStepCircle.orange { background: #fef3e0; }
+.processStepCircle.green { background: #e6f4ea; }
+.processStepNum {
+    font-size: 0.75rem !important;
+    font-weight: 700 !important;
+}
+.processStepCircle.blue .processStepNum  { color: #0070f2 !important; }
+.processStepCircle.orange .processStepNum { color: #e76500 !important; }
+.processStepCircle.green .processStepNum { color: #107e3e !important; }
+.processStepTitle {
+    font-size: 0.85rem !important;
+    font-weight: 600 !important;
+    color: #32363a !important;
+}
+.processStepDesc {
+    font-size: 0.75rem !important;
+    color: #6a6d70 !important;
+}
+.processStepLine {
+    width: 2px !important;
+    height: 16px !important;
+    min-height: 16px !important;
+    max-height: 16px !important;
+    background: #d9d9d9;
+    margin-left: 13px;
+}
+
+/* ════════════════════════════════════════
+   RESULT SECTION
+   ════════════════════════════════════════ */
+.resultSection {
+    animation: fadeInUp 0.4s ease-out;
+}
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.resultBanner .sapMMessageStrip {
+    border-radius: 8px !important;
+}
+
+.flowTrackerCard {
+    padding: 1rem 1.1rem 1.1rem 1.1rem !important;
+}
+
+.o2cMonitorShell {
+    background: linear-gradient(180deg, #f7fbff 0%, #f0f7ff 100%) !important;
+    border: 1px solid #d7e4f2 !important;
+    border-radius: 14px !important;
+    box-shadow: 0 8px 18px rgba(38, 83, 126, 0.12) !important;
+}
+
+.o2cMonitorShell .sapMTitle,
+.o2cMonitorShell .sapMText,
+.o2cMonitorShell .sapMObjStatusText {
+    color: #1e3045 !important;
+}
+
+.monitorTopBar {
+    border-bottom: 1px solid #d5e2f0;
+    padding-bottom: 0.6rem;
+    margin-bottom: 0.8rem;
+    gap: 0.75rem;
+}
+
+.monitorTopIcon {
+    color: #1f6fd6 !important;
+    font-size: 1.05rem !important;
+}
+
+.monitorTitle {
+    font-size: 1.02rem !important;
+    font-weight: 700 !important;
+}
+
+.monitorSubTitle {
+    color: #5f738a !important;
+    font-size: 0.78rem !important;
+}
+
+.monitorRunStatus {
+    padding-right: 0.25rem;
+}
+
+.o2cRail {
+    gap: 0.25rem;
+    width: 100%;
+}
+
+.o2cStep {
+    width: 312px;
+    max-width: 100%;
+    min-height: 128px;
+    background: #ffffff;
+    border: 1px solid #d8e3f0;
+    border-radius: 11px;
+    padding: 0.8rem 0.9rem;
+    box-sizing: border-box;
+}
+
+.o2cStepIconWrap {
+    width: 2.25rem;
+    height: 2.25rem;
+    min-width: 2.25rem;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #c2d4e8;
+}
+
+.o2cStepSO .o2cStepIconWrap {
+    background: #eaf3ff;
+}
+
+.o2cStepDL .o2cStepIconWrap {
+    background: #fff2e5;
+}
+
+.o2cStepBL .o2cStepIconWrap {
+    background: #e8f8ee;
+}
+
+.o2cStepIcon {
+    color: #355475 !important;
+    font-size: 0.92rem !important;
+}
+
+.o2cStepPhase {
+    color: #6c8098 !important;
+    font-size: 0.72rem !important;
+    text-transform: uppercase;
+    letter-spacing: 0.55px;
+    font-weight: 600 !important;
+}
+
+.o2cStepName {
+    color: #20364d !important;
+    font-size: 1rem !important;
+    font-weight: 700 !important;
+}
+
+.o2cStepState {
+    margin: 0.15rem 0 0.3rem 0 !important;
+}
+
+.o2cStepMetric {
+    color: #5e738b !important;
+    font-size: 0.8rem !important;
+}
+
+.o2cStepConnector {
+    width: 38px;
+    min-width: 38px;
+    align-self: stretch;
+}
+
+.o2cConnectorIcon {
+    color: #6d84a0 !important;
+    font-size: 0.95rem !important;
+}
+
+/* Summary Cards Row */
+.summaryRow {
+    gap: 0.75rem;
+    align-items: stretch !important;
+}
+.summaryRow > .sapMFlexItem {
+    flex: 1 1 calc(16.66% - 0.75rem) !important;
+    min-width: 190px;
+}
+.summaryCard {
+    background: #ffffff !important;
+    border: 1px solid #e5e5e6 !important;
+    border-radius: 8px !important;
+    padding: 1rem 1.25rem !important;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06) !important;
+    min-width: 0;
+    width: 100% !important;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.monitorSummaryRow .monitorSummaryCard {
+    background: #ffffff !important;
+    border: 1px solid #d9e4f1 !important;
+    box-shadow: 0 4px 12px rgba(25, 70, 118, 0.1) !important;
+}
+
+.monitorSummaryRow .summaryLabel {
+    color: #5f738a !important;
+}
+
+.monitorSummaryRow .summaryValue {
+    color: #1f3349 !important;
+}
+.summaryIcon {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 1.25rem !important;
+}
+.summaryIcon.blue   { background: #e8f0fe; color: #0070f2 !important; }
+.summaryIcon.teal   { background: #e0f5f5; color: #0e8585 !important; }
+.summaryIcon.orange { background: #fef3e0; color: #e76500 !important; }
+.summaryIcon.green  { background: #e6f4ea; color: #107e3e !important; }
+.summaryLabel {
+    font-size: 0.75rem !important;
+    color: #6a6d70 !important;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    font-weight: 500 !important;
+}
+.summaryValue {
+    font-size: 1.75rem !important;
+    font-weight: 700 !important;
+    color: #32363a !important;
+    margin-top: 0.125rem !important;
+}
+
+/* Result Table */
+.fioriResultTable .sapMListTblHeader {
+    background: #f5f6f7 !important;
+}
+
+.resultTableCard {
+    padding: 0.85rem !important;
+}
+
+.monitorTableCard {
+    background: #ffffff !important;
+    border: 1px solid #d9e4f1 !important;
+}
+
+.resultTableViewport {
+    margin-top: 0.55rem;
+    border: 1px solid #d7e4f2;
+    border-radius: 10px;
+    overflow-x: auto;
+    overflow-y: scroll;
+    height: 18rem;
+    min-height: 18rem;
+    max-height: 18rem;
+    background: #ffffff;
+    scrollbar-gutter: stable both-edges;
+    display: block !important;
+}
+
+.resultTableViewport .resultTableGrid {
+    min-width: 1120px;
+    height: max-content !important;
+    display: block !important;
+}
+
+.resultTableViewport .sapMListTbl {
+    width: 100% !important;
+    height: max-content !important;
+    min-height: 0 !important;
+}
+
+.resultTableViewport .sapMTableTBody,
+.resultTableViewport .sapMListTblBody {
+    vertical-align: top !important;
+    height: max-content !important;
+}
+
+/* STOP ROWS FROM INFLATING TO FILL 100% HEIGHT */
+.monitorResultTable,
+.monitorResultTable .sapMList,
+.monitorResultTable .sapMListUl,
+.monitorResultTable table,
+.monitorResultTable .sapMListTbl {
+    height: max-content !important;
+    min-height: 0 !important;
+    flex-grow: 0 !important;
+}
+
+.monitorTableToolbar {
+    background: transparent !important;
+    border-bottom: 1px solid #d8e4f1;
+    gap: 0.4rem;
+}
+
+.monitorTableToolbar.sapMOTB {
+    min-height: 3.15rem !important;
+    height: auto !important;
+    padding: 0.26rem 0 !important;
+}
+
+.monitorTableToolbar.sapMOTB .sapMBarChild {
+    min-height: 2.28rem !important;
+    align-items: center !important;
+    overflow: visible !important;
+}
+
+.monitorTableToolbar .sapMBarChild,
+.monitorTableToolbar .sapMTitle {
+    min-width: 0;
+}
+
+.monitorTableToolbar .sapMTitle,
+.monitorTableToolbar .sapMLabel {
+    color: #1e3248 !important;
+}
+
+.monitorResultTable .sapMListTblHeader {
+    background: #f4f8fc !important;
+}
+
+.monitorResultTable .sapMTableTH {
+    border-bottom-color: #d6e3f1 !important;
+}
+
+.monitorResultTable .sapMColumnHeader .sapMText,
+.monitorResultTable .sapMListTblCell .sapMText,
+.monitorResultTable .sapMObjNumber,
+.monitorResultTable .sapMObjStatusText {
+    color: #1f3348 !important;
+}
+
+.monitorResultTable .sapMListTblCell,
+.monitorResultTable td.sapMListTblCell {
+    border-bottom: 1px solid #e1ebf5 !important;
+    background: #ffffff !important;
+    vertical-align: middle !important;
+    height: 2.25rem !important;
+    padding: 0.2rem 0.5rem !important;
+    box-sizing: border-box !important;
+}
+
+.monitorResultTable .sapMListTblRow,
+.monitorResultTable tr.sapMListTblRow {
+    height: 2.25rem !important;
+}
+
+.monitorResultTable .sapMLIBAlternatingRowColors:nth-child(even) .sapMListTblCell,
+.monitorResultTable .sapMLIBAlternatingRowColors:nth-child(even) td.sapMListTblCell {
+    background: #f8fbff !important;
+}
+
+.monitorResultTable .docNumber {
+    color: #1f3348 !important;
+}
+
+.monitorResultTable .materialSubText {
+    color: #68809b !important;
+}
+
+.quotationCellWrap {
+    width: 100%;
+    gap: 0.15rem;
+}
+
+.quotationExpandBtn.sapMBtn {
+    min-width: 1.55rem !important;
+}
+
+.quotationExpandBtn .sapMBtnInner {
+    min-width: 1.55rem !important;
+    width: 1.55rem !important;
+    height: 1.55rem !important;
+    border: none !important;
+    background: transparent !important;
+    padding: 0 !important;
+}
+
+.quotationExpandBtn .sapMBtnIcon {
+    color: #2f6fb1 !important;
+    font-size: 0.85rem !important;
+}
+
+.quotationChildIcon {
+    color: #7a92ac !important;
+    font-size: 0.82rem !important;
+    margin-left: 0.15rem !important;
+}
+
+.quotationTextBlock {
+    min-width: 0;
+}
+
+.quotationParentText {
+    font-weight: 700 !important;
+    color: #1d3650 !important;
+}
+
+.quotationChildText {
+    padding-left: 0.2rem;
+}
+
+.resultSearchField.sapMSF {
+    width: clamp(12rem, 22vw, 16rem) !important;
+}
+
+.monitorTableToolbar .resultSearchField.sapMSF .sapMSFF,
+.monitorTableToolbar .resultSearchField.sapMSF .sapMSFI {
+    background: #ffffff !important;
+    border-color: #b8cce0 !important;
+    color: #1e3349 !important;
+}
+
+.monitorTableToolbar .resultSearchField.sapMSF .sapMSFI::placeholder {
+    color: #7b93ad !important;
+}
+
+.resultStatusSwitch.sapMSegB {
+    width: clamp(16rem, 30vw, 22rem);
+    max-width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.resultStatusSwitch.sapMSegB,
+.resultStatusSwitch .sapMSegBBtns,
+.resultStatusSwitch .sapMSegBBtn {
+    min-height: 2.15rem;
+}
+
+.monitorTableToolbar .resultStatusSwitch .sapMSegBBtnInner {
+    background: #f3f8fd !important;
+    border-color: #b9cde2 !important;
+    color: #254362 !important;
+}
+
+.monitorTableToolbar .resultStatusSwitch .sapMSegBBtnSel .sapMSegBBtnInner {
+    background: linear-gradient(180deg, #2f7fcb 0%, #266db2 100%) !important;
+    color: #ffffff !important;
+}
+
+.resultStatusSwitch .sapMSegBBtns {
+    display: flex !important;
+}
+
+.resultStatusSwitch .sapMSegBBtn {
+    flex: 1 1 25%;
+    min-width: 0 !important;
+}
+
+.resultStatusSwitch .sapMSegBBtnInner {
+    font-size: 0.76rem !important;
+    padding: 0 0.34rem !important;
+    white-space: nowrap !important;
+    line-height: 2.05rem !important;
+    height: 2.1rem !important;
+    box-sizing: border-box !important;
+}
+
+.resultDocStatus {
+    min-width: 7.8rem;
+}
+
+.resultDocStatus .sapMObjStatusText {
+    white-space: nowrap !important;
+}
+
+.monitorResultTable .sapMListTbl,
+.monitorResultTable .sapMListTblBody {
+    height: max-content !important;
+    min-height: 0 !important;
+}
+
+.monitorResultTable .sapMListTblBody > .sapMListTblRow {
+    height: 3.25rem !important;
+    min-height: 3.25rem !important;
+    max-height: 3.25rem !important;
+}
+
+.monitorResultTable .sapMListTblRow .sapMListTblCell {
+    height: 3.25rem !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+.monitorResultTable .batchIdText,
+.monitorResultTable .flowStageText {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap !important;
+    display: block;
+}
+
+.resultTableCard .sapMTableTBody .sapMLIB {
+    transition: background-color 0.18s ease;
+}
+
+.resultTableCard .sapMTableTBody .sapMLIB:hover {
+    background-color: #f8fafd !important;
+}
+.docIcon {
+    font-size: 0.875rem !important;
+    margin-right: 0.375rem !important;
+}
+.docNumber {
+    font-family: "72Mono", "72Monofull", monospace !important;
+    font-size: 0.85rem !important;
+    font-weight: 600 !important;
+    color: #32363a !important;
+}
+
+/* Timestamp */
+.resultTimestamp {
+    font-size: 0.8rem !important;
+    color: #6a6d70 !important;
+    font-style: italic;
+}
+
+/* ════════════════════════════════════════
+   JSON UPLOAD STYLING  (redesigned)
+   ════════════════════════════════════════ */
+
+/* ── Tab Bar ── */
+.uploadTabBar {
+    background: linear-gradient(180deg, #ffffff 0%, #f6fbff 100%);
+    border-radius: 12px;
+    padding: 0.85rem 1.5rem !important;
+    box-shadow: 0 4px 10px rgba(24, 73, 121, 0.08);
+    border: 1px solid #d8e5f3;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100%;
+}
+.uploadTabBar .uploadModeSwitch.sapMSegB {
+    width: 100%;
+    max-width: 440px;
+    margin: 0 auto;
+}
+.uploadTabBar .uploadModeSwitch .sapMSegBBtns {
+    display: flex !important;
+    width: 100%;
+}
+.uploadTabBar .uploadModeSwitch .sapMSegBBtn {
+    min-width: 0 !important;
+    flex: 1 1 50%;
+}
+.uploadTabBar .uploadModeSwitch .sapMSegBBtnInner {
+    padding: 0.52rem 1.3rem !important;
+    font-size: 0.95rem !important;
+    font-weight: 600 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 0.4rem;
+    min-height: 2.2rem;
+}
+
+.historySectionCard {
+    background: #ffffff !important;
+    border: 1px solid #e5e5e6 !important;
+    border-radius: 10px !important;
+    padding: 0.75rem !important;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06) !important;
+}
+
+.historyTableViewport {
+    margin-top: 0.35rem;
+    border: 1px solid #d6e4f2;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #ffffff;
+}
+
+.historyTableScroller {
+    width: 100%;
+}
+
+.historyWideTable {
+    min-width: 116rem;
+}
+
+.historyWideTable .sapMListTblHeaderCell,
+.historyWideTable .sapMListTblCell {
+    white-space: nowrap !important;
+}
+
+/* ── Two-column flex layout ── */
+.jsonMainLayout {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 1rem !important;
+    align-items: stretch !important;
+    width: 100%;
+}
+
+.jsonMainLayout > .sapMFlexItem {
+    flex: 1 1 calc(50% - 0.5rem) !important;
+    min-width: 0 !important;
+}
+
+.jsonMainLayout > .sapMFlexItem:first-child {
+    flex: 1 1 540px !important;
+    max-width: 760px;
+}
+
+.jsonMainLayout > .sapMFlexItem:last-child {
+    flex: 1 1 500px !important;
+}
+
+/* ── JSON Editor column (flexible, fills space) ── */
+.jsonEditorCard {
+    min-width: 0 !important;
+    max-width: 760px;
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    min-height: clamp(460px, 54vh, 690px);
+}
+
+/* override any padding that squeezes the textarea */
+.jsonEditorCard.fioriCard {
+    padding: 0 !important;
+    overflow: hidden !important;
+}
+
+.jsonDefaultsPanel {
+    padding: 0.65rem 0.9rem 0.4rem 0.9rem;
+    border-top: 1px solid #e3edf7;
+    border-bottom: 1px solid #e3edf7;
+    background: linear-gradient(180deg, #f8fbff 0%, #f3f8ff 100%);
+}
+
+.excelDefaultsPanel {
+    padding: 0.65rem 0.9rem 0.45rem 0.9rem;
+    border: 1px solid #dce9f7;
+    border-radius: 10px;
+    background: linear-gradient(180deg, #fbfdff 0%, #f4f9ff 100%);
+}
+
+.jsonDefaultsTitle {
+    color: #274a6d !important;
+    font-size: 0.9rem !important;
+    margin-bottom: 0.4rem !important;
+}
+
+.jsonDefaultsGrid {
+    gap: 0.55rem;
+}
+
+.jsonDefaultField {
+    flex: 1 1 calc(33.33% - 0.55rem);
+    min-width: 220px;
+}
+
+.jsonDefaultField .sapMLabel {
+    color: #496887 !important;
+    font-size: 0.75rem !important;
+    margin-bottom: 0.15rem !important;
+}
+
+.jsonDefaultField .sapMInputBaseContentWrapper {
+    border-color: #b8cee5 !important;
+    background: #ffffff !important;
+}
+
+.jsonDefaultField .sapMInputBaseInner {
+    color: #1f3955 !important;
+    font-weight: 600 !important;
+    font-size: 0.88rem !important;
+}
+
+/* ── Sidebar column (fixed width) ── */
+.jsonSidebarWrapper {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    justify-self: stretch;
+}
+
+/* ── Editor toolbar ── */
+.jsonEditorToolbar {
+    background: #f5f6f7 !important;
+    border-bottom: 1px solid #e5e5e6 !important;
+    padding: 0 1rem !important;
+    min-height: 2.75rem !important;
+    flex-shrink: 0;
+}
+.jsonEditorToolbar .sapMTitle {
+    color: #1d2d3e !important;
+    font-weight: 600 !important;
+    font-size: 0.95rem !important;
+}
+
+/* ── JSON TextArea — full-width, light theme ── */
+.jsonEditorTextArea {
+    width: 100% !important;
+    box-sizing: border-box !important;
+    font-family: "72Mono", "Consolas", "Courier New", monospace !important;
+    font-size: 0.875rem !important;
+    line-height: 1.6 !important;
+    background: #ffffff !important;
+    color: #1d2d3e !important;
+    padding: 0.875rem 1rem !important;
+    border: none !important;
+    border-top: none !important;
+    border-radius: 0 !important;
+    resize: vertical !important;
+    min-height: clamp(340px, 44vh, 560px) !important;
+    flex: 1;
+}
+/* SAPUI5 inner textarea element */
+.jsonEditorTextArea textarea,
+.jsonEditorTextArea .sapMTextAreaInner {
+    font-family: "72Mono", "Consolas", "Courier New", monospace !important;
+    font-size: 0.875rem !important;
+    line-height: 1.6 !important;
+    background: #ffffff !important;
+    color: #1d2d3e !important;
+    padding: 0.875rem 1rem !important;
+    border: none !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    min-height: clamp(340px, 44vh, 560px) !important;
+    resize: vertical !important;
+}
+.jsonEditorTextArea .sapMTextAreaInner:focus,
+.jsonEditorTextArea textarea:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+/* SAPUI5 TextArea wrapper override */
+.jsonEditorTextArea.sapMTextArea {
+    width: 100% !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+}
+.jsonEditorTextArea .sapMTextAreaInner::placeholder,
+.jsonEditorTextArea textarea::placeholder {
+    color: #8a9199 !important;
+    font-style: italic !important;
+    font-family: "72", "72full", Arial, Helvetica, sans-serif !important;
+    font-size: 0.875rem !important;
+}
+
+/* Border between textarea and action bar */
+.jsonEditorActions {
+    border-top: 1px solid #e5e5e6 !important;
+    background: #fafbfc !important;
+    padding: 0.625rem 1rem !important;
+    flex-shrink: 0;
+    gap: 0.75rem;
+}
+.jsonEditorActions > .sapMFlexItem:first-child {
+    flex: 0 0 auto;
+}
+.jsonEditorActions > .sapMFlexItem:last-child {
+    flex: 1 1 380px;
+    min-width: 260px;
+}
+
+/* Inline validation message strip */
+.jsonValidationStrip {
+    width: 100%;
+    margin-left: 0 !important;
+    margin-top: 0 !important;
+    max-width: 100%;
+}
+.jsonValidationStrip.sapMMessageStrip {
+    border-radius: 6px !important;
+    margin: 0 !important;
+}
+
+/* ── JSON Feature Items ── */
+.jsonFeatureItem {
+    padding: 0.45rem 0 !important;
+    border-bottom: 1px solid #f0f0f0 !important;
+}
+.jsonFeatureItem:last-child {
+    border-bottom: none !important;
+}
+.jsonFeatureItem .sapMText {
+    font-size: 0.85rem !important;
+    color: #32363a !important;
+    line-height: 1.35;
+}
+
+/* ════════════════════════════════════════
+   QUOTATION DETAIL DIALOG
+   ════════════════════════════════════════ */
+.quotationDialogContent {
+    gap: 0.9rem;
+}
+
+.quotationSectionPanel {
+    border: 1px solid #d7e3f0 !important;
+    border-radius: 14px !important;
+    background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%) !important;
+    box-shadow: 0 8px 18px rgba(28, 74, 120, 0.08) !important;
+    margin-bottom: 0.1rem !important;
+}
+
+.quotationSectionPanel .sapMPanelHdr {
+    padding: 0.95rem 1.05rem !important;
+}
+
+.quotationSectionPanel .sapMPanelHdr .sapMTitle {
+    font-size: 1.05rem !important;
+    font-weight: 700 !important;
+    color: #1f3a57 !important;
+}
+
+.quotationSectionPanel .sapMPanelContent {
+    padding: 1.1rem 1.05rem 1.05rem !important;
+}
+
+.quotationHeroPanel .sapMPanelContent {
+    padding-top: 1.1rem !important;
+}
+
+.quotationHeroLayout {
+    gap: 1rem;
+}
+
+.quotationHeroMain {
+    flex: 1 1 58%;
+    min-width: 320px;
+    gap: 0.35rem;
+}
+
+.quotationHeroAside {
+    flex: 0 1 34rem;
+    min-width: 300px;
+    gap: 0.85rem;
+    align-items: flex-end;
+}
+
+.quotationSectionEyebrow {
+    color: #6b8196 !important;
+    font-size: 0.72rem !important;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 700 !important;
+}
+
+.quotationDialogTitle {
+    color: #17324d !important;
+    font-weight: 800 !important;
+    font-size: 2rem !important;
+    letter-spacing: -0.03em;
+}
+
+.quotationHeroLine {
+    color: #415c79 !important;
+    font-size: 0.92rem !important;
+    line-height: 1.45 !important;
+}
+
+.quotationStatusChip {
+    align-self: flex-end;
+}
+
+.quotationStatusChip .sapMObjStatusText {
+    font-weight: 700 !important;
+}
+
+.quotationStatRow {
+    gap: 0.7rem;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.quotationStatRow > .sapMFlexItem {
+    flex: 1 1 calc(33.33% - 0.7rem);
+    min-width: 8.25rem;
+}
+
+.quotationStatTile {
+    min-height: 5.6rem;
+    padding: 0.85rem 0.95rem;
+    border-radius: 12px;
+    border: 1px solid #d6e3ef;
+    background: linear-gradient(180deg, #ffffff 0%, #f4f8fc 100%);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    justify-content: center;
+    gap: 0.22rem;
+}
+
+.quotationStatTile--items { border-left: 4px solid #1f6fd6; }
+.quotationStatTile--net { border-left: 4px solid #0f8a73; }
+.quotationStatTile--tax { border-left: 4px solid #2c87a3; }
+.quotationStatTile--gross { border-left: 4px solid #e06a00; }
+
+.quotationStatLabel {
+    color: #68809b !important;
+    font-size: 0.73rem !important;
+    font-weight: 700 !important;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.quotationStatValue {
+    color: #19324d !important;
+    font-size: 1rem !important;
+    font-weight: 800 !important;
+    line-height: 1.35;
+}
+
+.quotationFactsPanel .sapMPanelHdr,
+.quotationItemsPanel .sapMPanelHdr {
+    background: linear-gradient(180deg, #f9fcff 0%, #eff6fd 100%) !important;
+    border-bottom: 1px solid #d8e6f3 !important;
+}
+
+.quotationInfoGrid {
+    gap: 0.8rem;
+}
+
+.quotationTermsGrid {
+    margin-bottom: 0.65rem;
+}
+
+.quotationInfoGrid > .sapMFlexItem {
+    flex: 1 1 calc(33.33% - 0.8rem);
+    min-width: 18.5rem;
+}
+
+.quotationInfoTile {
+    min-height: 7.25rem;
+    padding: 0.85rem 0.95rem;
+    border-radius: 12px;
+    border: 1px solid #d8e4f1;
+    background: #ffffff;
+    box-shadow: 0 3px 12px rgba(28, 74, 120, 0.06);
+    gap: 0.3rem;
+}
+
+.quotationInfoTile--request { border-left: 4px solid #4d8cdf; }
+.quotationInfoTile--customer { border-left: 4px solid #7a5cd6; }
+.quotationInfoTile--financial { border-left: 4px solid #0f8a73; }
+.quotationInfoTile--process { border-left: 4px solid #e07a00; }
+.quotationInfoTile--document { border-left: 4px solid #1f6fd6; }
+.quotationInfoTile--audit { border-left: 4px solid #8a96a8; }
+
+.quotationInfoLabel {
+    color: #6a8096 !important;
+    font-size: 0.72rem !important;
+    font-weight: 700 !important;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+}
+
+.quotationInfoValue {
+    color: #1e3349 !important;
+    font-size: 0.88rem !important;
+    line-height: 1.5 !important;
+    white-space: pre-line;
+}
+
+.quotationMutedText {
+    color: #5f738a !important;
+    font-size: 0.82rem !important;
+}
+
+.quotationMessageStrip {
+    border-radius: 12px !important;
+    border: 1px solid #cfe0f1 !important;
+    background: linear-gradient(180deg, #f8fbff 0%, #eef6ff 100%) !important;
+}
+
+.quotationDialogTableViewport {
+    margin-top: 0.2rem;
+    max-height: 28rem;
+    overflow: auto;
+    border-radius: 12px;
+}
+
+.quotationDialogTableViewport .sapMListTblHeader {
+    background: #f4f8fc !important;
+    font-weight: 700 !important;
+    font-size: 0.9rem !important;
+    color: #1f3a57 !important;
+}
+
+.quotationDialogTableViewport .sapMListTblHeaderCell {
+    padding: 0.75rem 0.5rem !important;
+    border-bottom: 2px solid #d3e4f5 !important;
+}
+
+.quotationDialogTableViewport .sapMListTblRow {
+    height: auto !important;
+}
+
+.quotationDialogTableViewport .sapMListTblCell {
+    padding: 0.65rem 0.5rem !important;
+    font-size: 0.88rem !important;
+    line-height: 1.4 !important;
+    color: #2d3e52 !important;
+}
+
+.quotationDialogTableViewport .sapMListTblCell .sapMText {
+    font-size: 0.88rem !important;
+    line-height: 1.4 !important;
+    color: #2d3e52 !important;
+}
+
+.quotationDialogTableViewport .sapMListTblCell .sapMObjNumber {
+    font-size: 0.88rem !important;
+    line-height: 1.4 !important;
+}
+
+.quotationDialogTableViewport .sapMListTblRow:hover {
+    background-color: #f0f5fb !important;
+    transition: background-color 0.2s ease;
+}
+
+/* ── Payment/Incoterm Section ── */
+.quotationPaymentSection {
+    margin-bottom: 1.2rem;
+}
+
+.quotationPaymentSection .sapMTitle {
+    font-size: 0.95rem !important;
+    font-weight: 700 !important;
+    color: #1f3a57 !important;
+    margin-bottom: 0.55rem !important;
+}
+
+.quotationTermsGridNew {
+    gap: 1rem;
+    justify-content: flex-start;
+    align-items: stretch;
+}
+
+.quotationTermsGridNew > .sapMFlexItem {
+    flex: 1 1 calc(50% - 0.5rem);
+    min-width: 15rem;
+    max-width: 24rem;
+}
+
+.quotationTermCardNew {
+    min-height: 6.5rem;
+    padding: 1.1rem;
+    border-radius: 14px;
+    border: 1.5px solid #d6e3ef;
+    background: linear-gradient(135deg, #ffffff 0%, #f8fbff 100%);
+    box-shadow: 0 4px 14px rgba(28, 74, 120, 0.08);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.4rem;
+    transition: all 0.3s ease;
+}
+
+.quotationTermCardNew:hover {
+    border-color: #b5cce8;
+    box-shadow: 0 6px 18px rgba(28, 74, 120, 0.12);
+}
+
+.quotationTermCardNew--payment { 
+    border-left: 5px solid #0f8a73;
+}
+
+.quotationTermCardNew--incoterm { 
+    border-left: 5px solid #1f6fd6;
+}
+
+.quotationTermCardLabel {
+    color: #6a8096 !important;
+    font-size: 0.75rem !important;
+    font-weight: 800 !important;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    margin-bottom: 0.2rem !important;
+}
+
+.quotationTermCardValue {
+    color: #1e3349 !important;
+    font-size: 1.05rem !important;
+    font-weight: 700 !important;
+    line-height: 1.5 !important;
+    word-break: break-word;
+}
+
+.quotationDialogTableViewport .sapMListTblCell {
+    white-space: nowrap;
+    border-bottom-color: #e2ebf4 !important;
+}
+
+.quotationDialogTableViewport .sapMListTblBody > .sapMListTblRow {
+    height: 2.7rem !important;
+}
+
+.quotationDialogTableViewport .sapMText {
+    font-size: 0.8rem !important;
+}
+
+.quotationAmountText {
+    font-weight: 600 !important;
+    color: #1f3a57 !important;
+}
+
+.quotationDialogContent .sapMObjectIdentifierTitle {
+    font-size: 1.1rem !important;
+    color: #1f3a57 !important;
+    font-weight: 700 !important;
+}
+
+.quotationDialogContent .sapMObjectIdentifierText {
+    color: #58728b !important;
+    font-size: 0.82rem !important;
+}
+
+.quotationDialogContent .sapMPanelExpandableIcon {
+    color: #316faa !important;
+}
+
+.quotationPanel .sapMPanelHdr,
+.quotationPanel .sapMTB {
+    background: #f8fbff !important;
+    border-bottom: 1px solid #deebf8 !important;
+}
+
+.quotationPanel .sapMPanelContent {
+    padding: 0.5rem 0.75rem 0.75rem !important;
+}
+
+.quotationTableViewport {
+    margin-top: 0.2rem;
+    border: 1px solid #d5e4f2;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #ffffff;
+}
+
+.quotationTableScroll {
+    width: 100%;
+}
+
+.quotationExcelTable {
+    min-width: 84rem;
+}
+
+.quotationExcelTable .sapMListTblHeader {
+    background: #f4f8fc !important;
+}
+
+.quotationExcelTable .sapMListTblHeaderCell,
+.quotationExcelTable .sapMListTblCell {
+    white-space: nowrap !important;
+}
+
+.quotationExcelTable .sapMListTblCell {
+    border-bottom: 1px solid #e1ebf6 !important;
+}
+
+.quotationExcelTable .sapMText,
+.quotationExcelTable .sapMObjStatusText,
+.quotationExcelTable .sapMObjectNumberText,
+.quotationExcelTable .sapMObjectNumberUnit {
+    font-size: 0.79rem !important;
+}
+
+.quotationEmptyState {
+    min-height: 168px;
+    border: 1px dashed #ccdcf0;
+    border-radius: 8px;
+    background: #fbfdff;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center;
+    padding: 1rem;
+}
+
+.quotationEmptyIcon {
+    color: #6a8bad !important;
+    font-size: 1.4rem !important;
+}
+
+.quotationEmptyTitle {
+    color: #244260 !important;
+    font-weight: 600 !important;
+}
+
+.quotationEmptyText {
+    color: #68809b !important;
+    font-size: 0.82rem !important;
+    line-height: 1.45;
+}
+
+.quotationList {
+    max-height: 340px;
+    overflow-y: auto;
+}
+
+.quotationList .sapMLIB {
+    border-bottom: 1px solid #edf2f8 !important;
+    background: #ffffff !important;
+}
+
+.quotationList .sapMLIB:last-child {
+    border-bottom: none !important;
+}
+
+.quotationItemPanel {
+    border: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+}
+
+.quotationItemPanel .sapMPanelHdr,
+.quotationItemPanel .sapMTB {
+    background: #ffffff !important;
+    border: none !important;
+    min-height: 2.6rem !important;
+}
+
+.quotationItemPanel .sapMPanelExpandablePart {
+    border-top: 1px dashed #dbe7f5;
+    margin-top: 0.2rem;
+    padding-top: 0.35rem;
+}
+
+.quotationItemToolbar {
+    padding: 0.2rem 0 !important;
+}
+
+.quotationSummaryBox {
+    min-width: 0;
+}
+
+.quotationSummaryMeta {
+    font-size: 0.79rem !important;
+    color: #5f7894 !important;
+    line-height: 1.3;
+    margin-top: 0.06rem;
+}
+
+.quotationQty {
+    margin-left: 0.6rem;
+}
+
+.quotationDetailBox {
+    padding: 0.1rem 0 0.15rem;
+}
+
+.quotationMaterial {
+    font-weight: 600 !important;
+    color: #1f3348 !important;
+}
+
+.quotationMeta {
+    font-size: 0.78rem !important;
+    color: #68809b !important;
+    line-height: 1.35;
+    margin-top: 0.08rem;
+}
+
+@media (max-width: 1280px) {
+    .jsonMainLayout > .sapMFlexItem {
+        flex: 1 1 100% !important;
+    }
+    .jsonEditorCard {
+        max-width: 100% !important;
+    }
+    
+    /* ENFORCE STRICT TABLE HEIGHTS ON HD (1280px) TO PREVENT ROW STRETCHING */
+    .monitorResultTable,
+    .monitorResultTable table,
+    .monitorResultTable .sapMListTbl,
+    .resultTableViewport .sapMListTbl {
+        height: max-content !important;
+        flex-grow: 0 !important;
+    }
+    .monitorResultTable tr.sapMListTblRow {
+        height: 2.25rem !important;
+    }
+    .monitorResultTable td.sapMListTblCell {
+        height: 2.25rem !important;
+        padding: 0.2rem 0.5rem !important;
+    }
+}
+
+.jsonPreviewCard {
+    margin-top: 1rem !important;
+}
+
+.jsonPreviewCard .sapMTableTH {
+    background: #f5f7fa !important;
+}
+
+/* ── JSON Format Preview (read-only textarea) ── */
+.jsonSampleLabel {
+    font-size: 0.8rem !important;
+    color: #6a6d70 !important;
+}
+.jsonFormatPreview {
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+.jsonFormatPreview textarea,
+.jsonFormatPreview .sapMTextAreaInner {
+    font-family: "72Mono", "Consolas", "Courier New", monospace !important;
+    font-size: 0.8rem !important;
+    line-height: 1.5 !important;
+    background: #f7fafd !important;
+    color: #1f3348 !important;
+    padding: 0.75rem !important;
+    border: 1px solid #d7e3f1 !important;
+    border-radius: 6px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    resize: none !important;
+}
+
+/* ── JSON Format Edit Dialog ── */
+.jsonFormatEditArea textarea,
+.jsonFormatEditArea .sapMTextAreaInner {
+    font-family: "72Mono", "Consolas", "Courier New", monospace !important;
+    font-size: 0.85rem !important;
+    line-height: 1.5 !important;
+    background: #fafbfc !important;
+    color: #1d2d3e !important;
+    padding: 0.75rem !important;
+    border: 1px solid #e5e5e6 !important;
+    border-radius: 6px !important;
+}
+
+/* ── Large desktop tuning (Full HD and above) ── */
+@media (min-width: 1600px) {
+    .uploadContent {
+        max-width: 1540px;
+        padding: 0 1.25rem 2.25rem 1.25rem;
+    }
+    .uploadHeaderTitle {
+        font-size: 1.9rem !important;
+    }
+    .wizardSteps {
+        max-width: 900px;
+    }
+    .summaryRow > .sapMFlexItem {
+        flex: 1 1 calc(20% - 0.75rem) !important;
+        min-width: 185px;
+    }
+}
+
+@media (min-width: 1900px) {
+    .uploadContent {
+        max-width: 1760px;
+        padding: 0 1.5rem 2.5rem 1.5rem;
+    }
+    .jsonEditorCard {
+        min-height: 760px;
+    }
+    .jsonEditorTextArea,
+    .jsonEditorTextArea textarea,
+    .jsonEditorTextArea .sapMTextAreaInner {
+        min-height: 620px !important;
+    }
+    .quotationTableScroll {
+        height: 28rem !important;
+    }
+}
+
+@media (min-width: 1900px) and (min-height: 1500px) {
+    .jsonEditorCard {
+        min-height: 920px;
+    }
+    .jsonEditorTextArea,
+    .jsonEditorTextArea textarea,
+    .jsonEditorTextArea .sapMTextAreaInner {
+        min-height: 760px !important;
+    }
+    .quotationTableScroll {
+        height: 34rem !important;
+    }
+}
+
+/* ── Responsive: stack columns on small screens ── */
+@media (max-width: 1024px) {
+        .uploadNavBar .sapMBarMiddle {
+            max-width: 58vw;
+        }
+    .uploadNavBar {
+        height: 3rem !important;
+    }
+    .uploadNavBar .sapMBarChild {
+        height: 3rem !important;
+    }
+    .uploadNavBar .sapMTitle {
+        font-size: 1.02rem !important;
+    }
+    .uploadNavUserBox .uploadHistoryBtn .sapMBtnContent {
+        display: none !important;
+    }
+    .uploadNavUserBox .uploadHistoryBtn .sapMBtnInner {
+        min-width: 2.2rem !important;
+        padding: 0 0.4rem !important;
+    }
+    .uploadNavUserBox .sapMText,
+    .uploadNavUserBox .sapMLink {
+        display: none !important;
+    }
+    .jsonMainLayout {
+        display: flex !important;
+        flex-direction: column !important;
+    }
+    .jsonMainLayout > .sapMFlexItem {
+        flex: 1 1 100% !important;
+    }
+    .jsonSidebarWrapper {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+    }
+    .summaryRow > .sapMFlexItem {
+        flex: 1 1 calc(33.33% - 0.75rem) !important;
+        min-width: 180px;
+    }
+    .o2cStep {
+        width: 100%;
+    }
+    .o2cStepConnector {
+        width: 100%;
+        min-width: 100%;
+        height: 14px;
+    }
+    .o2cConnectorIcon {
+        transform: rotate(90deg);
+    }
+}
+
+@media (max-width: 760px) {
+        .uploadNavBar .sapMBarMiddle {
+            max-width: 70vw;
+        }
+    .uploadNavBar .sapMTitle {
+        font-size: 0.95rem !important;
+        max-width: 62vw !important;
+    }
+    .uploadNavUserBox .uploadHistoryBtn {
+        display: none !important;
+    }
+    .uploadContent {
+        padding: 0 0.25rem 1.25rem 0.25rem;
+    }
+    .uploadTabBar {
+        padding: 0.5rem !important;
+    }
+    .uploadTabBar .uploadModeSwitch.sapMSegB {
+        max-width: 100%;
+    }
+    .uploadTabBar .uploadModeSwitch .sapMSegBBtnInner {
+        padding: 0.5rem 0.5rem !important;
+        font-size: 0.85rem !important;
+    }
+    .wizardBar {
+        padding: 0.9rem 0.7rem !important;
+    }
+    .wLabel {
+        font-size: 0.65rem !important;
+    }
+    .jsonEditorCard {
+        min-height: 560px;
+    }
+    .monitorTopBar {
+        align-items: flex-start !important;
+    }
+    .o2cStep {
+        min-height: 118px;
+    }
+    .o2cStepName {
+        font-size: 0.92rem !important;
+    }
+    .jsonEditorActions {
+        padding: 0.75rem !important;
+    }
+    .summaryRow > .sapMFlexItem {
+        flex: 1 1 calc(50% - 0.75rem) !important;
+        min-width: 145px;
+    }
+    .summaryLabel {
+        font-size: 0.7rem !important;
+    }
+    .summaryValue {
+        font-size: 1.4rem !important;
+    }
+    .resultSearchField.sapMSF {
+        width: 11rem !important;
+    }
+    .resultStatusSwitch.sapMSegB {
+        width: 100%;
+        min-width: 0;
+        min-height: 1.9rem;
+    }
+    .resultStatusSwitch .sapMSegBBtnInner {
+        font-size: 0.68rem !important;
+        line-height: 1.8rem !important;
+        height: 1.85rem !important;
+        padding: 0 0.2rem !important;
+    }
+    .monitorTableCard {
+        padding: 0.75rem !important;
+    }
+    .resultTableViewport {
+        height: 15.5rem;
+        min-height: 15.5rem;
+        max-height: 15.5rem;
+    }
+}

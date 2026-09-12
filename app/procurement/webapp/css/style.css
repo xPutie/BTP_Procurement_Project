@@ -1,0 +1,4406 @@
+/* ============================================================
+   SAP BTP PROCUREMENT - MASTER DESIGN SYSTEM (FINAL FIX)
+   ============================================================ */
+
+:root {
+  --bg-light: hsl(210, 20%, 98%);
+  --sap-blue: #0070f2;
+  --cyber-navy: rgba(15, 23, 42, 0.95);
+  --cyber-cyan: #00f2ff;
+  --text-muted: #94a3b8;
+}
+
+/* --- GLOBAL SETTINGS --- */
+.sapMPageContent {
+  padding: 0 !important;
+}
+.mainContainer {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ============================================================
+   SECTION A: LIGHT ENTERPRISE (LANDING & UPLOAD)
+   ============================================================ */
+.landingPage,
+.uploadPage {
+  background-color: var(--bg-light) !important;
+  background-image: none !important;
+}
+.lan_hero {
+  background: linear-gradient(180deg, #e0f2fe 0%, #ffffff 100%) !important;
+  padding: 10rem 0 !important;
+}
+.lan_heroTitle {
+  color: #1d2d3e !important;
+  font-size: 4.5rem !important;
+  font-weight: 950 !important;
+  letter-spacing: -3px !important;
+}
+
+/* ============================================================
+   SECTION B: CYBER DARK (LOGIN & REGISTER)
+   ============================================================ */
+
+/* 1. LAYOUT CHIA ÄÃ”I */
+.splitLayout {
+  height: 100vh !important;
+  display: flex !important;
+}
+.loginHeroSide {
+  flex: 1.5 !important;
+  background:
+    linear-gradient(rgba(0, 8, 20, 0.4), rgba(0, 8, 20, 0.7)),
+    url("bg_login_final.jpg") !important;
+}
+.loginFormSide {
+  flex: 1 !important;
+  background: #020617 !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ============================================================
+   SIMPLE SAP-STYLE LOGIN (LOCAL + BTP)
+   ============================================================ */
+
+.sapSimpleLoginPage .sapMPageCont {
+  background: radial-gradient(circle at 20% 20%, #dbe9f6 0%, #cddfed 35%, #bdd1e1 60%, #a9bfd3 100%) !important;
+}
+
+.sapSimpleLoginViewport {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+}
+
+.sapSimpleLoginTopBar {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 0;
+}
+
+.sapSimpleLogo {
+  display: inline-block;
+  background: #1f8f3c;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 700;
+  border-radius: 2px;
+  padding: 2px 8px;
+  letter-spacing: 0.5px;
+}
+
+.sapSimpleLoginPanel {
+  width: 100%;
+  max-width: 420px;
+  padding: 8px;
+}
+
+.sapSimpleLoginLabel {
+  color: #1f2f44 !important;
+  font-size: 15px;
+}
+
+.sapSimpleLoginInput {
+  width: 100%;
+}
+
+.sapSimpleLoginInput .sapMInputBaseInner,
+.sapSimpleLoginInput .sapMSltLabel {
+  background: #ffffff !important;
+  border: 1px solid #b4c2ce !important;
+  border-radius: 0 !important;
+  color: #233549 !important;
+}
+
+.sapSimpleLoginButton {
+  width: 100%;
+}
+
+.sapSimpleLoginButton .sapMBtnInner {
+  border-radius: 2px !important;
+  background: #4f90c7 !important;
+  border-color: #4f90c7 !important;
+}
+
+.sapSimpleLoginButton .sapMBtnContent {
+  color: #ffffff !important;
+  font-weight: 600;
+}
+
+.sapSimpleChangePasswordLink {
+  width: 100%;
+  text-align: center;
+}
+
+.sapSimpleChangePasswordLink .sapMLnk {
+  color: #315e86 !important;
+}
+
+@media (max-width: 640px) {
+  .sapSimpleLoginPanel {
+    max-width: 94%;
+  }
+}
+
+/* 2. CARD LOGIN (FIX Lá»–I NHá»Ž XÃU) */
+.loginCard {
+  background: var(--cyber-navy) !important;
+  backdrop-filter: blur(30px);
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 32px !important;
+  padding: 3.5rem !important;
+  width: 100% !important;
+  max-width: 480px !important; /* Äá»™ rá»™ng hoÃ n háº£o cho form */
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7) !important;
+}
+
+/* 3. INPUT & LABEL (FIX Lá»–I DÃNH CHá»®) */
+.formGroup {
+  margin-bottom: 1.8rem !important;
+}
+.labelCyber {
+  color: var(--text-muted) !important;
+  font-size: 0.85rem !important;
+  font-weight: 600;
+  margin-bottom: 0.6rem !important;
+  display: block;
+}
+
+.cyberInput .sapMInputBaseContentWrapper {
+  background: rgba(255, 255, 255, 0.03) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 12px !important;
+  height: 3.5rem !important;
+}
+.cyberInput .sapMInputBaseInner {
+  color: #ffffff !important;
+  padding-left: 1.2rem !important;
+}
+.cyberInput:focus-within .sapMInputBaseContentWrapper {
+  border-color: var(--cyber-cyan) !important;
+  box-shadow: 0 0 15px rgba(0, 242, 255, 0.3);
+}
+
+/* Fix Link QuÃªn máº­t kháº©u */
+.forgotLink {
+  margin-top: 0.8rem !important;
+}
+.forgotLink .sapMLnk {
+  color: var(--cyber-cyan) !important;
+  font-size: 0.85rem !important;
+  font-weight: 500;
+}
+
+/* 4. NÃšT SUBMIT CHÃNH */
+.btnSubmitGlow .sapMBtnInner {
+  background: linear-gradient(90deg, #0070f2, #00f2ff) !important;
+  border: none !important;
+  border-radius: 12px !important;
+  height: 3.8rem !important;
+  box-shadow: 0 10px 25px rgba(0, 112, 242, 0.4) !important;
+}
+.btnSubmitGlow .sapMBtnContent {
+  color: #ffffff !important;
+  font-weight: 850 !important;
+  font-size: 1.1rem !important;
+}
+
+/* 5. NÃšT DEMO ROLES (TILE CHUáº¨N LOVABLE) */
+.demoTile {
+  background: rgba(255, 255, 255, 0.02) !important;
+  border-radius: 16px !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.1) !important;
+  height: 8rem !important; /* Fix lá»—i loáº¡n nÃºt */
+  transition: all 0.3s ease !important;
+}
+.demoTile .sapMBtnContent {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+}
+.demoTile .sapMBtnIcon {
+  font-size: 2.2rem !important;
+  margin-bottom: 0.8rem !important;
+  color: #94a3b8;
+}
+.demoTile .sapMBtnText {
+  font-size: 0.8rem !important;
+  font-weight: 700 !important;
+  color: var(--text-muted);
+}
+
+.roleBlue:hover {
+  border-color: #0070f2 !important;
+  box-shadow: 0 0 20px rgba(0, 112, 242, 0.3);
+}
+.roleAmber:hover {
+  border-color: #f59e0b !important;
+  box-shadow: 0 0 20px rgba(245, 158, 11, 0.3);
+}
+.roleRed:hover {
+  border-color: #ef4444 !important;
+  box-shadow: 0 0 20px rgba(239, 68, 68, 0.3);
+}
+
+/* 6. LOGO & DECOR */
+.sapLogoGlow {
+  background: linear-gradient(135deg, #0070f2 0%, #00f2ff 100%);
+  width: 100px;
+  height: 100px;
+  border-radius: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 50px rgba(0, 112, 242, 0.8);
+  margin-bottom: 2.5rem;
+}
+.sapLogoText {
+  color: #fff !important;
+  font-weight: 950 !important;
+  font-size: 2.2rem !important;
+}
+.heroTitleText {
+  color: #fff !important;
+  font-size: 3.8rem !important;
+  font-weight: 950 !important;
+  letter-spacing: -2px;
+  line-height: 1.1;
+  text-shadow: 0 10px 40px #000;
+}
+.heroSubText {
+  color: var(--text-muted) !important;
+  font-size: 1.4rem !important;
+  margin-top: 1rem;
+}
+
+.demoDivider {
+  margin: 2.5rem 0 !important;
+}
+.dividerLine {
+  height: 1px;
+  flex: 1;
+  background: rgba(255, 255, 255, 0.1);
+}
+.dividerText {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+.footerText {
+  color: rgba(148, 163, 184, 0.4);
+  font-size: 0.75rem;
+  margin-top: 2rem;
+}
+
+/* Auth Toggle */
+/* ============================================================
+   FINAL CYBER FIX - LOVABLE FIDELITY
+   ============================================================ */
+
+/* Ã‰P CARD LOGIN Rá»˜NG RÃƒI */
+.loginCard {
+  background: rgba(15, 23, 42, 0.95) !important;
+  backdrop-filter: blur(30px);
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 32px !important;
+  padding: 3.5rem !important;
+  width: 480px !important; /* To ra cho sang */
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6) !important;
+}
+
+/* FIX NÃšT Ä... (Ã‰P HIá»†N CHá»®) */
+.authToggleContainer {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 4px;
+  width: 100% !important;
+  display: flex !important;
+}
+
+.toggleBtn {
+  height: 3rem !important;
+}
+.toggleBtn .sapMBtnInner {
+  background: transparent !important;
+  border: none !important;
+  color: #94a3b8 !important;
+  width: 100% !important;
+}
+.toggleBtn .sapMBtnContent {
+  width: 100% !important;
+  overflow: visible !important; /* Ã‰P HIá»†N CHá»® Äáº¦Y Äá»¦ */
+  white-space: nowrap !important;
+  font-weight: 700 !important;
+}
+
+.toggleBtn .sapMBtnInner {
+  border: none !important;
+  background: transparent !important;
+}
+.toggleBtn .sapMBtnContent {
+  width: 100% !important;
+  overflow: visible !important; /* Ã‰P HIá»†N CHá»® Äáº¦Y Äá»¦ */
+  white-space: nowrap !important;
+  font-weight: 700 !important;
+}
+
+/* FIX DÃNH CHá»® & INPUT */
+.formGroup {
+  margin-bottom: 1.5rem !important;
+}
+.labelCyber {
+  color: #94a3b8 !important;
+  font-size: 0.85rem !important;
+  font-weight: 600;
+  margin-bottom: 0.6rem !important;
+  display: block;
+}
+.cyberInput .sapMInputBaseContentWrapper {
+  background: rgba(255, 255, 255, 0.03) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 12px !important;
+  height: 3.5rem !important;
+}
+.cyberInput .sapMInputBaseInner {
+  color: #fff !important;
+  padding-left: 1.2rem !important;
+}
+.forgotLink .sapMLnk {
+  color: #00f2ff !important;
+  font-size: 0.85rem !important;
+}
+
+/* FIX NÃšT DEMO LOáº N */
+.demoTile {
+  height: 8rem !important;
+  background: rgba(255, 255, 255, 0.02) !important;
+  border-radius: 16px !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.1) !important;
+}
+.demoTile .sapMBtnContent {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  width: 100% !important;
+}
+.demoTile .sapMBtnIcon {
+  font-size: 2.2rem !important;
+  margin-bottom: 0.5rem !important;
+  color: #94a3b8 !important;
+}
+.demoTile .sapMBtnText {
+  color: #94a3b8 !important;
+  font-weight: 700 !important;
+  font-size: 0.8rem !important;
+}
+
+/* LOGO SAP Bá»ªNG SÃNG */
+.sapLogoGlow {
+  background: linear-gradient(135deg, #0070f2 0%, #00f2ff 100%);
+  width: 100px;
+  height: 100px;
+  border-radius: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 50px rgba(0, 112, 242, 0.8);
+  margin-bottom: 2.5rem;
+}
+.sapLogoText {
+  color: #fff !important;
+  font-weight: 950 !important;
+  font-size: 2.2rem !important;
+}
+.heroTitleText {
+  color: #fff !important;
+  font-size: 3.5rem !important;
+  font-weight: 950 !important;
+  letter-spacing: -2px;
+  text-shadow: 0 10px 40px #000;
+}
+
+/* LAYOUT CHUNG */
+.splitLayout {
+  height: 100vh !important;
+  display: flex !important;
+}
+.loginHeroSide {
+  flex: 1.5 !important;
+  background:
+    linear-gradient(rgba(0, 8, 20, 0.4), rgba(0, 8, 20, 0.7)),
+    url("https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=1920&q=80")
+      center/cover;
+}
+.loginFormSide {
+  flex: 1 !important;
+  background: #020617 !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+.dividerLine {
+  height: 1px;
+  flex: 1;
+  background: rgba(255, 255, 255, 0.1);
+}
+.demoDivider {
+  margin: 2rem 0 !important;
+  width: 100%;
+}
+/* --- APPROVAL PAGE: LIGHT ENTERPRISE --- */
+.approvalPage {
+  background-color: hsl(210, 20%, 98%) !important;
+}
+
+/* Styled IconTabBar - Biáº¿n thanh Tab SAP thÃ nh thanh Tab Lovable */
+.lan_tabBar .sapMITBHeader {
+  background-color: transparent !important;
+  border-bottom: 1px solid hsl(210, 20%, 88%) !important;
+}
+
+.lan_tabBar .sapMITBFilter {
+  padding: 0 1rem !important;
+}
+
+.lan_tabBar .sapMITBText {
+  font-weight: 600 !important;
+  font-size: 0.95rem !important;
+}
+
+/* Badge sá»‘ lÆ°á»£ng kiá»ƒu Fiori Horizon */
+.tabBadge {
+  padding: 2px 8px !important;
+  border-radius: 12px !important;
+  font-weight: 800 !important;
+  font-size: 0.75rem !important;
+  margin-left: 8px !important;
+}
+
+/* Card phÃª duyá»‡t (Approval Card) */
+.approvalCard {
+  background: #ffffff !important;
+  border: 1px solid hsl(210, 20%, 88%) !important;
+  border-radius: 16px !important;
+  padding: 1.5rem !important;
+  margin-bottom: 1rem !important;
+  transition: all 0.3s ease;
+}
+.approvalCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1) !important;
+  border-color: #0070f2 !important;
+}
+
+/* Table bÃªn trong Detail Card */
+.innerTable {
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #f1f5f9;
+}
+.innerTable .sapMListTblHeaderCell {
+  background: #f8fafc !important;
+}
+/* --- Ã‰P NÃšT HIá»†N Äá»¦ CHá»® --- */
+.toggleBtn,
+.toggleBtn .sapMBtnInner,
+.toggleBtn .sapMBtnContent {
+  width: 100% !important;
+  min-width: 120px !important;
+  overflow: visible !important;
+  white-space: nowrap !important;
+}
+
+.authToggleContainer {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border-radius: 12px;
+  padding: 5px;
+  width: 100% !important;
+}
+
+/* --- CARD LOGIN TO RÃ• --- */
+.loginCard {
+  width: 480px !important;
+  padding: 3.5rem !important;
+  background: rgba(15, 23, 42, 0.95) !important;
+  border-radius: 32px;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6);
+}
+
+/* --- APPROVAL CARD Sáº CH Sáº¼ --- */
+.approvalCard {
+  background: #fff !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 16px !important;
+  padding: 2rem !important;
+  margin-bottom: 1.5rem !important;
+  transition: 0.3s;
+}
+.approvalCard:hover {
+  border-color: #0070f2 !important;
+  transform: translateY(-3px);
+}
+
+.innerTable {
+  border: 1px solid #f1f5f9;
+  border-radius: 12px;
+  overflow: hidden;
+}
+.innerTable .sapMListTblHeaderCell {
+  background: #f8fafc !important;
+  height: 3rem;
+}
+
+/* --- LOGO SAP GLOW --- */
+.sapLogoGlow {
+  background: linear-gradient(135deg, #0070f2 0%, #00f2ff 100%);
+  width: 100px;
+  height: 100px;
+  border-radius: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 50px rgba(0, 112, 242, 0.7);
+  margin-bottom: 2rem;
+}
+.sapLogoText {
+  color: #fff !important;
+  font-weight: 950 !important;
+  font-size: 2.2rem !important;
+}
+/* --- MASTER-DETAIL LAYOUT OPTIMIZATION --- */
+.masterListCard {
+  border-right: 1px solid #e2e8f0 !important;
+  background: #ffffff !important;
+}
+.detailPageArea {
+  background-color: #f8fafc !important;
+}
+
+/* Item trong danh sÃ¡ch bÃªn trÃ¡i */
+.orderListItem {
+  padding: 1rem !important;
+  border-bottom: 1px solid #f1f5f9 !important;
+  transition: all 0.2s ease;
+}
+.orderListItem:hover {
+  background-color: #f1f7ff !important;
+}
+.orderListItem.sapMLIBSelected {
+  background-color: #e0efff !important;
+  border-left: 4px solid #0070f2 !important;
+}
+
+/* Badge Tráº¡ng thÃ¡i */
+.statusPending {
+  color: #f59e0b !important;
+  background: #fef3c7 !important;
+  border: 1px solid #fde68a !important;
+  border-radius: 4px;
+  padding: 2px 8px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+/* Detail Header Info */
+.infoBoxDetail {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+/* FIX CARD LOGIN & TABS */
+.loginCard {
+  width: 480px !important;
+  padding: 3.5rem !important;
+  background: rgba(15, 23, 42, 0.95) !important;
+  border-radius: 32px !important;
+}
+
+/* Ã‰P NÃšT HIá»†N Äá»¦ CHá»® & TABS */
+.authToggleContainer {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border-radius: 12px;
+  padding: 5px;
+  width: 100% !important;
+}
+.toggleBtn,
+.toggleBtn .sapMBtnInner,
+.toggleBtn .sapMBtnContent {
+  width: 100% !important;
+  min-width: 120px !important;
+  overflow: visible !important;
+  white-space: nowrap !important;
+}
+.toggleBtn.active .sapMBtnInner {
+  background: linear-gradient(90deg, #0070f2, #00f2ff) !important;
+  color: #ffffff !important;
+}
+
+/* FIX CARD LOGIN NHá»Ž XÃU */
+.loginCard {
+  width: 480px !important;
+  padding: 3.5rem !important;
+  background: rgba(15, 23, 42, 0.95) !important;
+  border-radius: 32px !important;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6) !important;
+}
+
+/* FIX NÃšT DEMO LOáº N */
+.demoTile {
+  height: 8rem !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.1) !important;
+}
+.demoTile .sapMBtnContent {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+}
+.demoTile .sapMBtnIcon {
+  font-size: 2.2rem !important;
+  margin-bottom: 0.5rem !important;
+  color: #00f2ff !important;
+}
+
+/* LOGO SAP Bá»ªNG SÃNG */
+.sapLogoGlow {
+  background: linear-gradient(135deg, #0070f2, #00f2ff);
+  width: 100px;
+  height: 100px;
+  border-radius: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 50px rgba(0, 112, 242, 0.8);
+  margin-bottom: 2rem;
+}
+.sapLogoText {
+  color: #fff !important;
+  font-weight: 950 !important;
+  font-size: 2.2rem !important;
+}
+
+/* LAYOUT CHUNG */
+.splitLayout {
+  height: 100vh !important;
+  display: flex !important;
+}
+.loginHeroGravity {
+  flex: 1.5 !important;
+  background-image:
+    linear-gradient(rgba(0, 8, 20, 0.4), rgba(0, 8, 20, 0.7)),
+    url("bg_login_final.jpg") !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+}
+.loginFormSide {
+  flex: 1 !important;
+  background: #020617 !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+.heroTitleText {
+  color: #fff !important;
+  font-size: 3.5rem !important;
+  font-weight: 950 !important;
+  text-shadow: 0 10px 40px #000;
+}
+/* Ã‰P CARD LOGIN Rá»˜NG RÃƒI */
+.loginCard {
+  width: 480px !important;
+  padding: 3.5rem !important;
+  background: rgba(15, 23, 42, 0.95) !important;
+  border-radius: 32px !important;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6) !important;
+}
+
+/* FIX NÃšT Bá»Š Cáº®T CHá»® Ä... */
+.toggleBtn,
+.toggleBtn .sapMBtnInner,
+.toggleBtn .sapMBtnContent {
+  width: 100% !important;
+  min-width: 120px !important;
+  overflow: visible !important;
+  white-space: nowrap !important;
+}
+.toggleBtn.active .sapMBtnInner {
+  background: linear-gradient(90deg, #0070f2, #00f2ff) !important;
+  color: #fff !important;
+}
+
+/* LOGO SAP Bá»ªNG SÃNG */
+.sapLogoGlow {
+  background: linear-gradient(135deg, #0070f2, #00f2ff);
+  width: 100px;
+  height: 100px;
+  border-radius: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 50px rgba(0, 112, 242, 0.8);
+  margin-bottom: 2rem;
+}
+.sapLogoText {
+  color: #fff !important;
+  font-weight: 950 !important;
+  font-size: 2.2rem !important;
+}
+
+/* FIX DÃ’NG QUÃŠN Máº¬T KHáº¨U */
+.forgotLink {
+  margin-top: 8px !important;
+  display: block;
+}
+/* --- BENTO STYLE FOR APPROVAL --- */
+.approvalPage {
+  background-color: #f8fafc !important;
+}
+.masterColumn {
+  background: #fff !important;
+  border-right: 1px solid #e2e8f0 !important;
+}
+
+.bentoListItem {
+  border-bottom: 1px solid #f1f5f9 !important;
+  padding: 1rem 0 !important;
+}
+.sapMLIBSelected {
+  border-left: 4px solid #0070f2 !important;
+  background-color: #eff6ff !important;
+}
+
+.orderIdText {
+  color: #1e293b !important;
+  font-weight: 700 !important;
+}
+.priceText {
+  color: #0070f2 !important;
+  font-weight: 800 !important;
+}
+
+/* Detail Card */
+.bentoCardDetail {
+  background: #ffffff !important;
+  border-radius: 16px !important;
+  padding: 1.5rem !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05) !important;
+}
+
+.columnTag {
+  background: #f1f5f9;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-family: monospace;
+  font-weight: 600;
+}
+
+.badgeWarning {
+  background: #fef3c7;
+  color: #d97706;
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.innerTable .sapMListTblHeaderCell {
+  background: #f8fafc !important;
+  border-bottom: 2px solid #e2e8f0 !important;
+}
+
+/* Buttons */
+/* Buttons Premium Styling (Clean Version) */
+.btnAcceptMain .sapMBtnInner {
+  background-color: #0070f2 !important; /* SAP Blue Standard */
+  border: 1px solid #0070f2 !important;
+  border-radius: 8px !important;
+  height: 2.5rem !important;
+  min-width: 140px !important;
+  box-shadow: 0 4px 6px rgba(0, 112, 242, 0.2) !important;
+  transition: all 0.2s ease !important;
+  background-image: none !important;
+}
+.btnAcceptMain .sapMBtnContent,
+.btnAcceptMain .sapMBtnIcon {
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  font-size: 0.9rem !important;
+  text-shadow: none !important;
+}
+.btnAcceptMain:hover .sapMBtnInner {
+  background-color: #0060d0 !important;
+  box-shadow: 0 6px 12px rgba(0, 112, 242, 0.3) !important;
+  transform: translateY(-1px) !important;
+}
+
+.btnRejectOutline .sapMBtnInner {
+  background-color: transparent !important;
+  background-image: none !important;
+  border: 2px solid #ef4444 !important; /* Red-500 */
+  border-radius: 8px !important;
+  height: 2.5rem !important;
+  min-width: 120px !important;
+  box-shadow: none !important;
+  transition: all 0.2s ease !important;
+}
+.btnRejectOutline .sapMBtnContent,
+.btnRejectOutline .sapMBtnIcon {
+  color: #ef4444 !important;
+  font-weight: 700 !important;
+}
+.btnRejectOutline:hover .sapMBtnInner {
+  background-color: #fef2f2 !important; /* Red-50 */
+  box-shadow: 0 2px 4px rgba(239, 68, 68, 0.1) !important;
+}
+
+/* Custom Footer (Anchored) */
+.customFooter {
+  background-color: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(10px);
+  border-top: 1px solid #e2e8f0 !important;
+  padding: 0.5rem 1rem !important;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.05) !important;
+}
+.customFooter .sapMBarRight {
+  padding-right: 1rem !important;
+}
+
+/* --- 1. LOGIN (CYBER DARK) --- */
+.loginCard {
+  width: 480px !important;
+  padding: 3.5rem !important;
+  border-radius: 32px !important;
+  background: rgba(15, 23, 42, 0.95) !important;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6) !important;
+}
+.toggleBtn,
+.toggleBtn .sapMBtnInner,
+.toggleBtn .sapMBtnContent {
+  width: 100% !important;
+  overflow: visible !important;
+  white-space: nowrap !important;
+}
+.sapLogoGlow {
+  box-shadow: 0 0 50px rgba(0, 112, 242, 0.8);
+}
+
+/* --- 2. APPROVAL (LIGHT ENTERPRISE - LOVABLE STYLE) --- */
+.approvalPage {
+  background-color: #f8fafc !important;
+}
+.masterColumn {
+  background: #fff !important;
+  border-right: 1px solid #e2e8f0 !important;
+}
+.bentoListItem {
+  border-bottom: 1px solid #f1f5f9 !important;
+  padding: 1rem 0 !important;
+}
+.sapMLIBSelected {
+  border-left: 4px solid #0070f2 !important;
+  background-color: #eff6ff !important;
+}
+
+.bentoCardDetail {
+  background: #fff !important;
+  border-radius: 20px !important;
+  padding: 2.5rem !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05) !important;
+}
+
+.priceText {
+  color: #0070f2 !important;
+  font-weight: 800 !important;
+}
+.badgeWarning {
+  background: #fef3c7;
+  color: #d97706;
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.75rem;
+}
+.columnTag {
+  background: #f1f5f9;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-family: monospace;
+}
+
+/* Buttons */
+.btnAcceptMain {
+  height: 3.5rem !important;
+  background: #22c55e !important;
+  border: none !important;
+  border-radius: 12px !important;
+  font-weight: 700 !important;
+}
+.btnRejectOutline {
+  height: 3.5rem !important;
+  border: 1px solid #ef4444 !important;
+  color: #ef4444 !important;
+  background: transparent !important;
+  border-radius: 12px !important;
+}
+/* ============================================================
+   MASTER DESIGN SYSTEM - HYBRID THEME
+   ============================================================ */
+:root {
+  --background: hsl(210, 20%, 98%);
+  --foreground: hsl(210, 25%, 15%);
+  --card: #ffffff;
+  --border: hsl(210, 20%, 88%);
+  --primary: #0070f2;
+  --muted: hsl(210, 15%, 45%);
+}
+
+.sapMPageContent {
+  padding: 0 !important;
+}
+.adminContentPadding {
+  padding: 3rem !important;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* --- TRANG SÃNG (UPLOAD & LANDING) --- */
+.uploadPage,
+.landingPage {
+  background-color: var(--background) !important;
+  background-image: none !important; /* XÃ³a má»i gradient dark */
+}
+
+.lan_cleanCard {
+  background: var(--card) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+  transition: all 0.3s ease;
+}
+
+.lan_iconBox {
+  background: hsl(210, 100%, 95%);
+  padding: 1rem;
+  border-radius: 10px;
+  display: inline-flex;
+}
+
+/* ÄÃ¨n Status (Light Mode) */
+.stepInactive {
+  opacity: 0.25;
+  filter: grayscale(1);
+}
+.stepActive {
+  opacity: 1 !important;
+  color: var(--primary) !important;
+  transform: scale(1.1);
+}
+.stepActive .sapUiIcon {
+  color: var(--primary) !important;
+}
+
+/* ÄÆ°á»ng ná»‘i Process */
+.lan_processLine {
+  flex-grow: 1;
+  height: 2px;
+  background: var(--border);
+  margin: 0 1rem;
+  margin-top: 15px;
+  width: 50px;
+}
+
+/* --- TRANG Tá»I (LOGIN & ADMIN) --- */
+.loginPage,
+.adminPage {
+  background: radial-gradient(
+    circle at 50% -20%,
+    #1a2a44 0%,
+    #000814 90%
+  ) !important;
+}
+.bentoGlassCard {
+  background: rgba(255, 255, 255, 0.03) !important;
+  backdrop-filter: blur(20px);
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+/* ============================================================
+   SAP BTP PROCUREMENT - MASTER HYBRID DESIGN SYSTEM
+   Author: Putie & Gemini
+   Theme: Light Enterprise & Cyber Dark Split
+   ============================================================ */
+
+:root {
+  /* --- 1. LIGHT THEME PALETTE (Lovable/Fiori Inspired) --- */
+  --background: hsl(210, 20%, 98%);
+  --foreground: #1d2d3e;
+  --card-bg: #ffffff;
+  --border-color: hsl(210, 20%, 88%);
+  --sap-blue: #0070f2;
+  --text-muted: #556b82;
+  --accent-light: hsl(210, 100%, 96%);
+
+  /* --- 2. DARK THEME PALETTE (Cyber-Nexus) --- */
+  --neon-cyan: #00f2ff;
+  --dark-bg: #000814;
+  --glass-bg: rgba(255, 255, 255, 0.03);
+}
+
+/* --- 3. GLOBAL RESET --- */
+.sapMPageContent {
+  padding: 0 !important;
+}
+.mainContainer {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.adminContentPadding {
+  padding: 3rem !important;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* ============================================================
+   SECTION A: LIGHT ENTERPRISE THEME (LANDING & UPLOAD)
+   ============================================================ */
+
+.landingPage,
+.uploadPage {
+  background-color: var(--background) !important;
+  background-image: none !important; /* Triá»‡t tiÃªu hoÃ n toÃ n gradient dark */
+}
+
+/* --- HEADER LIGHT --- */
+.lan_header {
+  background: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-color) !important;
+}
+
+/* --- HERO: RESTORED BLUE GRADIENT --- */
+.lan_hero {
+  background: linear-gradient(180deg, #e0f2fe 0%, #f8fafc 100%) !important;
+  padding: 10rem 0 8rem 0 !important;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.lan_heroTitle {
+  color: var(--foreground) !important;
+  font-size: 4.5rem !important;
+  font-weight: 900 !important;
+  letter-spacing: -3px !important;
+  line-height: 1.1 !important;
+}
+
+/* --- CLEAN ENTERPRISE CARDS --- */
+.lan_cleanCard {
+  background: var(--card-bg) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 16px !important;
+  padding: 2.5rem !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+  transition: all 0.3s ease;
+}
+.lan_cleanCard:hover {
+  border-color: var(--sap-blue) !important;
+  box-shadow: 0 12px 25px -5px rgba(0, 0, 0, 0.1) !important;
+}
+
+.lan_iconBox {
+  background-color: var(--accent-light);
+  padding: 1rem;
+  border-radius: 12px;
+  display: inline-flex;
+}
+
+/* --- UPLOAD ZONE CUSTOM --- */
+.cyberUploadSet .sapMUCList {
+  background: #ffffff !important;
+  border: 2px dashed var(--border-color) !important;
+  border-radius: 16px !important;
+  min-height: 200px;
+}
+
+/* --- TYPOGRAPHY & TAGS --- */
+.lan_titleMain {
+  color: var(--foreground) !important;
+  font-weight: 700;
+}
+.lan_textBody {
+  color: var(--text-muted) !important;
+  line-height: 1.6;
+}
+
+.columnTag {
+  background: hsl(210, 15%, 94%) !important;
+  color: var(--foreground) !important;
+  font-family: monospace;
+  border-radius: 6px;
+  padding: 6px 12px !important;
+  margin: 4px;
+}
+
+/* --- PROCESS CONNECTORS (LIGHT) --- */
+.lan_processLine {
+  flex-grow: 1;
+  height: 2px;
+  background: var(--border-color);
+  margin: 2rem 1rem 0 1rem;
+  width: 60px;
+}
+
+/* Step States */
+.stepInactive {
+  opacity: 0.3;
+  filter: grayscale(1);
+}
+.stepActive {
+  opacity: 1 !important;
+  color: var(--sap-blue) !important;
+  transform: scale(1.1);
+  font-weight: 800;
+}
+.stepActive .sapUiIcon {
+  color: var(--sap-blue) !important;
+}
+
+/* ============================================================
+   SECTION B: CYBER DARK THEME (LOGIN, REGISTER, ADMIN)
+   ============================================================ */
+
+.loginPage,
+.adminPage {
+  background: radial-gradient(
+    circle at 50% -20%,
+    #1a2a44 0%,
+    var(--dark-bg) 90%
+  ) !important;
+}
+
+/* --- SPLIT LOGIN LAYOUT --- */
+.splitLoginContainer {
+  height: 100vh !important;
+  width: 100%;
+  display: flex !important;
+  flex-direction: row !important;
+}
+
+.loginHeroSide {
+  flex: 1.3;
+  background:
+    linear-gradient(rgba(0, 8, 20, 0.4), rgba(0, 8, 20, 0.7)),
+    url("https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072")
+      no-repeat center center;
+  background-size: cover !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+
+.heroBrandingBox {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  border-radius: 32px;
+  padding: 3.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.loginFormSide {
+  flex: 1;
+  background: var(--dark-bg) !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+
+.loginCard {
+  width: 100%;
+  max-width: 450px;
+  padding: 3rem !important;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+}
+
+/* --- DARK DASHBOARD CARDS --- */
+.bentoGlassCard {
+  background: var(--glass-bg) !important;
+  backdrop-filter: blur(25px);
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.neonTitleText {
+  color: var(--neon-cyan) !important;
+  font-weight: 900 !important;
+  text-shadow:
+    0 0 15px rgba(0, 242, 255, 0.5),
+    0 5px 15px #000 !important;
+}
+
+/* Quick Role Buttons (Dark) */
+.quickRoleBtn {
+  height: 4.5rem !important;
+  border-radius: 16px !important;
+  flex: 1;
+  margin: 0 5px;
+}
+.quickRoleBtn .sapMBtnContent {
+  color: #ffffff !important;
+  font-weight: 800 !important;
+}
+.roleEmployee {
+  background: rgba(0, 112, 242, 0.3) !important;
+  border: 2px solid #0070f2 !important;
+}
+.roleManager {
+  background: rgba(224, 157, 0, 0.3) !important;
+  border: 2px solid #e09d00 !important;
+}
+.roleAdmin {
+  background: rgba(187, 0, 0, 0.3) !important;
+  border: 2px solid #bb0000 !important;
+}
+/* Status Bar Steps */
+.statusContainer {
+  background: #ffffff !important;
+  padding: 20px !important;
+  border-radius: 12px !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1) !important;
+  border: 1px solid #e2e8f0 !important;
+}
+
+.stepActive {
+  opacity: 1 !important;
+  transform: scale(1.1) !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.stepActive .sapUiIcon {
+  color: #10b981 !important; /* Green Success */
+  font-size: 2rem !important;
+  text-shadow: 0 0 10px rgba(16, 185, 129, 0.4) !important;
+}
+
+.stepActive .statusLabelSmall {
+  color: #10b981 !important;
+  font-weight: 800 !important;
+}
+
+.stepInactive {
+  opacity: 0.4 !important;
+  transform: scale(1) !important;
+  filter: grayscale(100%) !important;
+  transition: all 0.3s ease !important;
+}
+/* BÆ°á»›c chÆ°a tá»›i: Má» vÃ  xÃ¡m nháº¡t */
+/* The original .stepInactive and .stepActive rules are now overridden by the new ones above */
+/* BÆ°á»›c Ä‘ang hoáº¡t Ä‘á»™ng: SÃ¡ng xanh SAP rá»±c rá»¡ */
+.stepActive .sapUiIcon {
+  color: #0070f2 !important;
+  filter: drop-shadow(0 0 10px rgba(0, 112, 242, 0.4));
+}
+.stepActive .sapMText {
+  color: #0070f2 !important;
+  font-weight: 800;
+}
+
+/* ÄÆ°á»ng ná»‘i (Light Mode) */
+.lan_processLine {
+  flex-grow: 1;
+  height: 1.5px;
+  background: #e2e8f0;
+  margin: 0 1rem;
+  margin-top: 12px;
+}
+
+/* Fix label nhá» cho status */
+.statusLabelSmall {
+  font-size: 0.7rem;
+  font-weight: 700;
+  margin-top: 8px;
+  color: #556b82;
+}
+/* --- FIX Lá»–I KHUNG NHá»Ž & CHE DETAIL --- */
+
+/* Ã‰p container chá»©a FCL ná»Ÿ rá»™ng 100% */
+.approvalPage .sapMPageContent {
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100% !important;
+}
+
+.detailPageArea {
+  background-color: #f8fafc !important;
+  height: 100% !important;
+}
+
+/* Card chi tiáº¿t dÃ£n rá»™ng 100% */
+.bentoCardDetail {
+  background: #ffffff !important;
+  border-radius: 20px !important;
+  padding: 2rem !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05) !important;
+  width: 100% !important;
+}
+
+/* Fix nÃºt báº¥m khÃ´ng bá»‹ mÃ©o */
+.btnAcceptMain {
+  height: 3rem !important;
+  padding: 0 2rem !important;
+  font-weight: 700 !important;
+  background-color: #22c55e !important;
+  border: none !important;
+}
+
+.btnRejectOutline {
+  height: 3rem !important;
+  border: 2px solid #ef4444 !important;
+  color: #ef4444 !important;
+  background: transparent !important;
+}
+
+/* List Item dÃ£n cÃ¡ch thoÃ¡ng Ä‘áº¡t */
+.bentoListItem {
+  padding: 1.2rem 0 !important;
+  border-bottom: 1px solid #f1f5f9 !important;
+}
+/* --- FIX KHUNG CHI TIáº¾T & LAYOUT (FINAL) --- */
+.approvalPage .sapMPageContent {
+  height: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+.detailPageArea {
+  background-color: #f8fafc !important;
+}
+
+/* Card Chi tiáº¿t dÃ£n rá»™ng 100% */
+.bentoCardDetail {
+  background: #ffffff !important;
+  border-radius: 20px !important;
+  padding: 2rem !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05) !important;
+  width: 100% !important;
+  margin-bottom: 1.5rem !important;
+}
+
+/* Table Style */
+.innerTable .sapMListTblHeaderCell {
+  background: #f8fafc !important;
+  border-bottom: 2px solid #e2e8f0 !important;
+}
+.columnTag {
+  background: #f1f5f9;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-family: monospace;
+}
+
+/* Text & Badges */
+.priceText {
+  color: #0070f2 !important;
+  font-weight: 800 !important;
+}
+.badgeWarning {
+  background: #fef3c7;
+  color: #d97706;
+  padding: 2px 10px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+/* Buttons Footer */
+.btnAcceptMain {
+  height: 3.2rem !important;
+  padding: 0 2rem !important;
+  background-color: #22c55e !important;
+  border: none !important;
+  font-weight: 700 !important;
+}
+.btnRejectOutline {
+  height: 3.2rem !important;
+  border: 2px solid #ef4444 !important;
+  color: #ef4444 !important;
+  background: transparent !important;
+  border-radius: 8px !important;
+}
+/* ============================================================
+   FIX Dá»¨T ÄIá»‚M Lá»–I WIDTH - Ã‰P CHI TIáº¾T ÄÆ N HÃ€NG FULL Rá»˜NG
+   ============================================================ */
+
+/* 1. Ã‰p toÃ n bá»™ khung bá»c FlexibleColumnLayout pháº£i chiáº¿m 100% diá»‡n tÃ­ch */
+/* ============================================================
+   FIX Dá»¨T ÄIá»‚M Lá»–I WIDTH - Ã‰P CHI TIáº¾T ÄÆ N HÃ€NG FULL Rá»˜NG
+   ============================================================ */
+
+/* 1. Ã‰p toÃ n bá»™ khung bá»c FlexibleColumnLayout pháº£i chiáº¿m 100% diá»‡n tÃ­ch */
+.approvalPage .sapMPageContent {
+  padding: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100% !important;
+  width: 100% !important;
+}
+
+/* 2. Ã‰p cá»™t Chi tiáº¿t (Mid Column) khÃ´ng Ä‘Æ°á»£c giá»›i háº¡n chiá»u rá»™ng */
+.detailPageArea {
+  background-color: #f8fafc !important;
+  width: 100% !important;
+}
+
+/* 3. CARD CHI TIáº¾T - Quan trá»ng nháº¥t */
+.bentoCardDetail {
+  background: #ffffff !important;
+  border-radius: 20px !important;
+  padding: 2.5rem !important; /* TÄƒng padding cho thoÃ¡ng nhÆ° Lovable */
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05) !important;
+  width: 100% !important; /* Ã‰P Rá»˜NG 100% */
+  margin-bottom: 1.5rem !important;
+  box-sizing: border-box !important;
+}
+
+/* 4. Fix Table co rÃºm */
+.innerTable {
+  width: 100% !important;
+  border: 1px solid #f1f5f9 !important;
+  border-radius: 12px !important;
+  overflow: hidden !important;
+}
+
+/* 5. CÄƒn chá»‰nh Grid thÃ´ng tin (NgÆ°á»i táº¡o, Thá»i gian...) */
+.infoGridBox {
+  width: 100% !important;
+}
+
+/* 6. Footer nÃºt báº¥m (Duyá»‡t/Tá»« chá»‘i) - Ã‰p nÃ³ ná»•i báº­t */
+.btnAcceptMain {
+  background-color: #22c55e !important;
+  border: none !important;
+  height: 3.5rem !important;
+  padding: 0 2.5rem !important;
+  font-weight: 700 !important;
+  border-radius: 12px !important;
+  box-shadow: 0 4px 14px 0 rgba(34, 197, 94, 0.3) !important;
+}
+
+.btnRejectOutline {
+  border: 2px solid #ef4444 !important;
+  color: #ef4444 !important;
+  background: transparent !important;
+  height: 3.5rem !important;
+  border-radius: 12px !important;
+}
+/* ============================================================
+   ADMIN DASHBOARD PROFESSIONAL UI (FINAL FIX)
+   ============================================================ */
+
+.adminPage {
+  background-color: #f8fafc !important;
+}
+
+/* Ã‰p khung ná»™i dung Admin full width */
+.adminContentContainer {
+  width: 100% !important;
+  max-width: 1400px;
+  margin: 0 auto !important;
+}
+
+/* KPI CARDS */
+.admKpiCard {
+  background: #ffffff !important;
+  border-radius: 16px !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+}
+
+.kpiLabelCyber {
+  color: #64748b !important;
+  font-size: 0.85rem !important;
+  font-weight: 500 !important;
+}
+
+/* Icon Circles in KPIs */
+.iconCircle {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.bgHorizonLight {
+  background-color: #eff6ff;
+}
+.bgSuccessLight {
+  background-color: #f0fdf4;
+}
+.bgWarningLight {
+  background-color: #fffbeb;
+}
+.bgErrorLight {
+  background-color: #fef2f2;
+}
+
+.iconHorizon {
+  color: #0070f2 !important;
+  font-size: 1.5rem !important;
+}
+.iconSuccess {
+  color: #22c55e !important;
+  font-size: 1.5rem !important;
+}
+.iconWarning {
+  color: #f59e0b !important;
+  font-size: 1.5rem !important;
+}
+.iconError {
+  color: #ef4444 !important;
+  font-size: 1.5rem !important;
+}
+
+/* Progress Bar Custom */
+.customProgress .sapMPIBarSuccess {
+  background-color: #22c55e !important;
+}
+
+/* BENTO CARD DETAIL (For Admin) */
+.bentoCardDetail {
+  background: #ffffff !important;
+  border-radius: 20px !important;
+  padding: 2rem !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05) !important;
+  width: 100% !important;
+  margin-bottom: 1rem !important;
+}
+
+.borderTop {
+  border-top: 1px solid #f1f5f9;
+  padding-top: 1rem;
+}
+/* ============================================================
+   ADMIN DASHBOARD - LIGHT THEME & PERFORMANCE FIX
+   ============================================================ */
+
+/* 1. Ã‰p ná»n sÃ¡ng cho toÃ n bá»™ trang Admin */
+.adminPage,
+.adminPage .sapMPageContent,
+.adminPage scrollContainer {
+  background-color: #f8fafc !important; /* MÃ u ná»n sÃ¡ng chuáº©n Fiori Horizon */
+  background-image: none !important;
+}
+
+/* 2. Äá»‹nh dáº¡ng cÃ¡c tháº» Card Ä‘á»ƒ ná»n tráº¯ng ná»•i báº­t */
+.bentoCardDetail,
+.admKpiCard,
+.bentoGlassCard {
+  background-color: #ffffff !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+  border: 1px solid #e2e8f0 !important;
+  backdrop-filter: none !important; /* Táº¯t hiá»‡u á»©ng kÃ­nh má» cá»§a dark mode */
+}
+
+/* 3. CSS cho pháº§n Hiá»‡u suáº¥t Há»‡ thá»‘ng (Performance) */
+.performanceBox {
+  padding: 1.5rem;
+  border-radius: 12px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.bgMuted {
+  background-color: #f1f5f9 !important; /* Ná»n xÃ¡m nháº¡t cho cÃ¡c há»™p hiá»‡u suáº¥t */
+}
+
+/* CÃ¡c tiá»‡n Ã­ch mÃ u sáº¯c vÄƒn báº£n */
+.textMutedSmall {
+  color: #64748b !important;
+  font-size: 0.875rem !important;
+}
+.textSuccessSmall {
+  color: #22c55e !important;
+  font-size: 0.875rem !important;
+  font-weight: 600 !important;
+}
+.textWarningSmall {
+  color: #f59e0b !important;
+  font-size: 0.875rem !important;
+  font-weight: 600 !important;
+}
+
+/* 4. Äiá»u chá»‰nh láº¡i tiÃªu Ä‘á» cho cháº¿ Ä‘á»™ sÃ¡ng */
+.detailTitle {
+  color: #0f172a !important;
+  text-shadow: none !important;
+}
+.neonTitle {
+  color: #0f172a !important;
+  text-shadow: none !important;
+}
+/* ========================================
+   LOGIN PAGE - GRAVITY BACKGROUND + CLEAN FORM
+   ======================================== */
+
+/* Page Container */
+.loginPageGravity .sapMPageContent {
+  padding: 0 !important;
+  background: #f5f5f5 !important;
+}
+
+/* Split Layout */
+.splitLoginContainer {
+  height: 100vh !important;
+  width: 100%;
+  display: flex !important;
+}
+
+/* ========== LEFT SIDE: GRAVITY BACKGROUND ========== */
+.loginHeroGravity {
+  flex: 1.3 !important;
+  background:
+    linear-gradient(rgba(0, 8, 20, 0.5), rgba(0, 8, 20, 0.7)),
+    url("https://lh3.googleusercontent.com/rd-gg-dl/AOI_d_8PgDf3Rd1Rzj4r_hL0cW4xiJTFcT-vhl7WWL2Udj9MRIeGzAsmr5w7kQ1aKI3X18R9wQDetto1FjMO4wsRKQhcBrmTZVsG9Vv-xxYkCQPnF3VAtxAeg67p7dAShFjMTSuTo7cR9Ju-0JvOd4dcWbqfjAxyG67sYf9YocV29ggLqYH8ciULzQvd1dhstiRmNNOqyewQK0rD6YUhQJan5LhNn1E-3heejjlD5cX2K0RK_0ic-NVvYkGCB-2tKkv_y-7lr6QAuKNRdO5tj2MWB1K48ZF0IEtKnaJlyAy7CNd_S6xj_8-v7Zqp5UD8xOSYT3laKeKHTv0L0cBaxoHyyhBiNYFP1CzuSKqpoXY2Z2aeymjAwZE2jkoJMr0A0cHafyhCpxdIbLF_HsJgYCJAdKTypaB4gkwvbOP9wzGARmHylUJ3E25Uk7p4uEoIQ3yKkLKIfjDB6xEodjvSr47Cj7m2xhcQn1_KeGPin5xzyUUv_BNB-cHtV9j-uvewON4J1DDzm5wsXhGHtJHyBsamRdkUo1Xx8rQMEzt0ZI9GovksWy5QIwwFQzvfESBrQhc5xajUz2cZni4l2HSIbc2jkBXU3rOSk_hxNZ5EYdIyuKcRTmdK3InGt01nO7X20NO8pbLQXgLxSSnlRu_6eBj2OADvfvBQwqnHbJgtszzA2RUi9RkluYZD0VKXmB9sKUse18Jy89ClSfylo4qGz2QiyRz_iZmXWb4SoNTtvoiOEE1tJsYvonBGxpsYNFkN9tXJe8DhI5pxISuXz2TBsdm7CR8w9KiUykLm67IEXbroScHXhmzdVZ0GCsZv0NuEmzyyDBD8HyNraq_cEPSSXuqlbeUBNPLezCGRKOpV_zLaqUkS4MkJ2hJf0JMrh1yuLarijczyfnzhfJFsdTB3jl5MACnb-bhjt2xkO6OsNDG4pE-VULHZC98UB8kD_2dVX8UoDK82lSsdtZw5MzJwe_fgh-mYKbe1U5ZkYkgykc99C7kpGIZFnFdFMoI7yIVhCiVNQTmLjdNELvmWHjsFc4Qmayical8SwT3ZYm9RnaoRSTn365zJNxyH4klKKqh0MWIzae_b2dPDJZY0xcw7yup0DuQ4T2uPznPgDIlw_NYLdnR0EFILMkqjANsI9zkEFv97nKCcKm9bcW0GTQiUH306Iy_5XXppamwRlf7za--RgIcOd4IFS4FmZf-_RAibVHZedoaXnYM02EnLmxzYS6AEYqtC6ZVltA8MZIfXbAmsWQPZtjTzUo36Kdxv2H684APurX0eTTS9z9SLWHqdl3wbZODzZWbyuedDdxw13j9UtR9bRMHeQ-mRPn-GR9vrguoeRiHyIphc=s1024-rj?authuser=1")
+      center/cover no-repeat !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+/* --- FIX TRIá»†T Äá»‚ Ã” VAI TRÃ’ (SELECT) --- */
+
+/* 1. KhÃ³a vá»‹ trÃ­ cá»¥m Vai trÃ² */
+#regRoleGroup {
+  margin-top: 5px !important;
+  margin-bottom: 15px !important;
+}
+
+/* 2. Ã‰p giao diá»‡n Select giá»‘ng há»‡t Input */
+.customSelectFixed {
+  height: 3.2rem !important;
+}
+
+.customSelectFixed .sapMSelectWithArrow {
+  height: 3.2rem !important;
+  background: #f8f9fa !important;
+  border: 2px solid #d1d5db !important;
+  border-radius: 10px !important;
+  transition: all 0.2s ease !important;
+}
+
+/* Fix chá»¯ bÃªn trong Select cho ngay ngáº¯n */
+.customSelectFixed .sapMSelectInner {
+  line-height: 3.2rem !important;
+  padding-left: 1rem !important;
+  font-weight: 500 !important;
+  color: #1a1a1a !important;
+}
+
+/* Fix mÅ©i tÃªn cá»§a Select */
+.customSelectFixed .sapMSelectArrow {
+  line-height: 3.2rem !important;
+  color: #0070f2 !important;
+}
+
+/* Hiá»‡u á»©ng khi hover/focus cho Ä‘á»“ng bá»™ */
+.customSelectFixed:hover .sapMSelectWithArrow {
+  border-color: #0070f2 !important;
+}
+/* BOX KÃNH Má»œ CHá»¨A LOGO */
+.brandingGlassBox {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  border-radius: 24px;
+  padding: 3.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  text-align: center;
+}
+
+.heroTitle {
+  color: #ffffff !important;
+  font-weight: 900 !important;
+  font-size: 2.5rem !important;
+  text-align: center !important;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8) !important;
+  margin-bottom: 1rem !important;
+}
+
+.heroSubtitle {
+  color: #00e5ff !important;
+  font-size: 1.15rem !important;
+  font-weight: 600 !important;
+  text-align: center !important;
+}
+
+/* ========== RIGHT SIDE: WHITE FORM ========== */
+.loginFormContainer {
+  flex: 1;
+  background: #ffffff !important;
+  padding: 2rem 4rem;
+  overflow-y: auto;
+}
+/* --- PHIÃŠN Báº¢N FIX TRIá»†T Äá»‚ REGISTER --- */
+
+/* 1. Ã‰p hiá»‡n Title báº±ng ID (Æ¯u tiÃªn cao hÆ¡n Class) */
+#regPageTitle {
+  color: #1a1a1a !important;
+  font-weight: 900 !important;
+  font-size: 2.2rem !important;
+  text-align: center !important;
+  display: block !important;
+  visibility: visible !important;
+  margin-bottom: 2rem !important;
+}
+
+/* 2. Ã‰p hÃ ng máº­t kháº©u náº±m ngang báº±ng ID */
+#regPasswordRow {
+  display: flex !important;
+  flex-direction: row !important; /* PHáº¢I LÃ€ ROW */
+  justify-content: space-between !important;
+  align-items: flex-end !important;
+  margin-bottom: 12px !important;
+}
+
+/* 3. Khá»­ margin nháº£y chá»¯ cho cÃ¡c Ã´ trong hÃ ng ngang */
+#regPasswordRow .formLabelDark {
+  margin-top: 0 !important;
+}
+.loginCardWhite {
+  width: 100%;
+  max-width: 480px;
+  padding: 3rem;
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.formTitleDark {
+  color: #1a1a1a !important;
+  font-weight: 900 !important;
+  font-size: 2.2rem !important;
+  text-align: center !important;
+  display: block !important; /* Ã‰p hiá»ƒn thá»‹ */
+  margin-top: 0 !important;
+}
+
+/* ========== FORM INPUTS - CLEAN STYLE ========== */
+.formLabelDark {
+  color: #1a1a1a !important;
+  font-weight: 600 !important;
+  font-size: 0.9rem !important;
+  margin-bottom: 4px !important; /* KÃ©o sÃ¡t label xuá»‘ng input */
+  margin-top: 15px !important; /* Äáº©y label ra xa input phÃ­a trÃªn */
+  display: block !important;
+}
+.selectHeightFix {
+  height: 3.2rem !important;
+}
+.selectHeightFix .sapMSelectWithArrow {
+  height: 3.2rem !important;
+  background: #f8f9fa !important;
+  border: 2px solid #d1d5db !important;
+  border-radius: 10px !important;
+}
+.selectHeightFix .sapMSelectInner {
+  line-height: 3.2rem !important;
+}
+.formInputClean .sapMInputBaseContentWrapper {
+  background: #f8f9fa !important;
+  border: 2px solid #d1d5db !important;
+  border-radius: 10px !important;
+  height: 3.2rem !important;
+  margin-top: 0 !important; /* Khá»­ hoÃ n toÃ n margin top Ä‘á»ƒ sÃ¡t label */
+}
+.inputGroup {
+  margin-bottom: 12px !important;
+  display: flex !important;
+  flex-direction: column !important; /* Ã‰p dá»c cho cÃ¡c Ã´ há» tÃªn, email... */
+}
+/* DÃ nh riÃªng cho hÃ ng Máº­t kháº©u (Side-by-side) */
+.inputRow {
+  margin-bottom: 12px !important;
+  display: flex !important;
+  flex-direction: row !important; /* Ã‰P Náº°M NGANG, khÃ´ng Ä‘Æ°á»£c dÃ¹ng column á»Ÿ Ä‘Ã¢y */
+  justify-content: space-between !important;
+  width: 100% !important;
+}
+.inputRow .formLabelDark {
+  margin-top: 0 !important; /* Triá»‡t tiÃªu margin gÃ¢y nháº£y chá»¯ */
+}
+.formInputClean .sapMInputBaseContentWrapper:hover {
+  border-color: #0070f2 !important;
+}
+
+.formInputClean.sapMInputBaseFocused .sapMInputBaseContentWrapper {
+  border-color: #0070f2 !important;
+  background: #ffffff !important;
+  box-shadow: 0 0 0 3px rgba(0, 112, 242, 0.1) !important;
+}
+
+.formInputClean .sapMInputBaseInner {
+  color: #1a1a1a !important;
+  font-size: 1rem !important;
+  font-weight: 500 !important;
+  padding: 0 1.2rem !important;
+  height: 3.5rem !important;
+  line-height: 3.5rem !important;
+}
+
+.formInputClean .sapMInputBaseInner::placeholder {
+  color: rgba(0, 0, 0, 0.4) !important;
+}
+
+/* ========== PRIMARY BUTTON ========== */
+.btnPrimaryBlue .sapMBtnInner {
+  background: linear-gradient(135deg, #0070f2 0%, #0095ff 100%) !important;
+  border: none !important;
+  border-radius: 10px !important;
+  height: 3.2rem !important;
+  font-weight: 800 !important;
+  font-size: 1rem !important;
+  letter-spacing: 0.5px !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 14px rgba(0, 112, 242, 0.35) !important;
+  transition: all 0.3s ease !important;
+  line-height: 3.2rem !important;
+}
+
+.btnPrimaryBlue .sapMBtnContent {
+  line-height: 3.2rem !important; /* Ã‰p chá»¯ náº±m chÃ­nh giá»¯a */
+  font-weight: 800 !important;
+  font-size: 0.95rem !important;
+}
+
+.btnPrimaryBlue .sapMBtnInner:active {
+  transform: translateY(0) !important;
+}
+
+/* ========== DIVIDER ========== */
+.dividerContainer {
+  margin: 2rem 0 1.5rem 0 !important;
+}
+
+.dividerTextGray {
+  color: #9ca3af !important;
+  font-weight: 700 !important;
+  font-size: 0.8rem !important;
+}
+
+/* ========== DEMO BUTTONS SECTION ========== */
+.demoTitleBlue {
+  color: #0070f2 !important;
+  font-weight: 800 !important;
+  font-size: 1.05rem !important;
+  text-align: center !important;
+}
+
+.demoButtonsRow {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.btnDemoClean {
+  flex: 1 !important; /* Ã‰p 3 nÃºt chia Ä‘á»u chiá»u rá»™ng */
+  height: 4.5rem !important; /* Cá»‘ Ä‘á»‹nh chiá»u cao */
+  margin: 0 4px !important; /* Khoáº£ng cÃ¡ch giá»¯a cÃ¡c nÃºt */
+}
+
+.btnDemoClean .sapMBtnInner {
+  height: 100% !important;
+  display: flex !important;
+  flex-direction: column !important; /* Icon trÃªn chá»¯ dÆ°á»›i */
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.btnDemoClean .sapMBtnIcon {
+  font-size: 1.4rem !important;
+}
+
+.btnDemoClean .sapMBtnContent {
+  font-weight: 700 !important;
+  font-size: 0.9rem !important;
+  letter-spacing: 0.3px !important;
+}
+
+/* Employee Button - Blue */
+.btnDemoBlue .sapMBtnInner {
+  background: #ffffff !important;
+  border: 2px solid #0070f2 !important;
+}
+
+.btnDemoBlue .sapMBtnIcon,
+.btnDemoBlue .sapMBtnContent {
+  color: #0070f2 !important;
+}
+
+.btnDemoBlue .sapMBtnInner:hover {
+  background: #f0f7ff !important;
+  border-color: #0056d2 !important;
+  transform: translateY(-2px) !important;
+}
+
+/* Manager Button - Orange */
+.btnDemoOrange .sapMBtnInner {
+  background: #ffffff !important;
+  border: 2px solid #e09d00 !important;
+}
+
+.btnDemoOrange .sapMBtnIcon,
+.btnDemoOrange .sapMBtnContent {
+  color: #e09d00 !important;
+}
+
+.btnDemoOrange .sapMBtnInner:hover {
+  background: #fff9f0 !important;
+  border-color: #c28600 !important;
+  transform: translateY(-2px) !important;
+}
+
+/* Admin Button - Red */
+.btnDemoRed .sapMBtnInner {
+  background: #ffffff !important;
+  border: 2px solid #dc2626 !important;
+}
+
+.btnDemoRed .sapMBtnIcon,
+.btnDemoRed .sapMBtnContent {
+  color: #dc2626 !important;
+}
+
+.btnDemoRed .sapMBtnInner:hover {
+  background: #fff5f5 !important;
+  border-color: #b91c1c !important;
+  transform: translateY(-2px) !important;
+}
+
+/* ========== FOOTER LINKS ========== */
+.linkBlue {
+  color: #0070f2 !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+}
+
+.linkBlue:hover {
+  text-decoration: underline !important;
+}
+
+.textMuted {
+  color: #6b7280 !important;
+  font-size: 0.95rem !important;
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 768px) {
+  .splitLoginContainer {
+    flex-direction: column !important;
+  }
+
+  .loginHeroGravity {
+    display: none !important;
+  }
+
+  .loginFormContainer {
+    padding: 2rem 1.5rem !important;
+  }
+
+  .loginCardWhite {
+    padding: 2rem !important;
+  }
+
+  .demoButtonsRow {
+    flex-direction: column !important;
+  }
+
+  .btnDemoClean {
+    width: 100% !important;
+  }
+}
+/* ============================================================
+   ADMIN DASHBOARD PROFESSIONAL UI (FINAL FIX)
+   ============================================================ */
+
+.adminPage {
+  background-color: #f8fafc !important;
+}
+
+/* Ã‰p khung ná»™i dung Admin full width */
+.adminContentContainer {
+  width: 100% !important;
+  max-width: 1400px;
+  margin: 0 auto !important;
+}
+
+/* KPI CARDS */
+.admKpiCard {
+  background: #ffffff !important;
+  border-radius: 16px !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+}
+
+.kpiLabelCyber {
+  color: #64748b !important;
+  font-size: 0.85rem !important;
+  font-weight: 500 !important;
+}
+
+/* Icon Circles in KPIs */
+.iconCircle {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.bgHorizonLight {
+  background-color: #eff6ff;
+}
+.bgSuccessLight {
+  background-color: #f0fdf4;
+}
+.bgWarningLight {
+  background-color: #fffbeb;
+}
+.bgErrorLight {
+  background-color: #fef2f2;
+}
+
+.iconHorizon {
+  color: #0070f2 !important;
+  font-size: 1.5rem !important;
+}
+.iconSuccess {
+  color: #22c55e !important;
+  font-size: 1.5rem !important;
+}
+.iconWarning {
+  color: #f59e0b !important;
+  font-size: 1.5rem !important;
+}
+.iconError {
+  color: #ef4444 !important;
+  font-size: 1.5rem !important;
+}
+
+/* Progress Bar Custom */
+.customProgress .sapMPIBarSuccess {
+  background-color: #22c55e !important;
+}
+
+/* BENTO CARD DETAIL (For Admin) */
+.bentoCardDetail {
+  background: #ffffff !important;
+  border-radius: 20px !important;
+  padding: 2rem !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05) !important;
+  width: 100% !important;
+  margin-bottom: 1rem !important;
+}
+
+.borderTop {
+  border-top: 1px solid #f1f5f9;
+  padding-top: 1rem;
+}
+/* ============================================
+   SAP BTP REGISTER PAGE - REFINED CYBER UI
+   Matching Login & Upload Portal Design
+   Project: Capstone FPT University
+   Author: Putie & Claude
+   ============================================ */
+
+/* --- 1. PAGE FOUNDATION --- */
+.loginPage {
+  background: linear-gradient(
+    135deg,
+    #0a0e1a 0%,
+    #020617 50%,
+    #0d1117 100%
+  ) !important;
+}
+
+.sapMPageContent {
+  padding: 0 !important;
+}
+
+/* --- 2. SPLIT LAYOUT CONTAINER --- */
+.splitLoginContainer {
+  height: 100vh !important;
+  width: 100%;
+  display: flex !important;
+}
+
+/* --- 3. LEFT HERO SIDE - SPACE BACKGROUND --- */
+.loginHeroSide {
+  flex: 1.3;
+  background:
+    linear-gradient(rgba(0, 8, 20, 0.5), rgba(2, 6, 23, 0.8)),
+    url("https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072")
+      no-repeat center center;
+  background-size: cover !important;
+  background-attachment: fixed;
+  padding: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.heroBrandingBox {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(25px) saturate(150%);
+  padding: 4rem 3rem;
+  border-radius: 32px;
+  border: 1.5px solid rgba(0, 229, 255, 0.2);
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.7),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  max-width: 500px;
+  text-align: center;
+}
+
+/* --- 4. LOGO WITH GLOW EFFECT --- */
+.logoBacklight {
+  background: radial-gradient(
+    circle,
+    rgba(0, 229, 255, 0.2) 0%,
+    rgba(0, 112, 242, 0.1) 40%,
+    transparent 70%
+  );
+  padding: 2.5rem;
+  border-radius: 50%;
+  animation: pulseGlow 3s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+  0%,
+  100% {
+    box-shadow: 0 0 30px rgba(0, 229, 255, 0.3);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 50px rgba(0, 229, 255, 0.5);
+    transform: scale(1.02);
+  }
+}
+
+.logoBacklight img {
+  filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.3));
+}
+
+/* --- 5. HERO TEXT STYLING --- */
+.neonTitleText {
+  color: #ffffff !important;
+  font-weight: 950 !important;
+  font-size: 3.5rem !important;
+  text-align: center;
+  text-shadow:
+    0 0 30px rgba(0, 229, 255, 0.6),
+    0 0 60px rgba(0, 229, 255, 0.3),
+    0 10px 40px rgba(0, 0, 0, 0.8) !important;
+  letter-spacing: 2px;
+  margin-bottom: 1rem !important;
+}
+
+.heroSubTextCyber {
+  color: #94a3b8 !important;
+  font-size: 1.2rem !important;
+  font-weight: 600 !important;
+  text-align: center;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+  letter-spacing: 0.5px;
+}
+
+/* --- 6. RIGHT FORM SIDE --- */
+.loginFormSide {
+  flex: 1;
+  background: linear-gradient(135deg, #0f172a 0%, #020617 100%) !important;
+  padding: 3rem 4rem;
+  overflow-y: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* --- 7. FORM CARD CONTAINER --- */
+.cyberLoginCard {
+  width: 100%;
+  max-width: 520px;
+  padding: 3.5rem !important;
+  background: linear-gradient(
+    135deg,
+    rgba(15, 23, 42, 0.9) 0%,
+    rgba(30, 41, 59, 0.7) 100%
+  );
+  border: 1.5px solid rgba(0, 229, 255, 0.2);
+  border-radius: 28px;
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.8),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+}
+
+/* --- 8. FORM TITLE --- */
+.formTitleHighContrast {
+  color: #ffffff !important;
+  font-weight: 950 !important;
+  font-size: 2.2rem !important;
+  text-align: center;
+  letter-spacing: 1px;
+  text-shadow:
+    0 0 20px rgba(0, 229, 255, 0.4),
+    0 5px 15px rgba(0, 0, 0, 0.8) !important;
+  margin-bottom: 2.5rem !important;
+}
+
+/* --- 9. FORM LABELS --- */
+.labelCyber {
+  color: #94a3b8 !important;
+  font-weight: 700 !important;
+  font-size: 0.9rem !important;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem !important;
+  display: block;
+}
+
+/* --- 10. INPUT FIELDS - HIGH CONTRAST --- */
+.loginInputCyber {
+  width: 100% !important;
+  margin-bottom: 1.5rem !important;
+}
+
+.loginInputCyber .sapMInputBaseContentWrapper {
+  background: rgba(2, 6, 23, 0.8) !important;
+  border: 1.5px solid rgba(148, 163, 184, 0.3) !important;
+  border-radius: 12px !important;
+  transition: all 0.3s ease;
+  height: 3.2rem !important;
+}
+
+.loginInputCyber .sapMInputBaseInner {
+  color: #ffffff !important;
+  font-size: 1rem !important;
+  font-weight: 500 !important;
+  padding: 0 1.2rem !important;
+  line-height: 3.2rem !important;
+}
+
+/* Input Placeholder */
+.loginInputCyber .sapMInputBaseInner::placeholder {
+  color: rgba(148, 163, 184, 0.5) !important;
+}
+
+/* Input Focus State */
+.loginInputCyber:focus-within .sapMInputBaseContentWrapper,
+.loginInputCyber .sapMInputBaseContentWrapper:focus-within {
+  border-color: #00f2ff !important;
+  box-shadow:
+    0 0 0 3px rgba(0, 242, 255, 0.1),
+    0 0 20px rgba(0, 242, 255, 0.2) !important;
+  background: rgba(2, 6, 23, 0.95) !important;
+}
+
+/* --- 11. SELECT DROPDOWN --- */
+.selectDarkRefined {
+  width: 100% !important;
+  margin-bottom: 1.5rem !important;
+}
+
+.selectDarkRefined .sapMSelectWithArrow {
+  background: rgba(2, 6, 23, 0.8) !important;
+  border: 1.5px solid rgba(148, 163, 184, 0.3) !important;
+  border-radius: 12px !important;
+  height: 3.2rem !important;
+  transition: all 0.3s ease;
+}
+
+.selectDarkRefined .sapMSelectInner {
+  color: #ffffff !important;
+  font-weight: 600 !important;
+  font-size: 1rem !important;
+  line-height: 3.2rem !important;
+  padding: 0 3rem 0 1.2rem !important;
+}
+
+.selectDarkRefined .sapMSelectArrow {
+  color: #00f2ff !important;
+  font-size: 1rem !important;
+}
+
+/* Select Focus State */
+.selectDarkRefined:focus-within .sapMSelectWithArrow,
+.selectDarkRefined .sapMSelectWithArrow:focus-within {
+  border-color: #00f2ff !important;
+  box-shadow:
+    0 0 0 3px rgba(0, 242, 255, 0.1),
+    0 0 20px rgba(0, 242, 255, 0.2) !important;
+}
+
+/* --- 12. PRIMARY ACTION BUTTON --- */
+.btnCyberActionRefined {
+  width: 100% !important;
+  height: 3.8rem !important;
+  margin-top: 2rem !important;
+}
+
+.btnCyberActionRefined .sapMBtnInner {
+  background: linear-gradient(
+    135deg,
+    #0070f2 0%,
+    #00d4ff 50%,
+    #00f2ff 100%
+  ) !important;
+  border: none !important;
+  border-radius: 12px !important;
+  box-shadow:
+    0 10px 30px rgba(0, 112, 242, 0.4),
+    0 0 40px rgba(0, 242, 255, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  height: 100%;
+}
+
+.btnCyberActionRefined .sapMBtnContent {
+  color: #ffffff !important;
+  font-weight: 900 !important;
+  font-size: 1.05rem !important;
+  letter-spacing: 1.5px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.btnCyberActionRefined:hover .sapMBtnInner {
+  background: linear-gradient(
+    135deg,
+    #0084ff 0%,
+    #00e5ff 50%,
+    #00f9ff 100%
+  ) !important;
+  box-shadow:
+    0 15px 40px rgba(0, 112, 242, 0.5),
+    0 0 60px rgba(0, 242, 255, 0.3) !important;
+  transform: translateY(-3px);
+}
+
+.btnCyberActionRefined:active .sapMBtnInner {
+  transform: translateY(-1px);
+}
+
+/* --- 13. FOOTER LINKS --- */
+.textMutedCyber {
+  color: #94a3b8 !important;
+  font-size: 0.95rem !important;
+  font-weight: 500 !important;
+}
+
+.lnkCyberHighlight {
+  color: #00f2ff !important;
+  font-weight: 700 !important;
+  font-size: 0.95rem !important;
+  text-decoration: none !important;
+  transition: all 0.2s ease;
+}
+
+.lnkCyberHighlight:hover {
+  color: #ffffff !important;
+  text-shadow: 0 0 10px rgba(0, 242, 255, 0.5);
+}
+
+/* --- 14. SPACING UTILITIES --- */
+.sapUiSmallMarginBottom {
+  margin-bottom: 1rem !important;
+}
+.sapUiMediumMarginBottom {
+  margin-bottom: 2rem !important;
+}
+.sapUiLargeMarginBottom {
+  margin-bottom: 3rem !important;
+}
+.sapUiMediumMarginTop {
+  margin-top: 2rem !important;
+}
+.sapUiLargeMarginTop {
+  margin-top: 3rem !important;
+}
+.sapUiTinyMarginEnd {
+  margin-right: 0.5rem !important;
+}
+
+/* --- 15. PASSWORD ROW LAYOUT --- */
+.loginFormInner {
+  width: 100%;
+}
+
+/* --- 16. RESPONSIVE DESIGN --- */
+@media (max-width: 1024px) {
+  .loginHeroSide {
+    flex: 1;
+  }
+
+  .neonTitleText {
+    font-size: 2.8rem !important;
+  }
+
+  .heroBrandingBox {
+    padding: 3rem 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .splitLoginContainer {
+    flex-direction: column !important;
+  }
+
+  .loginHeroSide {
+    display: none !important;
+  }
+
+  .loginFormSide {
+    flex: 1;
+    background: #020617 !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem !important; /* Giáº£m padding ngoÃ i Ä‘á»ƒ card cÃ³ khÃ´ng gian */
+    overflow-y: auto;
+  }
+
+  .cyberLoginCard {
+    width: 100% !important;
+    max-width: 500px !important; /* Äá»™ rá»™ng lÃ½ tÆ°á»Ÿng Ä‘á»ƒ khÃ´ng bá»‹ trÃ n */
+    padding: 3rem 2.5rem !important; /* Tinh chá»‰nh láº¡i khoáº£ng cÃ¡ch trong */
+    background: rgba(15, 23, 42, 0.9) !important;
+    border-radius: 28px;
+    border: 1px solid rgba(0, 242, 255, 0.2);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+    box-sizing: border-box !important; /* Ráº¥t quan trá»ng Ä‘á»ƒ trÃ¡nh trÃ n viá»n */
+  }
+
+  .formTitleHighContrast {
+    font-size: 1.8rem !important;
+  }
+}
+
+/* --- 17. SCROLLBAR STYLING --- */
+.loginFormSide::-webkit-scrollbar {
+  width: 8px;
+}
+
+.loginFormSide::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.5);
+}
+
+.loginFormSide::-webkit-scrollbar-thumb {
+  background: rgba(0, 242, 255, 0.3);
+  border-radius: 4px;
+}
+
+.loginFormSide::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 242, 255, 0.5);
+}
+
+/* --- 18. FORM VALIDATION STATES --- */
+.loginInputCyber.sapMInputBaseError .sapMInputBaseContentWrapper {
+  border-color: #ef4444 !important;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1) !important;
+}
+
+.loginInputCyber.sapMInputBaseSuccess .sapMInputBaseContentWrapper {
+  border-color: #10b981 !important;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1) !important;
+}
+
+/* --- 19. DISABLED STATE --- */
+.loginInputCyber:disabled .sapMInputBaseContentWrapper,
+.selectDarkRefined:disabled .sapMSelectWithArrow {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* --- 20. LOADING STATE --- */
+.btnCyberActionRefined.sapMBtnDisabled .sapMBtnInner {
+  background: linear-gradient(
+    135deg,
+    rgba(0, 112, 242, 0.4) 0%,
+    rgba(0, 212, 255, 0.4) 100%
+  ) !important;
+  cursor: not-allowed;
+}
+
+/* --- 21. ACCESSIBILITY ENHANCEMENTS --- */
+.loginInputCyber:focus .sapMInputBaseContentWrapper,
+.selectDarkRefined:focus .sapMSelectWithArrow,
+.btnCyberActionRefined:focus .sapMBtnInner {
+  outline: 2px solid rgba(0, 242, 255, 0.5) !important;
+  outline-offset: 2px;
+}
+
+/* --- 22. ANIMATION DELAYS --- */
+.cyberLoginCard {
+  animation: slideInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.heroBrandingBox {
+  animation: fadeInScale 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+/* ============================================================
+   LOVABLE DESIGN SYSTEM - SAP ENTERPRISE PORT
+   ============================================================ */
+
+:root {
+  /* Core SAP Brand Colors (HSL) */
+  --sap-blue: 210, 100%, 48%; /* #0070f2 */
+  --sap-blue-dark: 210, 100%, 38%;
+  --sap-blue-light: 210, 100%, 95%;
+
+  /* Background & Surface */
+  --background: 210, 20%, 98%; /* #f8fafc */
+  --foreground: 210, 25%, 15%; /* #1e293b */
+
+  --card: 0, 0%, 100%; /* #ffffff */
+  --card-foreground: 210, 25%, 15%;
+
+  /* Status Colors */
+  --status-success: 145, 65%, 42%; /* #16a34a */
+  --status-success-bg: 145, 65%, 95%;
+  --status-warning: 38, 92%, 50%; /* #f59e0b */
+  --status-warning-bg: 38, 92%, 95%;
+  --status-error: 0, 72%, 51%; /* #ef4444 */
+  --status-error-bg: 0, 72%, 96%;
+  --status-info: 210, 100%, 48%; /* #0070f2 */
+  --status-info-bg: 210, 100%, 96%;
+
+  /* Border & Input */
+  --border: 210, 20%, 88%; /* #e2e8f0 */
+  --muted-foreground: 210, 15%, 45%; /* #64748b */
+}
+
+/* --- BASE UTILITIES --- */
+.bg-background {
+  background-color: hsl(var(--background)) !important;
+}
+.text-foreground {
+  color: hsl(var(--foreground)) !important;
+}
+.text-muted {
+  color: hsl(var(--muted-foreground)) !important;
+}
+
+/* 1. ENTERPRISE CARD (Shadow & Border) */
+.enterprise-card {
+  background-color: hsl(var(--card)) !important;
+  border: 1px solid hsl(var(--border)) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+  padding: 1.5rem !important;
+}
+
+.enterprise-card-elevated {
+  background-color: hsl(var(--card)) !important;
+  border: 1px solid hsl(var(--border)) !important;
+  border-radius: 16px !important;
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.08) !important;
+  padding: 2rem !important;
+}
+
+/* 2. PAGE HEADER */
+.pageHeaderContainer {
+  margin-bottom: 2rem;
+  padding-left: 0.5rem;
+}
+.pageTitle {
+  font-size: 1.875rem !important; /* text-3xl */
+  font-weight: 800 !important;
+  color: hsl(var(--foreground)) !important;
+  letter-spacing: -0.5px;
+  margin-bottom: 0.5rem !important;
+}
+.pageSubtitle {
+  font-size: 1rem !important;
+  color: hsl(var(--muted-foreground)) !important;
+}
+
+/* 3. UPLOAD ZONE (Override SAP UploadSet) */
+.lovableUploadSet .sapMUC {
+  border: 2px dashed hsl(var(--border)) !important;
+  background-color: hsl(var(--background)) !important;
+  border-radius: 12px !important;
+  min-height: 250px !important;
+  transition: all 0.2s ease;
+}
+.lovableUploadSet .sapMUC:hover {
+  border-color: hsl(var(--sap-blue)) !important;
+  background-color: hsl(var(--sap-blue-light)) !important;
+}
+.lovableUploadSet .sapMUCNoData {
+  opacity: 0.8 !important;
+}
+
+/* 4. SIDEBAR COMPONENTS */
+.sidebarTitle {
+  font-size: 1rem !important;
+  font-weight: 700 !important;
+  color: hsl(var(--foreground)) !important;
+  margin-bottom: 1rem !important;
+  display: block;
+}
+
+/* Icon Box for Requirements */
+.iconBox {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 8px;
+  background-color: hsl(var(--sap-blue-light));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0.75rem;
+}
+.iconBox .sapUiIcon {
+  color: hsl(var(--sap-blue)) !important;
+  font-size: 1.2rem !important;
+}
+
+/* Requirement List Items */
+.reqItem {
+  display: flex !important;
+  align-items: flex-start !important;
+  margin-bottom: 0.75rem !important;
+  font-size: 0.95rem !important; /* Increased from 0.875rem */
+  line-height: 1.5 !important;
+  color: hsl(var(--foreground)) !important; /* Darker text for readability */
+}
+.reqBullet {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: hsl(var(--sap-blue));
+  margin-top: 10px; /* Aligned with larger text */
+  margin-right: 12px; /* More spacing */
+  flex-shrink: 0;
+}
+
+/* Chips/Tags for Columns */
+.columnChip {
+  background-color: hsl(var(--background)) !important;
+  border: 1px solid hsl(var(--border)) !important;
+  color: hsl(var(--foreground)) !important;
+  font-size: 0.85rem !important;
+  font-family:
+    "72", "72full", Arial, Helvetica, sans-serif !important; /* Use SAP font */
+  padding: 6px 12px !important; /* Larger touch target */
+  border-radius: 20px !important; /* More rounded */
+  margin-right: 0.5rem !important;
+  margin-bottom: 0.5rem !important;
+  display: inline-block !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+/* Info Box */
+.infoBoxSurface {
+  background-color: hsl(var(--status-info-bg) / 0.5) !important;
+  border: 1px solid hsl(var(--status-info-bg)) !important;
+  border-radius: 12px !important;
+  padding: 1.5rem !important;
+}
+.infoTitle {
+  font-weight: 600 !important;
+  color: hsl(var(--foreground)) !important;
+  margin-bottom: 0.25rem !important;
+}
+.infoText {
+  font-size: 0.875rem !important;
+  color: hsl(var(--muted-foreground)) !important;
+}
+
+/* 5. PROCESS STATUS BAR */
+.lovableStepLine {
+  position: relative;
+  margin-bottom: 2rem !important;
+  padding: 0 1rem;
+}
+.lovableLineBase {
+  position: absolute;
+  top: 24px;
+  left: 2rem;
+  right: 2rem;
+  height: 2px;
+  background: hsl(var(--border));
+  z-index: 0;
+}
+.lovableStepCircle {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: hsl(var(--card));
+  border: 2px solid hsl(var(--border));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  transition: all 0.3s ease;
+}
+.lovableStepCircle.active {
+  background: hsl(var(--sap-blue));
+  border-color: hsl(var(--sap-blue));
+  color: #fff;
+  box-shadow: 0 0 0 4px hsl(var(--sap-blue-light));
+}
+.lovableStepCircle .sapUiIcon {
+  font-size: 1.5rem !important;
+}
+.lovableStepLabel {
+  font-size: 0.75rem !important;
+  font-weight: 600 !important;
+  margin-top: 0.5rem !important;
+  color: hsl(var(--muted-foreground)) !important;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.lovableStepLabel.active {
+  color: hsl(var(--sap-blue)) !important;
+}
+
+/* Buttons */
+.lovablePrimaryBtn .sapMBtnInner {
+  background-color: hsl(var(--sap-blue)) !important;
+  border: none !important;
+  color: #fff !important;
+  border-radius: 8px !important;
+  padding: 0 1.5rem !important;
+  font-weight: 600 !important;
+  height: 2.5rem !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 112, 242, 0.4) !important;
+}
+.lovablePrimaryBtn:hover .sapMBtnInner {
+  background-color: hsl(var(--sap-blue-dark)) !important;
+  transform: translateY(-1px);
+}
+
+/* ============================================================
+   SECTION C: CYBER ENTERPRISE BUTTONS (APPROVAL)
+   ============================================================ */
+.lan_btnApprove .sapMBtnInner {
+  background: rgba(16, 185, 129, 0.2) !important;
+  backdrop-filter: blur(5px);
+  border: 1px solid #10b981 !important;
+  border-radius: 20px !important;
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.4);
+  color: #10b981 !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.lan_btnApprove .sapMBtnContent,
+.lan_btnApprove .sapMBtnIcon {
+  color: #10b981 !important;
+  font-weight: 700 !important;
+  text-shadow: 0 0 5px rgba(16, 185, 129, 0.5);
+}
+
+.lan_btnApprove:hover .sapMBtnInner {
+  background: #10b981 !important;
+  box-shadow:
+    0 0 20px rgba(16, 185, 129, 0.8),
+    0 0 5px #00f2ff !important;
+  transform: scale(1.05);
+  border-color: #00f2ff !important;
+}
+
+.lan_btnApprove:hover .sapMBtnContent,
+.lan_btnApprove:hover .sapMBtnIcon {
+  color: #000 !important;
+  text-shadow: none !important;
+}
+
+/* REJECT BUTTON */
+.lan_btnReject .sapMBtnInner {
+  background: transparent !important;
+  border: 1px solid #ff4d4f !important;
+  border-radius: 20px !important;
+  box-shadow: 0 0 8px rgba(255, 77, 79, 0.3);
+  color: #ff4d4f !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.lan_btnReject .sapMBtnContent,
+.lan_btnReject .sapMBtnIcon {
+  color: #ff4d4f !important;
+  font-weight: 700 !important;
+  text-shadow: 0 0 5px rgba(255, 77, 79, 0.5);
+}
+
+.lan_btnReject:hover .sapMBtnInner {
+  background: #ff4d4f !important;
+  box-shadow: 0 0 20px rgba(255, 77, 79, 0.8) !important;
+  transform: scale(1.05);
+}
+
+.lan_btnReject:hover .sapMBtnContent,
+.lan_btnReject:hover .sapMBtnIcon {
+  color: #fff !important;
+  text-shadow: none !important;
+}
+
+/* ============================================================
+   CYBER TABLE STRIPING
+   ============================================================ */
+/* Default row transparency */
+.cyberTable .sapMListTblRow {
+  background-color: transparent !important;
+}
+
+/* Alternate row styling (Even rows) - Subtle Cyan Tint */
+.cyberTable .sapMListTblAltRow {
+  background-color: rgba(0, 242, 255, 0.03) !important;
+}
+
+/* Hover effect for rows */
+.cyberTable .sapMListTblRow:hover {
+  background-color: rgba(0, 112, 242, 0.05) !important;
+  transition: background-color 0.2s ease;
+}
+
+/* ============================================================
+   SECTION D: CYBER UI OVERHAUL (GLASSMORPHISM & GLOW)
+   ============================================================ */
+
+/* 1. GLASSMORPHISM CONTAINERS */
+.bentoCardDetail,
+.enterprise-card,
+.enterprise-card-elevated,
+.infoBoxDetail {
+  background: rgba(255, 255, 255, 0.7) !important; /* Semi-transparent white */
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(0, 242, 255, 0.2) !important; /* Thin Cyan Border */
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07) !important;
+}
+
+/* 2. ACTIVE LIST STYLING (NEON GLOW) */
+.sapMLIBSelected {
+  border-left: 4px solid #00f2ff !important; /* Cyan Border */
+  background-color: rgba(0, 242, 255, 0.05) !important;
+  box-shadow: 0 0 15px rgba(0, 242, 255, 0.3) !important; /* Subtle Outer Glow */
+  transition: all 0.3s ease !important;
+  z-index: 1; /* Bring to front for shadow */
+}
+
+/* 3. DATA TYPOGRAPHY (MONOSPACE) */
+.priceText,
+.columnTag,
+.priceData {
+  font-family: "Courier New", Courier, monospace !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.5px;
+}
+
+/* 4. REFINED HEADER (CYAN BORDER) */
+.lan_header {
+  border-bottom: 1px solid rgba(0, 242, 255, 0.5) !important;
+  box-shadow: 0 4px 15px rgba(0, 242, 255, 0.1) !important;
+  background: rgba(255, 255, 255, 0.9) !important;
+  backdrop-filter: blur(10px) !important;
+}
+
+/* 5. PROCESS INDICATOR (APPROVAL DETAIL) */
+.cyberProcessContainer {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 12px;
+  border: 1px solid rgba(0, 242, 255, 0.1);
+}
+
+.processStep {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.processIconBox {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.processLabel {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #94a3b8;
+  text-transform: uppercase;
+}
+
+/* Active State */
+.processStep.active .processIconBox {
+  background: #00f2ff;
+  border-color: #00f2ff;
+  box-shadow: 0 0 10px rgba(0, 242, 255, 0.5);
+}
+.processStep.active .processLabel {
+  color: #0070f2;
+}
+.processStep.active .sapUiIcon {
+  color: #fff !important;
+}
+
+/* Connector Line */
+.processLine {
+  height: 2px;
+  background: #e2e8f0;
+  flex-grow: 1;
+  margin-top: 20px; /* Align with center of circle (40px/2) */
+  position: relative;
+  z-index: 0;
+}
+.processLine.active {
+  background: #00f2ff;
+  box-shadow: 0 0 5px rgba(0, 242, 255, 0.3);
+}
+
+/* ============================================================
+   PROCESS FLOW: SUCCESS & ERROR STATES
+   ============================================================ */
+
+/* Success State (Green) */
+.processStep.success .processIconBox {
+  background: #10b981; /* Emerald-500 */
+  border-color: #10b981;
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+}
+.processStep.success .processLabel {
+  color: #10b981;
+}
+.processStep.success .sapUiIcon {
+  color: #fff !important;
+}
+.processLine.success {
+  background: #10b981;
+  box-shadow: 0 0 5px rgba(16, 185, 129, 0.3);
+}
+
+/* Error State (Red) */
+.processStep.error .processIconBox {
+  background: #ef4444; /* Red-500 */
+  border-color: #ef4444;
+  box-shadow: 0 0 10px rgba(239, 68, 68, 0.5);
+}
+.processStep.error .processLabel {
+  color: #ef4444;
+}
+.processStep.error .sapUiIcon {
+  color: #fff !important;
+}
+
+/* ============================================================
+   SECTION E: STANDARD PROCESS FLOW CYBER STYLING
+   ============================================================ */
+
+/* Node Container */
+.sapSuiteUiCommonsProcessFlowNode {
+  outline: none !important;
+}
+
+/* Success Node (Green Glow) */
+.sapSuiteUiCommonsProcessFlowNodeStatePositive
+  .sapSuiteUiCommonsProcessFlowNodeContent {
+  background-color: rgba(16, 185, 129, 0.1) !important;
+  border-color: #10b981 !important;
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.4) !important;
+}
+.sapSuiteUiCommonsProcessFlowNodeStatePositive
+  .sapSuiteUiCommonsProcessFlowNodeStateIcon {
+  color: #10b981 !important;
+}
+
+/* Error Node (Red Glow) */
+.sapSuiteUiCommonsProcessFlowNodeStateNegative
+  .sapSuiteUiCommonsProcessFlowNodeContent {
+  background-color: rgba(239, 68, 68, 0.1) !important;
+  border-color: #ef4444 !important;
+  box-shadow: 0 0 15px rgba(239, 68, 68, 0.6) !important;
+}
+.sapSuiteUiCommonsProcessFlowNodeStateNegative
+  .sapSuiteUiCommonsProcessFlowNodeStateIcon {
+  color: #ef4444 !important;
+}
+
+/* Planned/Neutral Node (Blue/Cyan Glow) */
+.sapSuiteUiCommonsProcessFlowNodeStateNeutral
+  .sapSuiteUiCommonsProcessFlowNodeContent,
+.sapSuiteUiCommonsProcessFlowNodeStatePlanned
+  .sapSuiteUiCommonsProcessFlowNodeContent {
+  background-color: rgba(0, 242, 255, 0.05) !important;
+  border-color: rgba(0, 242, 255, 0.3) !important;
+}
+
+/* Focused Node */
+.sapSuiteUiCommonsProcessFlowNodeFocused
+  .sapSuiteUiCommonsProcessFlowNodeContent {
+  box-shadow:
+    0 0 0 2px #00f2ff,
+    0 0 10px rgba(0, 242, 255, 0.5) !important;
+}
+
+/* ============================================================
+   STATUS BADGES
+   ============================================================ */
+.badgeError {
+  color: #ef4444 !important; /* Red */
+  font-weight: 700;
+  text-shadow: 0 0 5px rgba(239, 68, 68, 0.3);
+}
+
+.badgeSuccess {
+  color: #10b981 !important; /* Green */
+  font-weight: 700;
+  text-shadow: 0 0 5px rgba(16, 185, 129, 0.3);
+}
+
+.resultDocStatus.sapMObjStatusInverted .sapMObjStatusText,
+.resultDocStatus.sapMObjStatusInverted .sapMObjStatusIcon,
+.sapMObjStatusInverted.sapMObjStatusSuccess .sapMObjStatusText,
+.sapMObjStatusInverted.sapMObjStatusSuccess .sapMObjStatusIcon,
+.sapMObjStatusInverted.sapMObjStatusError .sapMObjStatusText,
+.sapMObjStatusInverted.sapMObjStatusError .sapMObjStatusIcon {
+  color: #fff !important;
+}
+
+.badgeWarning {
+  color: #f59e0b !important; /* Amber */
+  font-weight: 700;
+}
+
+/* ============================================================ 
+   FOOTER UPGRADE: CYBER-ENTERPRISE THEME
+   ============================================================ */
+
+.footerContainer {
+  background: rgba(255, 255, 255, 0.85) !important;
+  backdrop-filter: blur(12px) !important;
+  border-top: 1px solid rgba(0, 242, 255, 0.4) !important;
+  box-shadow: 0 -4px 20px rgba(0, 242, 255, 0.05) !important;
+  z-index: 100;
+  width: 100%;
+}
+
+.footerToolbar {
+  background: transparent !important;
+  border: none !important;
+  height: 3.5rem !important;
+}
+
+/* System Status Pulse Animation */
+.statusDot {
+  color: #10b981 !important; /* Emerald Green */
+  font-size: 0.7rem !important;
+  animation: pulseDot 2s infinite ease-in-out;
+}
+
+@keyframes pulseDot {
+  0% {
+    opacity: 0.6;
+    transform: scale(0.9);
+    text-shadow: 0 0 0px #10b981;
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+    text-shadow: 0 0 8px #10b981;
+  }
+  100% {
+    opacity: 0.6;
+    transform: scale(0.9);
+    text-shadow: 0 0 0px #10b981;
+  }
+}
+
+.statusText {
+  color: #64748b !important;
+  font-size: 0.75rem !important;
+  font-weight: 700 !important;
+  font-family: "Consolas", "Monaco", monospace !important;
+  letter-spacing: 0.5px;
+}
+
+/* Footer Link Buttons */
+.footerLinkBtn .sapMBtnInner {
+  border: none !important;
+  background: transparent !important;
+}
+.footerLinkBtn .sapMBtnContent,
+.footerLinkBtn .sapMBtnIcon {
+  color: #64748b !important;
+  font-size: 0.85rem !important;
+  font-weight: 600 !important;
+  transition: all 0.3s ease !important;
+}
+
+/* Hover Effect: Cyan Glow & Underline */
+.footerLinkBtn:hover .sapMBtnContent,
+.footerLinkBtn:hover .sapMBtnIcon {
+  color: #00f2ff !important; /* Cyber Cyan */
+  text-shadow: 0 0 8px rgba(0, 242, 255, 0.4);
+}
+.footerLinkBtn:hover .sapMBtnContent {
+  text-decoration: underline !important;
+  text-decoration-color: #00f2ff !important;
+  text-decoration-thickness: 2px !important;
+  text-underline-offset: 4px !important;
+}
+
+.footerCopyright {
+  color: #94a3b8 !important;
+  font-size: 0.75rem !important;
+  font-weight: 500;
+  opacity: 0.8;
+}
+
+/* ============================================================ 
+   UPLOAD PAGE: DROP ZONE & ANIMATIONS
+   ============================================================ */
+.dropZoneContainer {
+  border: 2px dashed rgba(0, 112, 242, 0.3);
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(12px);
+  border-radius: 16px;
+  padding: 4rem 2rem;
+  transition: all 0.3s ease-in-out;
+  position: relative; /* For absolute overlay */
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.dropZoneContainer:hover {
+  border-color: #00f2ff !important;
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 20px rgba(0, 242, 255, 0.2);
+}
+
+.uploadIllustration {
+  transition: transform 0.3s ease;
+  pointer-events: none; /* Let clicks pass to overlay */
+}
+
+.dropZoneContainer:hover .uploadIllustration {
+  transform: scale(1.05);
+}
+
+/* Seamless UploadSet Integration */
+.lovableUploadSet {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  min-height: 100px; /* Ensure space for the button */
+}
+
+/* Hide default borders/headers to blend in */
+.lovableUploadSet .sapMUC {
+  background: transparent !important;
+  border: none !important;
+}
+
+/* ============================================================ 
+   USER PROFILE POPOVER & LOGOUT
+   ============================================================ */
+.cyberPopover .sapMPopoverCont {
+  padding: 0 !important;
+  background: rgba(255, 255, 255, 0.85) !important;
+  backdrop-filter: blur(15px) !important;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.userProfileTrigger {
+  cursor: pointer;
+  padding: 6px 12px;
+  border-radius: 20px; /* Pillow shape */
+  transition: background 0.2s;
+}
+.userProfileTrigger:hover {
+  background: rgba(0, 112, 242, 0.08); /* Light Blue Tint */
+}
+
+.textMainBold {
+  font-weight: 700 !important;
+  color: #0070f2 !important;
+  font-size: 0.95rem !important;
+  letter-spacing: -0.2px !important;
+  text-decoration: none !important; /* In case we use Link */
+}
+
+.mutedTextSmall {
+  color: #6a6d70 !important;
+  font-size: 0.85rem !important;
+}
+
+.cyberAvatar {
+  background: linear-gradient(135deg, #0070f2, #00f2ff) !important;
+  box-shadow: 0 0 10px rgba(0, 242, 255, 0.3) !important;
+  border: 1px solid rgba(255, 255, 255, 0.5) !important;
+}
+
+.cyberLogoutBtn .sapMBtnInner {
+  background: transparent !important;
+  border: 1px solid #ff4d4f !important; /* Red Neon */
+  color: #ff4d4f !important;
+  border-radius: 20px !important;
+  font-weight: 600 !important;
+  transition: all 0.3s ease !important;
+}
+
+.cyberLogoutBtn:hover .sapMBtnInner {
+  background: #ff4d4f !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 10px rgba(255, 77, 79, 0.5) !important;
+}
+
+.cyberMenuBtn .sapMBtnInner {
+  text-align: left !important;
+  color: #475569 !important;
+}
+.cyberMenuBtn:hover .sapMBtnInner {
+  color: #0070f2 !important;
+}
+.lovableUploadSet .sapMUCNoData,
+.lovableUploadSet .sapMIllustratedMessage,
+.lovableUploadSet .sapMListNoData,
+.lovableUploadSet .sapMListShowNoData {
+  display: none !important;
+}
+
+/* Style the Upload Button (Toolbar) inside UploadSet */
+.lovableUploadSet .sapMTB {
+  background: transparent !important;
+  border: none !important;
+  justify-content: center; /* Center the button */
+}
+
+/* Remove borders from the internal list */
+.lovableUploadSet .sapMList,
+.lovableUploadSet .sapMListUl {
+  border: none !important;
+  background: transparent !important;
+}
+
+/* Ensure the Drop Zone area of UploadSet covers the container but is transparent */
+.lovableUploadSet .sapMUCDragDropOverlay {
+  background: rgba(255, 255, 255, 0.5) !important; /* Slight tint on drag */
+}
+
+/* ============================================================ 
+   AUTH & GRAVITY UI
+   ============================================================ */
+.loginHeroGravity {
+  position: relative;
+  background-color: #0a192f; /* Deep Navy Black */
+  overflow: hidden;
+}
+
+.brandingGlassBox {
+  z-index: 10;
+  padding: 3rem;
+  border-radius: 20px;
+  backdrop-filter: blur(20px);
+  background: rgba(255, 255, 255, 0.05); /* Very subtle glass */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  animation: floating 6s ease-in-out infinite;
+}
+
+@keyframes floating {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.formTitleDark {
+  font-weight: 800 !important; /* ExtraBold */
+  color: #1e293b !important;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  border-bottom: 3px solid #00f2ff; /* Cyan Underline */
+  display: inline-block;
+}
+
+.quickAccessCard {
+  cursor: pointer;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  padding: 10px;
+  transition: all 0.3s;
+  background: #f8fafc;
+}
+.quickAccessCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.borderNeonBlue {
+  border-color: #0070f2 !important;
+}
+.borderNeonOrange {
+  border-color: #f59e0b !important;
+}
+.borderNeonRed {
+  border-color: #ef4444 !important;
+}
+
+/* Shake Animation for Errors */
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: translateX(-5px);
+  }
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: translateX(5px);
+  }
+}
+.shake {
+  animation: shake 0.5s;
+  border-color: #ef4444 !important;
+}
+
+/* Custom Select Icons */
+.customSelectFixed .sapMSltIcon {
+  color: #0070f2;
+}
+
+/* ============================================================
+   TEMPLATE DOWNLOAD PANEL STYLES
+   ============================================================ */
+.templateDownloadPanel {
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  border: 2px solid #bae6fd;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(14, 165, 233, 0.15);
+  transition: all 0.3s ease;
+}
+
+.templateDownloadPanel:hover {
+  box-shadow: 0 6px 20px rgba(14, 165, 233, 0.25);
+  transform: translateY(-2px);
+}
+
+.templateDownloadPanel .sapMPanelHeader {
+  background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+  color: white !important;
+  font-weight: 600;
+  border-radius: 10px 10px 0 0;
+  padding: 12px 16px;
+}
+
+.templateDownloadPanel .sapMPanelHeader .sapMPanelHdr {
+  color: white !important;
+  font-size: 14px;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.templateDownloadPanel .sapMPanelContent {
+  background: transparent;
+  border-radius: 0 0 10px 10px;
+}
+
+.templateDesc {
+  color: #475569;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.templateButtons {
+  margin-top: 8px;
+}
+
+.templateBtn {
+  min-width: 130px;
+  height: 38px;
+  font-weight: 600;
+  font-size: 13px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.templateBtn .sapMBtnIcon {
+  font-size: 18px;
+}
+
+.csvBtn {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+  border: none !important;
+  color: white !important;
+  box-shadow: 0 3px 10px rgba(16, 185, 129, 0.3);
+}
+
+.csvBtn:hover {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%) !important;
+  box-shadow: 0 5px 15px rgba(16, 185, 129, 0.4);
+  transform: translateY(-2px);
+}
+
+.csvBtn .sapMBtnContent {
+  color: white !important;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.excelBtn {
+  background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%) !important;
+  border: 2px solid #3b82f6 !important;
+  color: #1d4ed8 !important;
+  box-shadow: 0 3px 10px rgba(59, 130, 246, 0.15);
+}
+
+.excelBtn:hover {
+  background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%) !important;
+  box-shadow: 0 5px 15px rgba(59, 130, 246, 0.25);
+  transform: translateY(-2px);
+}
+
+.excelBtn .sapMBtnContent {
+  color: #1d4ed8 !important;
+  font-weight: 600;
+}
+
+.templateNote {
+  background: rgba(91, 139, 196, 0.08);
+  padding: 8px 12px;
+  border-radius: 6px;
+  border-left: 3px solid #5B8BC4;
+}
+
+.templateNoteText {
+  color: #475569;
+  font-size: 12px;
+  font-style: italic;
+}
+
+/* ============================================================
+   JSON TEMPLATE PANEL STYLES
+   ============================================================ */
+.jsonTemplatePanel {
+  background: linear-gradient(135deg, #fefce8 0%, #fef9c3 100%);
+  border: 2px solid #fde047;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(234, 179, 8, 0.15);
+  transition: all 0.3s ease;
+}
+
+.jsonTemplatePanel:hover {
+  box-shadow: 0 6px 20px rgba(234, 179, 8, 0.25);
+  transform: translateY(-2px);
+}
+
+.jsonTemplatePanel .sapMPanelHeader {
+  background: linear-gradient(135deg, #eab308 0%, #ca8a04 100%);
+  color: white !important;
+  font-weight: 600;
+  border-radius: 10px 10px 0 0;
+  padding: 12px 16px;
+}
+
+.jsonTemplatePanel .sapMPanelHeader .sapMPanelHdr {
+  color: white !important;
+  font-size: 14px;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.jsonTemplateBtn {
+  background: linear-gradient(135deg, #eab308 0%, #ca8a04 100%) !important;
+  border: none !important;
+  color: white !important;
+  box-shadow: 0 3px 10px rgba(234, 179, 8, 0.3);
+  min-width: 140px;
+  height: 38px;
+  font-weight: 600;
+  font-size: 13px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.jsonTemplateBtn:hover {
+  background: linear-gradient(135deg, #ca8a04 0%, #a16207 100%) !important;
+  box-shadow: 0 5px 15px rgba(234, 179, 8, 0.4);
+  transform: translateY(-2px);
+}
+
+.jsonTemplateBtn .sapMBtnContent {
+  color: white !important;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+/* JSON Editor improvements */
+.jsonEditorTextArea {
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace !important;
+  font-size: 13px !important;
+  line-height: 1.5 !important;
+}
+
+.jsonEditorTextArea textarea {
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace !important;
+}
+
+/* --- PROCESSING MONITOR SCROLLBAR FIX --- */
+/* Table có chiều cao động nhưng trang vẫn scroll bình thường */
+.resultTableViewport {
+  overflow-x: auto !important;
+  overflow-y: auto !important;
+  min-height: 500px !important;
+  max-height: 70vh !important;
+}
+
+/* PHỤC HỒI SCROLL CỦA PAGE - QUAN TRỌNG! */
+.sapMPage > section {
+  overflow: auto !important;
+}
+
+.sapMPage {
+  overflow: auto !important;
+}
+
+html, body {
+  overflow: auto !important;
+}
+
+/* Table card styling */
+.monitorTableCard {
+  overflow: visible !important;
+}
+
+/* Monitor content area */
+.monitorContent {
+  overflow: visible !important;
+}
+
+/* Detail Dialog styling */
+.detailDialogText {
+  font-size: 14px !important;
+  line-height: 1.6 !important;
+  word-break: break-word !important;
+  white-space: pre-wrap !important;
+}
+
+/* Customer and Message link styling */
+.monitorResultTable .sapMLnk {
+  cursor: pointer !important;
+}
+
+.monitorResultTable .sapMLnk:hover {
+  text-decoration: underline !important;
+}
+
+.monitorResultTable .errorReasonText,
+.monitorResultTable .errorReasonText .sapMLnkText {
+  color: #111827 !important;
+  font-weight: 500 !important;
+}
+
+.monitorResultTable .errorReasonText:hover,
+.monitorResultTable .errorReasonText:hover .sapMLnkText {
+  color: #000000 !important;
+}
+
+.resultDocStatus.sapMObjStatusInverted {
+  background: transparent !important;
+}
+
+.resultDocStatus.sapMObjStatusInverted.sapMObjStatusInformation .sapMObjStatusText {
+  background-color: #0b5cab !important;
+  border-color: #0b5cab !important;
+  border-radius: 999px !important;
+  color: #ffffff !important;
+  padding: 0.18rem 0.55rem !important;
+  min-width: 5.6rem;
+  text-align: center;
+  box-shadow: none !important;
+}
+
+.resultDocStatus.sapMObjStatusInverted.sapMObjStatusSuccess .sapMObjStatusText,
+.resultDocStatus.sapMObjStatusInverted.sapMObjStatusError .sapMObjStatusText {
+  border-radius: 999px !important;
+  padding: 0.18rem 0.55rem !important;
+  min-width: 5.6rem;
+  text-align: center;
+}
+
+.resultDocStatus.sapMObjStatusInverted.sapMObjStatusInformation .sapMObjStatusIcon {
+  color: #ffffff !important;
+}
+
+.monitorSummaryRow.sapMFlexBox {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+  align-items: stretch;
+}
+
+.monitorSummaryRow.sapMFlexBox > .sapMFlexItem {
+  min-width: 0;
+}
+
+.monitorSummaryCard {
+  width: 100% !important;
+  min-height: 90px;
+  border: 1px solid #d9e5f2 !important;
+  border-left: 4px solid #0b5cab !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 14px rgba(13, 34, 64, 0.08) !important;
+}
+
+.monitorSummaryCard .sapMFlexBox {
+  height: 100%;
+}
+
+.monitorDocStatsRow.sapMFlexBox {
+  grid-template-columns: repeat(5, minmax(160px, 1fr));
+}
+
+.monitorDocStatsRow .monitorSummaryCard {
+  min-height: 76px;
+}
+
+.lockedPartnerField .sapMInputBaseContentWrapper,
+.lockedEmailField .sapMInputBaseContentWrapper {
+  background: #eef2f7 !important;
+  border-style: dashed !important;
+}
+
+/* --- MONITOR FILTER STYLING --- */
+.filterSelect {
+  border-radius: 8px !important;
+  border: 1px solid #e2e8f0 !important;
+  background: #ffffff !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+  transition: all 0.2s ease !important;
+}
+
+.filterSelect:hover {
+  border-color: #0070f2 !important;
+  box-shadow: 0 2px 6px rgba(0, 112, 242, 0.15) !important;
+}
+
+.filterSelect:focus {
+  border-color: #0070f2 !important;
+  box-shadow: 0 0 0 2px rgba(0, 112, 242, 0.2) !important;
+}
+
+.filterSearchField {
+  border-radius: 8px !important;
+  border: 1px solid #e2e8f0 !important;
+  background: #ffffff !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+  transition: all 0.2s ease !important;
+}
+
+.filterSearchField:hover {
+  border-color: #0070f2 !important;
+  box-shadow: 0 2px 6px rgba(0, 112, 242, 0.15) !important;
+}
+
+.filterSearchField:focus-within {
+  border-color: #0070f2 !important;
+  box-shadow: 0 0 0 2px rgba(0, 112, 242, 0.2) !important;
+}
+
+.filterDatePicker {
+  border-radius: 8px !important;
+  border: 1px solid #e2e8f0 !important;
+  background: #ffffff !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+  transition: all 0.2s ease !important;
+}
+
+.filterDatePicker:hover {
+  border-color: #0070f2 !important;
+  box-shadow: 0 2px 6px rgba(0, 112, 242, 0.15) !important;
+}
+
+.filterDatePicker:focus {
+  border-color: #0070f2 !important;
+  box-shadow: 0 0 0 2px rgba(0, 112, 242, 0.2) !important;
+}
+
+/* Toolbar styling */
+.monitorTableToolbar {
+  background: #f8fafc !important;
+  border-radius: 8px !important;
+  padding: 12px !important;
+  margin-bottom: 16px !important;
+  border: 1px solid #e2e8f0 !important;
+}
+
+/* ============================================================
+   MODERN LOGIN PAGE - PROFESSIONAL DESIGN
+   ============================================================ */
+
+/* Main Container */
+.modernLoginPage .sapMPageCont {
+  background: #ffffff !important;
+  padding: 0 !important;
+}
+
+.modernLoginContainer {
+  width: 100% !important;
+  height: 100vh !important;
+}
+
+/* Left Side - Hero Section */
+.modernLoginHeroSide {
+  background: linear-gradient(135deg, #0070d1 0%, #5c9fd6 50%, #a8d4f2 100%) !important;
+  position: relative;
+  overflow: hidden;
+}
+
+.modernLoginHeroSide::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.modernHeroContent {
+  position: relative;
+  z-index: 1;
+  padding: 3rem;
+}
+
+/* Logo Box */
+.modernHeroLogoBox {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  padding: 1rem 2rem;
+}
+
+.modernHeroLogoIcon {
+  color: #ffffff !important;
+  font-size: 2rem !important;
+}
+
+.modernHeroLogoText {
+  color: #ffffff !important;
+  font-size: 1.5rem !important;
+  font-weight: 700 !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Hero Title */
+.modernHeroTitle {
+  color: #ffffff !important;
+  font-size: 3rem !important;
+  font-weight: 800 !important;
+  text-align: center;
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  letter-spacing: -1px;
+}
+
+/* Hero Subtitle */
+.modernHeroSubtitle {
+  color: rgba(255, 255, 255, 0.85) !important;
+  font-size: 1.1rem !important;
+  text-align: center;
+  max-width: 500px;
+  line-height: 1.6;
+}
+
+/* Feature Cards */
+.modernHeroFeatures {
+  gap: 1rem;
+}
+
+.modernFeatureCard {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 1.5rem;
+  min-width: 120px;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.modernFeatureCard:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.modernFeatureIcon {
+  color: #ffffff !important;
+  font-size: 1.8rem !important;
+  margin-bottom: 0.5rem;
+}
+
+.modernFeatureText {
+  color: rgba(255, 255, 255, 0.9) !important;
+  font-size: 0.85rem !important;
+  font-weight: 500;
+  text-align: center;
+}
+
+/* Right Side - Form Section */
+.modernLoginFormSide {
+  background: #f8fafc !important;
+  padding: 2rem;
+}
+
+/* Mobile Logo */
+.modernMobileLogo {
+  margin-bottom: 1.5rem;
+}
+
+.modernMobileLogoIcon {
+  color: #0070d1 !important;
+  font-size: 2rem !important;
+}
+
+.modernMobileLogoText {
+  color: #1e293b !important;
+  font-size: 1.5rem !important;
+  font-weight: 700 !important;
+}
+
+/* Login Card */
+.modernLoginCard {
+  background: #ffffff !important;
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.05);
+  padding: 2.5rem;
+  width: 100%;
+  max-width: 420px;
+}
+
+/* Card Header */
+.modernCardHeader {
+  margin-bottom: 0.5rem;
+}
+
+.modernCardAvatar {
+  background: linear-gradient(135deg, #0070d1 0%, #5c9fd6 50%, #a8d4f2 100%);
+  color: #ffffff !important;
+  font-size: 2.5rem !important;
+  border-radius: 50%;
+  padding: 1rem;
+  box-shadow: 0 8px 20px rgba(0, 112, 209, 0.3);
+}
+
+.modernCardTitle {
+  color: #1e293b !important;
+  font-size: 1.5rem !important;
+  font-weight: 700 !important;
+}
+
+.modernCardSubtitle {
+  color: #64748b !important;
+  font-size: 0.95rem !important;
+}
+
+/* Form Fields */
+.modernFormFields {
+  width: 100%;
+}
+
+.modernFormGroup {
+  width: 100%;
+}
+
+.modernFormLabel {
+  color: #374151 !important;
+  font-size: 0.875rem !important;
+  font-weight: 600 !important;
+  margin-bottom: 0.5rem !important;
+}
+
+.modernFormLabel .sapMLabelText {
+  color: #374151 !important;
+  font-weight: 600 !important;
+}
+
+.modernFormInput {
+  width: 100%;
+}
+
+.modernFormInput .sapMInputBaseContentWrapper {
+  background: #ffffff !important;
+  border: 2px solid #e2e8f0 !important;
+  border-radius: 12px !important;
+  height: 3rem !important;
+  transition: all 0.2s ease;
+}
+
+.modernFormInput .sapMInputBaseContentWrapper:hover {
+  border-color: #cbd5e1 !important;
+}
+
+.modernFormInput .sapMInputBaseContentWrapper.sapMInputBaseContentWrapperFocused {
+  border-color: #0070d1 !important;
+  box-shadow: 0 0 0 3px rgba(0, 112, 209, 0.1) !important;
+}
+
+.modernFormInput .sapMInputBaseInner {
+  color: #1e293b !important;
+  font-size: 0.95rem !important;
+  padding-left: 1rem !important;
+}
+
+.modernFormInput .sapMInputBaseInner::placeholder {
+  color: #94a3b8 !important;
+}
+
+/* Form Options */
+.modernFormOptions {
+  width: 100%;
+}
+
+.modernRememberMe .sapMCbLabel {
+  color: #64748b !important;
+  font-size: 0.875rem !important;
+}
+
+.modernForgotLink .sapMLnk {
+  color: #0070d1 !important;
+  font-size: 0.875rem !important;
+  font-weight: 500 !important;
+}
+
+.modernForgotLink .sapMLnk:hover {
+  color: #5c9fd6 !important;
+  text-decoration: underline !important;
+}
+
+/* Login Button */
+.modernLoginButton {
+  width: 100% !important;
+}
+
+.modernLoginButton .sapMBtnInner {
+  background: linear-gradient(135deg, #0070d1 0%, #5c9fd6 50%, #a8d4f2 100%) !important;
+  border: none !important;
+  border-radius: 12px !important;
+  height: 3.2rem !important;
+  box-shadow: 0 4px 15px rgba(0, 112, 209, 0.4) !important;
+  transition: all 0.3s ease !important;
+}
+
+.modernLoginButton .sapMBtnInner:hover {
+  box-shadow: 0 6px 20px rgba(0, 112, 209, 0.5) !important;
+  transform: translateY(-1px);
+}
+
+.modernLoginButton .sapMBtnContent {
+  color: #ffffff !important;
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+}
+
+.modernLoginButton .sapMBtnIcon {
+  color: #ffffff !important;
+  margin-left: 0.5rem !important;
+}
+
+/* Card Footer */
+.modernCardFooter {
+  width: 100%;
+  padding-top: 1rem;
+  border-top: 1px solid #f1f5f9;
+}
+
+.modernFooterText {
+  color: #94a3b8 !important;
+  font-size: 0.8rem !important;
+  text-align: center;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .modernLoginCard {
+    padding: 2rem;
+    max-width: 100%;
+  }
+  
+  .modernHeroTitle {
+    font-size: 2rem !important;
+  }
+  
+  .modernHeroSubtitle {
+    font-size: 0.95rem !important;
+  }
+  
+  .modernFeatureCard {
+    padding: 1rem;
+    min-width: 100px;
+  }
+}
+
+/* ============================================================
+   MODERN MONITOR BUTTON - HERO SECTION
+   ============================================================ */
+
+.modernMonitorBtn {
+  background: linear-gradient(135deg, #0070d1 0%, #5c9fd6 50%, #a8d4f2 100%) !important;
+  border: none !important;
+  border-radius: 12px !important;
+  height: 3rem !important;
+  padding: 0 2rem !important;
+  box-shadow: 0 4px 15px rgba(0, 112, 209, 0.4) !important;
+  transition: all 0.3s ease !important;
+}
+
+.modernMonitorBtn:hover {
+  box-shadow: 0 6px 20px rgba(0, 112, 209, 0.5) !important;
+  transform: translateY(-2px);
+}
+
+.modernMonitorBtn .sapMBtnContent {
+  color: #ffffff !important;
+  font-size: 0.95rem !important;
+  font-weight: 600 !important;
+}
+
+.modernMonitorBtn .sapMBtnIcon {
+  color: #ffffff !important;
+  margin-right: 0.5rem !important;
+}
+
+/* ============================================================
+   QUOTATION DIALOG - FINANCIAL SUMMARY STYLING
+   ============================================================ */
+.quotationFinancialPanel .quotationHeroLine {
+    font-size: 1.25rem !important;
+    font-weight: 600 !important;
+    color: #1e3a5f !important;
+    margin-bottom: 0.5rem !important;
+}
+
+.quotationFinancialPanel .quotationHeroLine:last-child {
+    color: #0070f2 !important;
+    font-weight: 700 !important;
+    font-size: 1.35rem !important;
+}
+
+/* ============================================================
+   QUOTATION DETAILS DIALOG - REDESIGNED
+   ============================================================ */
+.quotationDetailDialog .sapMDialogScroll {
+    background: #eef3f8 !important;
+}
+
+.quotationDetailDialog .sapMDialogTitle {
+    font-weight: 700 !important;
+    color: #0f172a !important;
+}
+
+.quotationDetailDialog .sapMDialogSection {
+    max-height: 85vh !important;
+}
+
+.quotationDialogNew {
+    padding: 1rem;
+    gap: 1rem;
+    background: #eef3f8;
+}
+
+/* Header Row with 3 Cards - Better spacing */
+.quotationHeaderRow {
+    gap: 1rem !important;
+    justify-content: start;
+    align-items: stretch;
+    margin-bottom: 0.75rem;
+}
+
+.quotationHeaderRow > .sapMFlexItem {
+    flex: 1 1 310px;
+    min-width: 280px;
+    max-width: none;
+}
+
+/* Card Styling - Compact */
+.quotationCard {
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 6px 20px rgba(15, 23, 42, 0.08);
+    border: 1px solid #d9e5f2;
+    overflow: hidden;
+    height: 100%;
+}
+
+.quotationCardHeader {
+    padding: 0.75rem 0.875rem;
+    background: #f8fafc;
+    border-bottom: 1px solid #d9e5f2;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.quotationCardHeader .sapMTitle {
+    font-size: 0.875rem !important;
+    font-weight: 600 !important;
+    color: #1e3a5f !important;
+}
+
+.quotationCardBody {
+    padding: 0.875rem;
+    gap: 0.375rem;
+}
+
+/* Customer Card Specifics */
+.quotationCustomerCard {
+    border-left: 3px solid #4d8cdf;
+}
+
+.quotationCustomerName {
+    font-size: 0.9375rem !important;
+    font-weight: 600 !important;
+    color: #1e3a5f !important;
+    line-height: 1.35 !important;
+    margin-bottom: 0.25rem;
+}
+
+.quotationCustomerCode {
+    font-size: 0.8125rem !important;
+    color: #64748b !important;
+    font-family: monospace;
+    background: #f1f5f9;
+    padding: 0.125rem 0.375rem;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+/* Document Card Specifics */
+.quotationDocCard {
+    border-left: 3px solid #1f6fd6;
+}
+
+.quotationInfoRow {
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.375rem 0;
+    border-bottom: 1px solid #f1f5f9;
+    gap: 0.75rem;
+}
+
+.quotationInfoRow:last-child {
+    border-bottom: none;
+}
+
+.quotationInfoRow .sapMLabel {
+    font-size: 0.8125rem !important;
+    color: #64748b !important;
+    font-weight: 500 !important;
+    flex-shrink: 0;
+}
+
+.quotationInfoRow .sapMText {
+    font-size: 0.875rem !important;
+    color: #1e3a5f !important;
+    font-weight: 500 !important;
+    text-align: right;
+    font-family: monospace;
+}
+
+/* Pricing Card Specifics */
+.quotationPricingCard {
+    border-left: 3px solid #10b981;
+}
+
+.quotationPriceRow {
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #f1f5f9;
+    gap: 0.75rem;
+}
+
+.quotationPriceRow:last-child {
+    border-bottom: none;
+}
+
+.quotationPriceRow .sapMLabel {
+    font-size: 0.8125rem !important;
+    color: #64748b !important;
+    font-weight: 500 !important;
+}
+
+/* Price Value Text Formatting */
+.quotationPriceValue {
+    font-size: 0.875rem !important;
+    font-weight: 600 !important;
+    color: #1e3a5f !important;
+    font-family: "Segoe UI", -apple-system, sans-serif !important;
+    letter-spacing: 0.01em;
+}
+
+.quotationTotalValue {
+    font-size: 0.9375rem !important;
+    font-weight: 700 !important;
+    color: #059669 !important;
+}
+
+.quotationTotalRow {
+    background: #ecfdf5;
+    margin: 0.5rem -0.875rem -0.875rem -0.875rem;
+    padding: 0.625rem 0.875rem !important;
+    border-top: 2px solid #10b981;
+}
+
+.quotationTotalRow .sapMLabel {
+    font-size: 0.875rem !important;
+    color: #1e3a5f !important;
+    font-weight: 600 !important;
+}
+
+/* Table Section - More Compact */
+.quotationTableSection {
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 6px 20px rgba(15, 23, 42, 0.08);
+    border: 1px solid #d9e5f2;
+    overflow: hidden;
+}
+
+.quotationTableToolbar {
+    padding: 0.75rem 0.875rem;
+    background: #f8fafc;
+    border-bottom: 1px solid #d9e5f2;
+    min-height: auto !important;
+}
+
+.quotationTableToolbar .sapMTitle {
+    font-size: 0.875rem !important;
+    font-weight: 600 !important;
+    color: #1e3a5f !important;
+}
+
+/* Table Styling - Compact */
+.quotationItemsTable {
+    border: none !important;
+}
+
+.quotationItemsTable .sapMListTblHeader {
+    background: #edf4fb !important;
+}
+
+.quotationItemsTable .sapMListTblHeaderCell {
+    padding: 0.625rem 0.5rem !important;
+    font-weight: 600 !important;
+    color: #475569 !important;
+    font-size: 0.8125rem !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+}
+
+.quotationItemsTable .sapMListTblCell {
+    padding: 0.75rem 0.625rem !important;
+    font-size: 0.875rem !important;
+    color: #334155 !important;
+    border-bottom: 1px solid #f1f5f9 !important;
+    vertical-align: middle !important;
+}
+
+.quotationItemsTable .sapMListTblRow:hover {
+    background-color: #f2f7fc !important;
+}
+
+.quotationItemsTable .sapMObjectNumber {
+    font-size: 0.875rem !important;
+}
+
+/* Table Price Formatting */
+.quotationTablePrice {
+    font-size: 0.875rem !important;
+    font-weight: 600 !important;
+    color: #1e3a5f !important;
+    font-family: "Segoe UI", -apple-system, sans-serif !important;
+    text-align: right;
+    display: block;
+    width: 100%;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+    .quotationHeaderRow > .sapMFlexItem {
+        flex: 1 1 45%;
+    }
+}
+
+@media (max-width: 768px) {
+    .quotationDialogNew {
+        padding: 1rem;
+    }
+    
+    .quotationHeaderRow > .sapMFlexItem {
+        flex: 1 1 100%;
+    }
+}
